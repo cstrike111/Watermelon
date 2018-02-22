@@ -10,9 +10,8 @@ public:
 	Graphic(SDL_Window* w);
 	~Graphic();
 	bool loadImage(string path);
-	SDL_Surface* gScreenSurface;
-	SDL_Surface* gImage;
 	bool draw();
+	int a;
 
 private:
 	SDL_Window* gWindow;

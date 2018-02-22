@@ -8,6 +8,7 @@ SDL_Window* gWindow = NULL;
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 Graphic* g;
+bool quit = false;
 
 bool init() {
 	//Initialization flag
@@ -29,8 +30,6 @@ bool init() {
 		{
 			//create renderer
 			g = new Graphic(gWindow);
-			// get window surface
-			g->gScreenSurface = SDL_GetWindowSurface(gWindow);
 		}
 	}
 
@@ -54,15 +53,10 @@ int main(int argc, char* args[]) {
 		cout << "Failed to initialize!\n";
 	}
 	else {
-		//load media
-		if (!g->loadImage("hello_world.bmp")) {
-			printf("Failed to load media!\n");
-		}
-		else {
+		while (!quit) {
 			g->draw();
-			//Wait two seconds
-			SDL_Delay(2000);
-		}
+			}
+			
 		
 	}
 
