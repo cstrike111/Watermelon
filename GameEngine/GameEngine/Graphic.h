@@ -16,6 +16,6 @@ public:
 
 private:
 	SDL_Window* gWindow;
-	
+	SDL_Renderer* gRenderer;
 	bool load; // whether the image is loaded
 };

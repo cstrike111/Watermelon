@@ -2,6 +2,7 @@
 
 Graphic::Graphic(SDL_Window* w) {
 	gWindow = w;
+	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
 }
 
 Graphic::~Graphic() {
@@ -13,20 +14,11 @@ Graphic::~Graphic() {
 }
 
 bool Graphic::loadImage(string path) {
-
-	//load image
-	gImage = SDL_LoadBMP("hello_world.bmp");
-	if (gImage == NULL) {
-		cout << "Unable to load image " << "hello_world.bmp" << "SDL Error: " << SDL_GetError() << endl;
-		return false;
-	}
-
 	return true;
 }
 
 bool Graphic::draw() {
 	
-	SDL_BlitSurface(gImage, NULL, gScreenSurface, NULL);
-	SDL_UpdateWindowSurface(gWindow);
-	return true;
+	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderClear(gRenderer);
 }
