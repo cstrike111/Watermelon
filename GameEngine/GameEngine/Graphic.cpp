@@ -17,7 +17,6 @@ bool Graphic::loadImage(string path) {
 bool Graphic::draw() {
     SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(gRenderer);
-	SDL_UpdateWindowSurface(gWindow);
 	SDL_Rect fillRect = { 640 / 4, 480 / 4, 640 / 2, 480 / 2 };
 	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
 	SDL_RenderFillRect(gRenderer, &fillRect);
@@ -34,6 +33,16 @@ bool Graphic::draw() {
 	SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0xFF);
 	SDL_RenderDrawRect(gRenderer, &mr);
 	SDL_RenderPresent(gRenderer);
+	SDL_UpdateWindowSurface(gWindow);
 	return true;
+}
+
+void Graphic::handleEvent(EventSystem* e) {
+	for (std::vector<Event>::iterator it = e->queue->begin(); it != e->queue->end(); ++it) {
+		if (it->eventType == Event::RECTENGLE_MOVELEFT) {
+			draw();
+		}
+	}
+	//draw at once?
 }
 

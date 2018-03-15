@@ -2,6 +2,8 @@
 #include "SDL2-2.0.7\include\SDL.h"
 #include <string>
 #include <iostream>
+#include <vector>
+#include "EventSystem.h"
 
 using namespace std;
 
@@ -12,6 +14,7 @@ public:
 	bool loadImage(string path);
 	bool draw();
 	int a;
+	void handleEvent(EventSystem* e);
 
 private:
 	SDL_Window* gWindow;
