@@ -2,6 +2,7 @@
 #include "SDL2-2.0.7\include\SDL.h"
 #include "EventSystem.h"
 #include <iostream>
+#include <queue>
 enum KeyPress {
 	KEY_PRESS_DEFAULT,
 	KEY_PRESS_ESCAPE,
@@ -16,17 +17,17 @@ class Input {
 public:
 	
 
-	Input(SDL_Event* e);
+	Input();
 	~Input();
 
 	//return the key user pressed
 	void handleEvent(EventSystem* es);
+	void handleKey(EventSystem* es);
 
 	//a function that can detect the pressed key and create event
 private:
 	//key press surfaces constants
 	
-	SDL_Event* e;
 };
 
 

@@ -1,6 +1,6 @@
 #pragma once
 #pragma once
-#include <vector>
+#include <queue>
 #include "Event.h"
 #include "SDL2-2.0.7\include\SDL.h"
 using namespace std;
@@ -12,10 +12,12 @@ public:
 
 	void addEvent(Event e);
 	void removeEvent();
+	SDL_Event* getSDLEvent();
+	void setSDLEvent(SDL_Event* e);
 
-	vector<Event>* queue;
+	queue<Event>* eventQueue;
 
-	void detectUserInput(SDL_Event* e);
+	void detectUserInput();
 private:
-	
+	SDL_Event* e;
 };

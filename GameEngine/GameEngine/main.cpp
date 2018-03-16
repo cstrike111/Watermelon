@@ -12,7 +12,7 @@ const int SCREEN_HEIGHT = 480;
 Graphic* g; //renderer
 bool quit = false; //flag for quit
 SDL_Event* e = new SDL_Event(); //sdl event
-Input* input = new Input(e); //input sub-system
+Input* input = new Input(); //input sub-system
 EventSystem* es = new EventSystem();
 
 bool init() {
@@ -35,6 +35,8 @@ bool init() {
 		{
 			//create renderer
 			g = new Graphic(gWindow);
+			//set up sdl event
+			es->setSDLEvent(e);
 		}
 	}
 
@@ -71,20 +73,23 @@ void gameLoop() {
 	//every sub-system handle the events(graphic, input)
 	//last sub-system delete the event
 	//handle the event
-	
-	es->detectUserInput(e);
-	if (es->queue->size() != 0 & SDL_PollEvent(e) != 0) { //SDL event queue will affect this(handle 2 queue?)
-		//if the user wants to quit(which system should deal with this?)
-		for (std::vector<Event>::iterator it = es->queue->begin(); it != es->queue->end(); ++it) {
-			if (it->eventType == Event::QUIT) {
-				quit = true;
-				//lagging bug
-			}
-		}
+
+	SDL_PollEvent(e);
+	es->detectUserInput();
+	if (es->eventQueue->size() != 0) {
 		input->handleEvent(es);
 		g->handleEvent(es);
+		//if the user wants to quit(which system should deal with this?)
+		
+	}//SDL event queue will affect this(handle 2 queue?)
+	if (es->eventQueue->size() != 0) {
+		if (es->eventQueue->front().eventType == Event::QUIT) {
+			quit = true;
+			es->eventQueue->pop();
+		}
+		//lagging bug
 	}
-
+	g->draw();
 }
 
 int main(int argc, char* args[]) {
@@ -94,7 +99,6 @@ int main(int argc, char* args[]) {
 	}
 	else {
 		//handle the game loop
-		es->addEvent(Event::DRAW);
 		while (!quit) {
 			gameLoop();
 		}	

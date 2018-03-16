@@ -1,23 +1,33 @@
 #include "Input.h"
 
-Input::Input(SDL_Event* e) {
-	this->e = e;
+Input::Input() {
+	
 }
 
 Input::~Input(){
-	e = nullptr;
+
 }
 
 void Input::handleEvent(EventSystem* es) {
-	switch (e->key.keysym.sym) {
+	if (es->eventQueue->size() != 0) {
+		if (es->eventQueue->front().eventType == Event::KEY_PRESS) {
+			handleKey(es);
+			es->eventQueue->pop();
+		}
+	}
+}
+
+void Input::handleKey(EventSystem* es) {
+	switch (es->getSDLEvent()->key.keysym.sym) {
 	//detect which key the user presses
 	case SDLK_ESCAPE:
-		es->queue->push_back(Event::QUIT);
+		es->eventQueue->push(Event::QUIT);
 		cout << "The program needs to be quited!" << endl;
 		break;  
 	case SDLK_RIGHT:
-		es->queue->push_back(Event::RECTENGLE_MOVERIGHT);
+		es->eventQueue->push(Event::RECTENGLE_MOVERIGHT);
 	default:
 		break;
 	}
 }
+

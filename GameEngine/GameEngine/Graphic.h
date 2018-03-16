@@ -2,7 +2,7 @@
 #include "SDL2-2.0.7\include\SDL.h"
 #include <string>
 #include <iostream>
-#include <vector>
+#include <queue>
 #include "EventSystem.h"
 
 using namespace std;
@@ -13,7 +13,7 @@ public:
 	~Graphic();
 	bool loadImage(string path);
 	bool draw();
-	int a;
+	float a;
 	void handleEvent(EventSystem* e);
 
 private:

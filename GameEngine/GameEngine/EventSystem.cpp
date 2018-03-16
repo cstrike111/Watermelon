@@ -2,22 +2,23 @@
 
 
 EventSystem::EventSystem() {
-	queue = new vector<Event>;
+	eventQueue = new queue<Event>;
 }
 
 EventSystem::~EventSystem() {
-	delete queue;
+	delete eventQueue;
+	delete e;
 }
 
 void EventSystem::addEvent(Event e) {
-	queue->push_back(e);
+	eventQueue->push(e);
 }
 
 void EventSystem::removeEvent() {
-	queue->pop_back();
+	eventQueue->pop();
 }
 
-void EventSystem::detectUserInput(SDL_Event* e) {
+void EventSystem::detectUserInput() {
 	switch (e->type){
 	case SDL_KEYDOWN:
 		addEvent(Event::KEY_PRESS);
@@ -29,4 +30,12 @@ void EventSystem::detectUserInput(SDL_Event* e) {
 		break;
 	}
 	
+}
+
+SDL_Event* EventSystem::getSDLEvent() {
+	return e;
+}
+
+void EventSystem::setSDLEvent(SDL_Event* e) {
+	this->e = e;
 }
