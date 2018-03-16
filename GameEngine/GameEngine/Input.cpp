@@ -8,14 +8,16 @@ Input::~Input(){
 	e = nullptr;
 }
 
-int Input::getKey() {
+void Input::handleEvent(EventSystem* es) {
 	switch (e->key.keysym.sym) {
 	//detect which key the user presses
 	case SDLK_ESCAPE:
-		return KEY_PRESS_ESCAPE;
+		es->queue->push_back(Event::QUIT);
+		cout << "The program needs to be quited!" << endl;
 		break;  
+	case SDLK_RIGHT:
+		es->queue->push_back(Event::RECTENGLE_MOVERIGHT);
 	default:
-		return KEY_PRESS_DEFAULT;
 		break;
 	}
 }

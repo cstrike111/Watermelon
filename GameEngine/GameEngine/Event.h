@@ -4,8 +4,10 @@
 class Event {
 public:
 	enum {
-		RECTENGLE_MOVELEFT,
-		KEY_PRESS
+		DRAW,
+		RECTENGLE_MOVERIGHT,
+		KEY_PRESS,
+		QUIT
 	};
 	Event(int type);
 	~Event();

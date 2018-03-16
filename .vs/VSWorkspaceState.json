@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GameEngine",
+    "\\GameEngine\\GameEngine"
   ],
+  "SelectedNode": "\\GameEngine\\GameEngine.sln",
   "PreviewInSolutionExplorer": false
 }

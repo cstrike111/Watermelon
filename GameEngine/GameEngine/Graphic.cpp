@@ -28,7 +28,6 @@ bool Graphic::draw() {
 	{
 		SDL_RenderDrawPoint(gRenderer, 640 / 2, i);
 	}
-	a += 1;
 	SDL_Rect mr = { 160, 40, a, 40 };
 	SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0xFF);
 	SDL_RenderDrawRect(gRenderer, &mr);
@@ -39,8 +38,17 @@ bool Graphic::draw() {
 
 void Graphic::handleEvent(EventSystem* e) {
 	for (std::vector<Event>::iterator it = e->queue->begin(); it != e->queue->end(); ++it) {
-		if (it->eventType == Event::RECTENGLE_MOVELEFT) {
+		if (it->eventType == Event::RECTENGLE_MOVERIGHT) {
+			//should move this part to physics subsystem
+			a += 10;
 			draw();
+			e->queue->erase(it);
+			break;
+		}
+		if (it->eventType == Event::DRAW) {
+			draw();
+			e->queue->erase(it);
+			break;
 		}
 	}
 	//draw at once?

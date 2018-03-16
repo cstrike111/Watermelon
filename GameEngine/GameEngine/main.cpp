@@ -13,6 +13,7 @@ Graphic* g; //renderer
 bool quit = false; //flag for quit
 SDL_Event* e = new SDL_Event(); //sdl event
 Input* input = new Input(e); //input sub-system
+EventSystem* es = new EventSystem();
 
 bool init() {
 	//Initialization flag
@@ -66,27 +67,24 @@ void close() {
 //game loop
 void gameLoop() {
 	//create event queue
-	//game logic should be able to create event?
+	//game logic should be able to create event?(event system create event?)
 	//every sub-system handle the events(graphic, input)
 	//last sub-system delete the event
 	//handle the event
-	while (SDL_PollEvent(e) != 0) {
-		//if the user wants to quit
-		if (e->type == SDL_QUIT) {
-			quit = true;
-		}
-
-		//if user press space, quit
-		if (e->type == SDL_KEYDOWN) {
-			if (input->getKey() == KEY_PRESS_ESCAPE) {
+	
+	es->detectUserInput(e);
+	if (es->queue->size() != 0 & SDL_PollEvent(e) != 0) { //SDL event queue will affect this(handle 2 queue?)
+		//if the user wants to quit(which system should deal with this?)
+		for (std::vector<Event>::iterator it = es->queue->begin(); it != es->queue->end(); ++it) {
+			if (it->eventType == Event::QUIT) {
 				quit = true;
+				//lagging bug
 			}
-			cout << input->getKey();
-
 		}
+		input->handleEvent(es);
+		g->handleEvent(es);
 	}
-	//draw things
-	g->draw();
+
 }
 
 int main(int argc, char* args[]) {
@@ -96,7 +94,7 @@ int main(int argc, char* args[]) {
 	}
 	else {
 		//handle the game loop
-		
+		es->addEvent(Event::DRAW);
 		while (!quit) {
 			gameLoop();
 		}	
