@@ -4,6 +4,7 @@ Graphic::Graphic(SDL_Window* w) {
 	gWindow = w;
 	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
 	a = 160;
+	b = 40;
 }
 
 Graphic::~Graphic() {
@@ -28,7 +29,7 @@ bool Graphic::draw() {
 	{
 		SDL_RenderDrawPoint(gRenderer, 640 / 2, i);
 	}
-	SDL_Rect mr = { 160, 40, a, 40 };
+	SDL_Rect mr = { a, b, 40, 40 };
 	SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0xFF);
 	SDL_RenderDrawRect(gRenderer, &mr);
 	SDL_RenderPresent(gRenderer);
@@ -37,6 +38,7 @@ bool Graphic::draw() {
 }
 
 void Graphic::handleEvent(EventSystem* e) {
+	//replace here with switch
 	if (e->eventQueue->size() != 0) {
 		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVERIGHT) {
 			//should move this part to physics subsystem
@@ -44,7 +46,23 @@ void Graphic::handleEvent(EventSystem* e) {
 			e->eventQueue->pop();
 			return;
 		}
+		//delete this
 		if (e->eventQueue->front().eventType == Event::DRAW) {
+			e->eventQueue->pop();
+			return;
+		}
+		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVELEFT) {
+			a -= 0.01;
+			e->eventQueue->pop();
+			return;
+		}
+		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVEUP) {
+			b -= 0.01;
+			e->eventQueue->pop();
+			return;
+		}
+		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVEDOWN) {
+			b += 0.01;
 			e->eventQueue->pop();
 			return;
 		}

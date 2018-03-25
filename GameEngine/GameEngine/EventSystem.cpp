@@ -1,5 +1,7 @@
 #include "EventSystem.h"
 
+/*Event System not only handles the events made by me, 
+but also handles the SDL events*/
 
 EventSystem::EventSystem() {
 	eventQueue = new queue<Event>;
@@ -17,6 +19,7 @@ void EventSystem::addEvent(Event e) {
 void EventSystem::removeEvent() {
 	eventQueue->pop();
 }
+
 
 void EventSystem::detectUserInput() {
 	switch (e->type){

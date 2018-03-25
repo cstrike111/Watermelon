@@ -68,28 +68,28 @@ void close() {
 
 //game loop
 void gameLoop() {
-	//create event queue
-	//game logic should be able to create event?(event system create event?)
-	//every sub-system handle the events(graphic, input)
-	//last sub-system delete the event
-	//handle the event
-
+	
+	//handle sdl event
 	SDL_PollEvent(e);
+	//detect the input of user
 	es->detectUserInput();
+	//handle events
 	if (es->eventQueue->size() != 0) {
 		input->handleEvent(es);
 		g->handleEvent(es);
-		//if the user wants to quit(which system should deal with this?)
 		
-	}//SDL event queue will affect this(handle 2 queue?)
+	}
+	//if the user wants to quit(will handle this in evnet system)
 	if (es->eventQueue->size() != 0) {
 		if (es->eventQueue->front().eventType == Event::QUIT) {
 			quit = true;
 			es->eventQueue->pop();
 		}
-		//lagging bug
+		
 	}
+	//graphic, physics sub-system update per frame
 	g->draw();
+	
 }
 
 int main(int argc, char* args[]) {

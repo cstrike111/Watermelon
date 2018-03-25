@@ -14,6 +14,7 @@ public:
 	bool loadImage(string path);
 	bool draw();
 	float a;
+	float b;
 	void handleEvent(EventSystem* e);
 
 private:

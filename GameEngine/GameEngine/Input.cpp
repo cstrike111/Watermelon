@@ -17,6 +17,7 @@ void Input::handleEvent(EventSystem* es) {
 	}
 }
 
+//handle user's input and add events
 void Input::handleKey(EventSystem* es) {
 	switch (es->getSDLEvent()->key.keysym.sym) {
 	//detect which key the user presses
@@ -26,6 +27,16 @@ void Input::handleKey(EventSystem* es) {
 		break;  
 	case SDLK_RIGHT:
 		es->eventQueue->push(Event::RECTENGLE_MOVERIGHT);
+		break;
+	case SDLK_LEFT:
+		es->eventQueue->push(Event::RECTENGLE_MOVELEFT);
+		break;
+	case SDLK_UP:
+		es->eventQueue->push(Event::RECTENGLE_MOVEUP);
+		break;
+	case SDLK_DOWN:
+		es->eventQueue->push(Event::RECTENGLE_MOVEDOWN);
+		break;
 	default:
 		break;
 	}
