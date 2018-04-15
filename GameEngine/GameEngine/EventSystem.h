@@ -1,23 +1,32 @@
 #pragma once
-#pragma once
+#include <SFML\Graphics.hpp>
+#include <SFML\Window.hpp>
+#include <iostream>
 #include <queue>
-#include "Event.h"
-#include "SDL2-2.0.7\include\SDL.h"
+#include "Eventlist.h"
+
 using namespace std;
 
 class EventSystem {
 public:
-	EventSystem();
+	EventSystem(sf::RenderWindow* window);
 	~EventSystem();
 
-	void addEvent(Event e);
+	void addEvent(Event* e);
 	void removeEvent();
-	SDL_Event* getSDLEvent();
-	void setSDLEvent(SDL_Event* e);
-
-	queue<Event>* eventQueue;
-
-	void detectUserInput();
+	void checkFinish();
+	int getKeycode();
+	int getControllerId();
+	int getButton();
+	queue<Event>* getEventQueue();
+	void update();
+	sf::Event getsfEvent();
+	
 private:
-	SDL_Event* e;
+	queue<Event>* eventQueue;
+	sf::RenderWindow* window;
+	sf::Event sfEvent;
+	int keycode; //better solution?
+	int controllerId;
+	int button;
 };

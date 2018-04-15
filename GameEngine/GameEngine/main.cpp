@@ -1,113 +1,82 @@
 #include <iostream>
-#include "SDL2-2.0.7\include\SDL.h"
 #include "Graphic.h"
-#include "Input.h"
+#include "UserInterface.h"
 
-using namespace std;
-
-SDL_Window* gWindow = NULL;
-//define resolution
-const int SCREEN_WIDTH = 640; 
+//configuration of the parameters
+//resolution
+const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+
+//declare of sub-system and window
 Graphic* g; //renderer
-bool quit = false; //flag for quit
-SDL_Event* e = new SDL_Event(); //sdl event
-Input* input = new Input(); //input sub-system
-EventSystem* es = new EventSystem();
+UserInterface* ui; //user interface sub-system
+EventSystem* es; //event system
+sf::RenderWindow* window;
+
 
 bool init() {
-	//Initialization flag
+	//initializing flag
 	bool success = true;
 
-	// initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		cout << "SDL could not initialize! SDL_Error: %s\n" << SDL_GetError();
-		success = false;
+	//create window
+	window = new sf::RenderWindow(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "A SUPER FUN GAME!");
+	if (window->isOpen()) {
+		success = true;
+		//pass the window to sub-systems
+		g = new Graphic(window);
+		ui = new UserInterface(window);
+		es = new EventSystem(window);
+		//pass the event system to sub-systems
+		g->getEventSystem(es);
+		ui->getEventSystem(es);
 	}
 	else {
-		// create window
-		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (gWindow == NULL) {
-			cout << "Window could not be created! SDL_Error: %s\n" << SDL_GetError();
-			success = false;
-		}
-		else
-		{
-			//create renderer
-			g = new Graphic(gWindow);
-			//set up sdl event
-			es->setSDLEvent(e);
-		}
+		success = false;
 	}
-
-
 	return success;
 }
 
 void close() {
-
-	// destroy window
-	SDL_DestroyWindow(gWindow);
-	gWindow = nullptr;
+	//clean the memory
+	//window
+	delete window;
+	window = nullptr;
 
 	//clean the graphic subsystem
 	delete g;
 	g = nullptr;
 
 	//clean the input subsystem
-	delete input;
-	input = nullptr;
+	delete ui;
+	ui = nullptr;
 
-	//clean the memory
-	delete e;
-	e = nullptr;
+	//clean the event system
+	delete es;
+	es = nullptr;
 
-	// quit SDL subsystems
-	SDL_Quit();
 }
 
 //game loop
 void gameLoop() {
-	
-	//handle sdl event
-	SDL_PollEvent(e);
-	//detect the input of user
-	es->detectUserInput();
-	//handle events
-	if (es->eventQueue->size() != 0) {
-		input->handleEvent(es);
-		g->handleEvent(es);
-		
-	}
-	//if the user wants to quit(will handle this in evnet system)
-	if (es->eventQueue->size() != 0) {
-		if (es->eventQueue->front().eventType == Event::QUIT) {
-			quit = true;
-			es->eventQueue->pop();
-		}
-		
-	}
-	//graphic, physics sub-system update per frame
+	es->update();
 	g->draw();
-	
+	ui->update();
 }
 
-int main(int argc, char* args[]) {
-	// start up SDL and create window
+int main()
+{
+	//start
 	if (!init()) {
-		cout << "Failed to initialize!\n";
+		cout << "Oops! Something wrong happened!\n";
 	}
 	else {
-		//handle the game loop
-		while (!quit) {
+		//game loop
+		while (window->isOpen()) {
 			gameLoop();
-		}	
+		}
 	}
-
-	//free resources and close SDL
+	//close
 	close();
 
 	return 0;
 }
-
-

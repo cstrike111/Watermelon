@@ -13,48 +13,93 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{e8c47857-abd6-4e78-a8eb-905506afb88e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event System">
+      <UniqueIdentifier>{a88bb814-4203-4fbf-9de0-63bd050d2202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User Interface">
+      <UniqueIdentifier>{5d64a704-62f8-4cd0-aafa-7072cda34afd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{b1ef7c2a-62b7-42d8-9a1c-e52993d42239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event System\Events">
+      <UniqueIdentifier>{68a46320-7505-4670-b6c9-0ba109fff858}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graphic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Graphic.cpp">
+      <Filter>Graphic</Filter>
     </ClCompile>
     <ClCompile Include="EventSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Event System</Filter>
     </ClCompile>
     <ClCompile Include="Physics.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Event System</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>User Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Graphic.h">
+      <Filter>Graphic</Filter>
     </ClInclude>
     <ClInclude Include="EventSystem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Event System</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
-      <Filter>Header Files</Filter>
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="Quit.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyPress.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMoveDown.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMoveLeft.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMoveRight.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMoveUp.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerConnected.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerDisconnected.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonPress.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Eventlist.h">
+      <Filter>Event System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

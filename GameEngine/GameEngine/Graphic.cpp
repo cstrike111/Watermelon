@@ -1,14 +1,16 @@
 #include "Graphic.h"
+sf::CircleShape* shape;
 
-Graphic::Graphic(SDL_Window* w) {
-	gWindow = w;
-	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
-	a = 160;
-	b = 40;
+
+Graphic::Graphic(sf::RenderWindow* window) {
+	this->window = window;
+	shape = new sf::CircleShape(100.f);
+	shape->setFillColor(sf::Color::Green);
+	openglInit();
 }
 
 Graphic::~Graphic() {
-	gWindow = nullptr;
+	window = nullptr;
 }
 
 bool Graphic::loadImage(string path) {
@@ -16,57 +18,84 @@ bool Graphic::loadImage(string path) {
 }
 
 bool Graphic::draw() {
-    SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 255);
-	SDL_RenderClear(gRenderer);
-	/*SDL_Rect fillRect = { 640 / 4, 480 / 4, 640 / 2, 480 / 2 };
-	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-	SDL_RenderFillRect(gRenderer, &fillRect);*/
-	SDL_Rect outlineRect = { 640 / 6, 480 / 6, 640 * 2 / 3, 480 * 2 / 3 };
-	SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-	SDL_RenderDrawRect(gRenderer, &outlineRect);
-	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0x00, 0xFF);
-	for (int i = 0; i < 480; i += 4)
-	{
-		SDL_RenderDrawPoint(gRenderer, 640 / 2, i);
+	//check the queue
+	if (es->getEventQueue()->size() != 0) {
+		if (es->getEventQueue()->front().getSubSystem(Event::subsystem::GRAPHIC)) {
+			//handle event
+			handleEvent(es->getEventQueue()->front().getEventType());
+			//tell the event that the sub-system has finished its job
+			es->getEventQueue()->front().popGraphic();
+		}
 	}
-	SDL_Rect mr = { a, b, 40, 40 };
-	SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 0xFF);
-	SDL_RenderDrawRect(gRenderer, &mr);
-	SDL_RenderPresent(gRenderer);
-	SDL_UpdateWindowSurface(gWindow);
+	window->clear();
+	openglDraw();
+	window->pushGLStates();
+	window->draw(*shape);
+	window->popGLStates();
+	window->display();
 	return true;
 }
 
-void Graphic::handleEvent(EventSystem* e) {
-	//replace here with switch
-	if (e->eventQueue->size() != 0) {
-		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVERIGHT) {
-			//should move this part to physics subsystem
-			a += 0.01;
-			e->eventQueue->pop();
-			return;
-		}
-		//delete this
-		if (e->eventQueue->front().eventType == Event::DRAW) {
-			e->eventQueue->pop();
-			return;
-		}
-		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVELEFT) {
-			a -= 0.01;
-			e->eventQueue->pop();
-			return;
-		}
-		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVEUP) {
-			b -= 0.01;
-			e->eventQueue->pop();
-			return;
-		}
-		if (e->eventQueue->front().eventType == Event::RECTENGLE_MOVEDOWN) {
-			b += 0.01;
-			e->eventQueue->pop();
-			return;
-		}
-	}	
-	//draw at once?
+void Graphic::getEventSystem(EventSystem* es){
+	this->es = es;
+}
+
+void Graphic::handleEvent(int eventType) {
+	switch (eventType) {
+	case Event::PLAYER_MOVE_UP:
+		shape->move(0, -5);
+		break;
+	case Event::PLAYER_MOVE_DOWN:
+		shape->move(0, 5);
+		break;
+	case Event::PLAYER_MOVE_LEFT:
+		shape->move(-5, 0);
+		break;
+	case Event::PLAYER_MOVE_RIGHT:
+		shape->move(5, 0);
+		break;
+	default:
+		break;
+	}
+}
+
+void Graphic::openglDraw() {
+	int i;
+
+	for (i = 0; i < 6; i++) {
+		glBegin(GL_QUADS);
+		glNormal3fv(&n[i][0]);
+		glVertex3fv(&v[faces[i][0]][0]);
+		glVertex3fv(&v[faces[i][1]][0]);
+		glVertex3fv(&v[faces[i][2]][0]);
+		glVertex3fv(&v[faces[i][3]][0]);
+		glEnd();
+	}
+}
+
+void Graphic::openglInit() {
+	/* Setup cube vertex data. */
+	v[0][0] = v[1][0] = v[2][0] = v[3][0] = -1;
+	v[4][0] = v[5][0] = v[6][0] = v[7][0] = 1;
+	v[0][1] = v[1][1] = v[4][1] = v[5][1] = -1;
+	v[2][1] = v[3][1] = v[6][1] = v[7][1] = 1;
+	v[0][2] = v[3][2] = v[4][2] = v[7][2] = 1;
+	v[1][2] = v[2][2] = v[5][2] = v[6][2] = -1;
+
+	/* Enable a single OpenGL light. */
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+
+	/* Use depth buffering for hidden surface elimination. */
+	glEnable(GL_DEPTH_TEST);
+
+	/* Setup the view of the cube. */
+	glMatrixMode(GL_PROJECTION);
+	glMatrixMode(GL_MODELVIEW);
+	glTranslatef(0.0, 0.0, -2.5);
+	glRotatef(60, 1.0, 0.0, 0.0);
+	glRotatef(-20, 0.0, 0.0, 1.0);
 }
 

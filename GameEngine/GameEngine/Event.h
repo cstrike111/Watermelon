@@ -1,19 +1,44 @@
 #pragma once
 
-
 class Event {
 public:
-	//enum for event's name(will replace here with classes)
-	enum {
-		DRAW,
-		RECTENGLE_MOVERIGHT,
-		RECTENGLE_MOVELEFT,
-		RECTENGLE_MOVEUP,
-		RECTENGLE_MOVEDOWN,
-		KEY_PRESS,
+	//enum for subsystem
+	//question: push the event to the list or push the enum to the list?
+	//subsystem can pop itself from here, and the event system will turn off the light in the end
+	enum subsystem {
+		GRAPHIC,
+		PHYSICS,
+		UI,
+		AUDIO
+	};
+	enum event {
+		KEYPRESS,
+		CONTROLLER_CONNECTED,
+		CONTROLLER_DISCONNECTED,
+		BUTTON_PRESS,
+		PLAYER_MOVE_LEFT,
+		PLAYER_MOVE_RIGHT,
+		PLAYER_MOVE_UP,
+		PLAYER_MOVE_DOWN,
 		QUIT
 	};
-	Event(int type);
+	Event();
 	~Event();
-	int eventType;
+	bool getSubSystem(int subsystem);
+	int getEventType();
+
+	//pop the systems
+	void popGraphic();
+	void popPhysics();
+	void popUI();
+	void popAudio();
+
+	//check whether there is system that still has job to do
+	bool isActive();
+
+protected:
+	int eventType; //type of event
+	//a list records which system has job to do
+	//the index will indicate which subsystem it is (refer to subsystem enum)
+	bool active[4] = { false, false, false, false };
 };
