@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Graphic.h"
 #include "UserInterface.h"
+#include "Audio.h"
 
 //configuration of the parameters
 //resolution
@@ -11,6 +12,7 @@ const int SCREEN_HEIGHT = 480;
 Graphic* g; //renderer
 UserInterface* ui; //user interface sub-system
 EventSystem* es; //event system
+Audio* a; //audio system
 sf::RenderWindow* window;
 
 
@@ -26,9 +28,12 @@ bool init() {
 		g = new Graphic(window);
 		ui = new UserInterface(window);
 		es = new EventSystem(window);
+		a = new Audio();
 		//pass the event system to sub-systems
 		g->getEventSystem(es);
 		ui->getEventSystem(es);
+		a->getEventSystem(es);
+		//load assets
 	}
 	else {
 		success = false;
@@ -61,6 +66,7 @@ void gameLoop() {
 	es->update();
 	g->draw();
 	ui->update();
+	a->update();
 }
 
 int main()

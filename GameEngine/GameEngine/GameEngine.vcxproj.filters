@@ -28,12 +28,15 @@
     <Filter Include="Event System\Events">
       <UniqueIdentifier>{68a46320-7505-4670-b6c9-0ba109fff858}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{d44169e7-5d58-4858-88cc-1521e9d280f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{81bb353c-7ba0-48af-9c97-b330a45061f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphic.cpp">
@@ -51,11 +54,14 @@
     <ClCompile Include="UserInterface.cpp">
       <Filter>User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic.h">
       <Filter>Graphic</Filter>
     </ClInclude>
@@ -100,6 +106,12 @@
     </ClInclude>
     <ClInclude Include="Eventlist.h">
       <Filter>Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
