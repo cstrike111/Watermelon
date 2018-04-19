@@ -25,10 +25,10 @@ bool init() {
 	if (window->isOpen()) {
 		success = true;
 		//pass the window to sub-systems
+		a = new Audio();
 		g = new Graphic(window);
 		ui = new UserInterface(window);
-		es = new EventSystem(window);
-		a = new Audio();
+		es = new EventSystem(window);	
 		//pass the event system to sub-systems
 		g->getEventSystem(es);
 		ui->getEventSystem(es);

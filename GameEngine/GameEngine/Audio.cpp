@@ -13,7 +13,9 @@ Audio::~Audio() {
 }
 
 void Audio::loadSounds() {
-	playerStepBuffer->loadFromFile("asset/sounds/ss.wav");
+	playerStepBuffer = new sf::SoundBuffer();
+	playerStep = new sf::Sound();
+	playerStepBuffer->loadFromFile("ss.wav");
 	playerStep->setBuffer(*playerStepBuffer);
 }
 
