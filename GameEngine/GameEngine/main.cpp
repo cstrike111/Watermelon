@@ -24,6 +24,7 @@ bool init() {
 	window = new sf::RenderWindow(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "A SUPER FUN GAME!");
 	if (window->isOpen()) {
 		success = true;
+		window->setFramerateLimit(60); //limit the fps
 		//pass the window to sub-systems
 		a = new Audio();
 		g = new Graphic(window);

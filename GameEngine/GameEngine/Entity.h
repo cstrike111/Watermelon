@@ -9,6 +9,7 @@ public:
 		MESH,
 		SPRITE
 	};
+	/* Entity should be created in main.cpp and deleted in main.cpp! */
 	Entity();
 	~Entity();
 

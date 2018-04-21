@@ -9,7 +9,9 @@ public:
 		GRAPHIC,
 		PHYSICS,
 		UI,
-		AUDIO
+		AUDIO,
+		ASSETMANAGER,
+		PROFILE
 	};
 	enum event {
 		KEYPRESS,
