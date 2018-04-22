@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Event.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="ButtonPress.h" />
     <ClInclude Include="ControllerConnected.h" />
@@ -153,6 +155,7 @@
     <ClInclude Include="Eventlist.h" />
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="Graphic.h" />
+    <ClInclude Include="KeyRelease.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="KeyPress.h" />
     <ClInclude Include="Physics.h" />

@@ -83,6 +83,10 @@ void EventSystem::update() {
 			addEvent(new ButtonPress());
 			button = sfEvent.joystickButton.button;
 			break;
+		//if player release the key
+		case sf::Event::KeyReleased:
+			addEvent(new KeyRelease());
+			break;
 		//by default, do nothing
 		default:
 			break;

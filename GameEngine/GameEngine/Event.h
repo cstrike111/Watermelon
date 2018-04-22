@@ -22,6 +22,7 @@ public:
 		PLAYER_MOVE_RIGHT,
 		PLAYER_MOVE_UP,
 		PLAYER_MOVE_DOWN,
+		KEYRELEASE,
 		QUIT
 	};
 	Event();

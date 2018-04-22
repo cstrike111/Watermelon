@@ -9,7 +9,7 @@ Physics::~Physics() {
 }
 
 bool Physics::collisionDetect(Entity* e1, Entity* e2) {
-
+	return true;
 }
 
 void Physics::update() {
@@ -53,7 +53,7 @@ void Physics::handleEvent(int eventType) {
 	}
 }
 
-bool Physics::addEntity(Entity* e) {
+void Physics::addEntity(Entity* e) {
 	entityList.push_back(e);
 }
 

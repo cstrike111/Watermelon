@@ -11,9 +11,11 @@ UserInterface::~UserInterface(){
 void UserInterface::handleEvent(int eventType) {
 	switch (eventType) {
 	case Event::KEYPRESS:
-		handleKey(es->getKeycode());
+		handleKeyPress(es->getKeycode());
 		break;
-	
+	case Event::KEYRELEASE:
+		handleKeyRelease(es->getKeycode());
+		break;
 	case Event::QUIT:
 		window->close();
 		break;
@@ -37,7 +39,7 @@ void UserInterface::handleEvent(int eventType) {
 }
 
 //handle user's input and add events
-void UserInterface::handleKey(int key) {
+void UserInterface::handleKeyPress(int key) {
 	//might need to use some features of sfml
 	if (key == sf::Keyboard::Escape) {
 		//exit the game
@@ -58,6 +60,27 @@ void UserInterface::handleKey(int key) {
 	if (sf::Keyboard::isKeyPressed(playerRight)) {
 		//move the player
 		es->addEvent(new PlayerMoveRight());
+	}
+
+}
+
+//handle user's input and add events
+void UserInterface::handleKeyRelease(int key) {
+	if (key == playerUp) {
+		//stop the player
+		cout << "Up key release" << endl;
+	}
+	if (key == playerDown) {
+		//stop the player
+		cout << "Down key release" << endl;
+	}
+	if (key == playerLeft) {
+		//stop the player
+		cout << "Left key release" << endl;
+	}
+	if (key == playerRight) {
+		//stop the player
+		cout << "Right key release" << endl;
 	}
 }
 
