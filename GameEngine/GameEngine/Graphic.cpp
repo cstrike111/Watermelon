@@ -1,6 +1,5 @@
 #include "Graphic.h"
 
-
 Graphic::Graphic(sf::RenderWindow* window) {
 	this->window = window;
 	openglInit();
@@ -29,17 +28,18 @@ bool Graphic::update() {
 	window->clear();
 	openglDraw();
 	window->pushGLStates();
+	draw();
 	window->popGLStates();
 	window->display();
 	return true;
 }
 
 void Graphic::draw() {
+	
 	//draw shape
 	for (int i = 0; i < shapeList.size(); i++) {
-		ShapeEntity* e = shapeList.at(i);
-		glm::vec2 pos = e->getPosition();
-		window->draw(*(shapeList.at(i)->getShape()));
+		ShapeEntity* se = shapeList.at(i);
+		window->draw(*(se->getShape()));
 	}
 }
 

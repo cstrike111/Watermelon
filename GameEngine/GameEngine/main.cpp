@@ -19,7 +19,7 @@ Physics* p; //physics system
 sf::RenderWindow* window;
 
 //pointer of asset
-ShapeEntity* shape;
+ShapeEntity* player;
 
 bool init() {
 	//initializing flag
@@ -41,11 +41,11 @@ bool init() {
 		ui->getEventSystem(es);
 		a->getEventSystem(es);
 		//set up assets
-		shape = new ShapeEntity();
-		shape->setShape(new sf::CircleShape());
-		shape->getShape()->setFillColor(sf::Color::Green);
-		g->addEntity(shape, Entity::rType::SHAPE);
-		p->getPlayer(shape);
+		player = new ShapeEntity();
+		player->setShape(new sf::CircleShape(50));
+		player->getShape()->setFillColor(sf::Color::Green);
+		g->addEntity(player, Entity::rType::SHAPE);
+		p->getPlayer(player);
 	}
 	else {
 		success = false;
@@ -71,8 +71,8 @@ void close() {
 	delete es;
 	es = nullptr;
 
-	delete shape;
-	shape = nullptr;
+	delete player;
+	player = nullptr;
 
 }
 

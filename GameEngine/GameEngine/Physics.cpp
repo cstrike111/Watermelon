@@ -71,6 +71,7 @@ void Physics::getEventSystem(EventSystem* es) {
 
 void Physics::getPlayer(Entity* player) {
 	this->player = player;
+	addEntity(player);
 }
 
 
