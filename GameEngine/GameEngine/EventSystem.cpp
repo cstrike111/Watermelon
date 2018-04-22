@@ -52,47 +52,6 @@ void EventSystem::checkFinish() {
 }
 
 void EventSystem::update() {
-	//handle sfml event 
-	while (window->pollEvent(sfEvent))
-	{	
-		switch (sfEvent.type) {
-		//if the user wants to close the window, close it
-		case sf::Event::Closed:
-			addEvent(new Quit());
-			break;
-		
-		//if the user press something
-		case sf::Event::KeyPressed:
-			addEvent(new KeyPress());
-			keycode = sfEvent.key.code; // get the keycode
-			break;
-
-		//if the controller is connected
-		case sf::Event::JoystickConnected:
-			addEvent(new ControllerConnected());
-			controllerId = sfEvent.joystickConnect.joystickId;
-			break;
-
-		//if the controller is connected
-		case sf::Event::JoystickDisconnected:
-			addEvent(new ControllerDisconnected());
-			controllerId = sfEvent.joystickConnect.joystickId;
-			break;
-		//if the controller button is pressed
-		case sf::Event::JoystickButtonPressed:
-			addEvent(new ButtonPress());
-			button = sfEvent.joystickButton.button;
-			break;
-		//if player release the key
-		case sf::Event::KeyReleased:
-			addEvent(new KeyRelease());
-			break;
-		//by default, do nothing
-		default:
-			break;
-		}
-			
-	}
 
 	//check whether the events are finished and clean the list
 	if (eventQueue->size() != 0) {
@@ -104,14 +63,3 @@ sf::Event EventSystem::getsfEvent() {
 	return sfEvent;
 }
 
-int EventSystem::getKeycode() {
-	return keycode;
-}
-
-int EventSystem::getControllerId() {
-	return controllerId;
-}
-
-int EventSystem::getButton() {
-	return button;
-}

@@ -15,9 +15,6 @@ public:
 	void addEvent(Event* e);
 	void removeEvent();
 	void checkFinish();
-	int getKeycode();
-	int getControllerId();
-	int getButton();
 	queue<Event>* getEventQueue();
 	void update();
 	sf::Event getsfEvent();
@@ -26,7 +23,4 @@ private:
 	queue<Event>* eventQueue;
 	sf::RenderWindow* window;
 	sf::Event sfEvent;
-	int keycode; //better solution?
-	int controllerId;
-	int button;
 };

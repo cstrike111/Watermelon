@@ -16,8 +16,8 @@ public:
 	~UserInterface();
 
 	void handleEvent(int eventType); //event handler
-	void handleKeyPress(int key); //react according to the key that user presses
-	void handleKeyRelease(int key); //react according to the key that user presses
+	void handleKeyPress(sf::Keyboard::Key key); //react according to the key that user presses
+	void handleKeyRelease(sf::Keyboard::Key key); //react according to the key that user presses
 	//handle button
 	void handleButton(int button); //react according to the button that user presses on the controller
 	void setButton(int action, int button); //configure the button
@@ -44,6 +44,9 @@ private:
 	int playerLeftC = sf::Joystick::Z;
 	int playerRightC = sf::Joystick::Y;
 	//xbox controller
+
+	//sfml event
+	sf::Event sfEvent;
 };
 
 

@@ -10,27 +10,9 @@ UserInterface::~UserInterface(){
 
 void UserInterface::handleEvent(int eventType) {
 	switch (eventType) {
-	case Event::KEYPRESS:
-		handleKeyPress(es->getKeycode());
-		break;
-	case Event::KEYRELEASE:
-		handleKeyRelease(es->getKeycode());
-		break;
 	case Event::QUIT:
 		window->close();
 		break;
-
-	case Event::CONTROLLER_CONNECTED:
-		std::cout << "joystick connected: " << es->getControllerId() << std::endl;
-		break;
-	
-	case Event::CONTROLLER_DISCONNECTED:
-		std::cout << "joystick disconnected: " << es->getControllerId() << std::endl;
-		break;
-	
-	case Event::BUTTON_PRESS:
-		handleButton(es->getButton());
-
 	default:
 		break;
 	}
@@ -39,7 +21,7 @@ void UserInterface::handleEvent(int eventType) {
 }
 
 //handle user's input and add events
-void UserInterface::handleKeyPress(int key) {
+void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 	//might need to use some features of sfml
 	if (key == sf::Keyboard::Escape) {
 		//exit the game
@@ -65,7 +47,7 @@ void UserInterface::handleKeyPress(int key) {
 }
 
 //handle user's input and add events
-void UserInterface::handleKeyRelease(int key) {
+void UserInterface::handleKeyRelease(sf::Keyboard::Key key) {
 	if (key == playerUp) {
 		//stop the player
 		cout << "Up key release" << endl;
@@ -143,6 +125,42 @@ void UserInterface::getEventSystem(EventSystem* es) {
 }
 
 void UserInterface::update() {
+	//handle sfml event 
+	while (window->pollEvent(sfEvent))
+	{
+		switch (sfEvent.type) {
+			//if the user wants to close the window, close it
+		case sf::Event::Closed:
+			es->addEvent(new Quit());
+			break;
+			//if the user press something
+		case sf::Event::KeyPressed:
+			handleKeyPress(sfEvent.key.code);
+			break;
+			//if player release the key
+		case sf::Event::KeyReleased:
+			handleKeyRelease(sfEvent.key.code);
+			break;
+			//if the controller is connected
+		case sf::Event::JoystickConnected:
+			cout << "Controller Connected" << endl;
+			es->addEvent(new ControllerConnected);
+			break;
+			//if the controller is connected
+		case sf::Event::JoystickDisconnected:
+			cout << "Controller Disconnected" << endl;
+			es->addEvent(new ControllerDisconnected);
+			break;
+			//if the controller button is pressed
+		case sf::Event::JoystickButtonPressed:
+			handleButton(sfEvent.JoystickButtonPressed);
+			break;
+			//by default, do nothing
+		default:
+			break;
+		}
+
+	}
 	//check the queue
 	if (es->getEventQueue()->size() != 0) {
 		if (es->getEventQueue()->front().getSubSystem(Event::subsystem::UI)) {
