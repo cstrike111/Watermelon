@@ -66,6 +66,9 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>Asset Manager</Filter>
     </ClCompile>
+    <ClCompile Include="ShapeEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphic.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="AssetManager.h">
       <Filter>Asset Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeEntity.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

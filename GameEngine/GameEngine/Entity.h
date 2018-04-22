@@ -1,13 +1,14 @@
 #pragma once
 #include "glm\glm.hpp"
-
+#include <SFML\Graphics.hpp>
 
 class Entity {
 public:
 	//render type
 	enum rType {
 		MESH,
-		SPRITE
+		SPRITE,
+		SHAPE
 	};
 	/* Entity should be created in main.cpp and deleted in main.cpp! */
 	Entity();
@@ -18,23 +19,23 @@ public:
 	glm::vec2 getPosition();
 	void setVelocity(glm::vec2 velocity);
 	glm::vec2 getVelocity();
-	void setOriginX(float originX);
-	float getOriginX();
-	void setOriginY(float originY);
-	float getOriginY();
+	void setOrigin(glm::vec2 origin);
+	glm::vec2 getOrigin();
 	void setWidth(float width);
 	float getWideth();
 	void setHeight(float height);
 	float getHeight();
+	void setScale(glm::vec2 scale);
+	glm::vec2 getScale();
 	void setRenderType(int type);
 	int getRenderType();
 	
-private:
+protected:
 	//physics infomation
 	glm::vec2 position;
 	glm::vec2 velocity;
-	float originX;
-	float originY;
+	glm::vec2 scale;
+	glm::vec2 origin;
 	float width;
 	float height;
 	//collision rectangle

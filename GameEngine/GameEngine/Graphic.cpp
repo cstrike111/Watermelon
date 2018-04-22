@@ -1,11 +1,8 @@
 #include "Graphic.h"
-sf::CircleShape* shape;
 
 
 Graphic::Graphic(sf::RenderWindow* window) {
 	this->window = window;
-	shape = new sf::CircleShape(100.f);
-	shape->setFillColor(sf::Color::Green);
 	openglInit();
 }
 
@@ -17,7 +14,7 @@ bool Graphic::loadImage(string path) {
 	return true;
 }
 
-bool Graphic::draw() {
+bool Graphic::update() {
 	//check the queue
 	if (es->getEventQueue()->size() != 0) {
 		if (es->getEventQueue()->front().getSubSystem(Event::subsystem::GRAPHIC)) {
@@ -27,13 +24,23 @@ bool Graphic::draw() {
 			es->getEventQueue()->front().popGraphic();
 		}
 	}
+	
+
 	window->clear();
 	openglDraw();
 	window->pushGLStates();
-	window->draw(*shape);
 	window->popGLStates();
 	window->display();
 	return true;
+}
+
+void Graphic::draw() {
+	//draw shape
+	for (int i = 0; i < shapeList.size(); i++) {
+		ShapeEntity* e = shapeList.at(i);
+		glm::vec2 pos = e->getPosition();
+		window->draw(*(shapeList.at(i)->getShape()));
+	}
 }
 
 void Graphic::getEventSystem(EventSystem* es){
@@ -42,18 +49,6 @@ void Graphic::getEventSystem(EventSystem* es){
 
 void Graphic::handleEvent(int eventType) {
 	switch (eventType) {
-	case Event::PLAYER_MOVE_UP:
-		shape->move(0, -5);
-		break;
-	case Event::PLAYER_MOVE_DOWN:
-		shape->move(0, 5);
-		break;
-	case Event::PLAYER_MOVE_LEFT:
-		shape->move(-5, 0);
-		break;
-	case Event::PLAYER_MOVE_RIGHT:
-		shape->move(5, 0);
-		break;
 	default:
 		break;
 	}
@@ -97,5 +92,22 @@ void Graphic::openglInit() {
 	glTranslatef(0.0, 0.0, -2.5);
 	glRotatef(60, 1.0, 0.0, 0.0);
 	glRotatef(-20, 0.0, 0.0, 1.0);
+}
+
+void Graphic::addEntity(Entity* e, Entity::rType renderType) {
+	switch (renderType) {
+	case Entity::rType::MESH:
+		meshList.push_back(e);
+		break;
+	case Entity::rType::SHAPE:
+		shapeList.push_back(static_cast<ShapeEntity*> (e));
+		break;
+	case Entity::rType::SPRITE:
+		spriteList.push_back(e);
+		break;
+	default:
+		break;
+	}
+	
 }
 

@@ -2,13 +2,7 @@
 
 
 Entity::Entity() {
-	position = glm::vec2(0, 0);
-	velocity = glm::vec2(0, 0);
-	originX = 0;
-	originY = 0;
-	width = 0;
-	height = 0;
-	renderType = SPRITE;
+
 }
 
 Entity::~Entity() {
@@ -31,20 +25,12 @@ glm::vec2 Entity::getVelocity() {
 	return velocity;
 }
 
-void Entity::setOriginX(float originX) {
-	this->originX = originX;
+void Entity::setOrigin(glm::vec2 origin) {
+	this->origin = origin;
 }
 
-float Entity::getOriginX() {
-	return originX;
-}
-
-void Entity::setOriginY(float originY) {
-	this->originY = originY;
-}
-
-float Entity::getOriginY() {
-	return originY;
+glm::vec2 Entity::getOrigin() {
+	return origin;
 }
 
 void Entity::setWidth(float width) {
@@ -61,6 +47,14 @@ void Entity::setHeight(float height) {
 
 float Entity::getHeight() {
 	return height;
+}
+
+void Entity::setScale(glm::vec2 scale) {
+	this->scale = scale;
+}
+
+glm::vec2 Entity::getScale() {
+	return scale;
 }
 
 void Entity::setRenderType(int type) {

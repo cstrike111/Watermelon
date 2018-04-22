@@ -139,6 +139,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventSystem.cpp" />
+    <ClCompile Include="ShapeEntity.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Graphic.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="KeyRelease.h" />
+    <ClInclude Include="ShapeEntity.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="KeyPress.h" />
     <ClInclude Include="Physics.h" />

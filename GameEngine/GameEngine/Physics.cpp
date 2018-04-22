@@ -24,6 +24,14 @@ void Physics::update() {
 	}
 
 	//update physics
+	//position change?
+	for (int i = 0; i < entityList.size(); i++) {
+		Entity* e = entityList.at(i);
+		glm::vec2 newPos = e->getPosition();
+		newPos.x += e->getVelocity().x;
+		newPos.y += e->getVelocity().y;
+		e->setPosition(newPos);
+	}
 	//detect collision
 	//gravity
 	//if player is not landing on the ground, apply gravity 

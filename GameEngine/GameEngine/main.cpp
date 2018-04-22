@@ -2,6 +2,8 @@
 #include "Graphic.h"
 #include "UserInterface.h"
 #include "Audio.h"
+#include "Physics.h"
+#include "ShapeEntity.h"
 
 //configuration of the parameters
 //resolution
@@ -13,8 +15,11 @@ Graphic* g; //renderer
 UserInterface* ui; //user interface sub-system
 EventSystem* es; //event system
 Audio* a; //audio system
+Physics* p; //physics system
 sf::RenderWindow* window;
 
+//pointer of asset
+ShapeEntity* shape;
 
 bool init() {
 	//initializing flag
@@ -29,12 +34,18 @@ bool init() {
 		a = new Audio();
 		g = new Graphic(window);
 		ui = new UserInterface(window);
-		es = new EventSystem(window);	
+		es = new EventSystem(window);
+		p = new Physics();
 		//pass the event system to sub-systems
 		g->getEventSystem(es);
 		ui->getEventSystem(es);
 		a->getEventSystem(es);
-		//load assets
+		//set up assets
+		shape = new ShapeEntity();
+		shape->setShape(new sf::CircleShape());
+		shape->getShape()->setFillColor(sf::Color::Green);
+		g->addEntity(shape, Entity::rType::SHAPE);
+		p->getPlayer(shape);
 	}
 	else {
 		success = false;
@@ -60,12 +71,15 @@ void close() {
 	delete es;
 	es = nullptr;
 
+	delete shape;
+	shape = nullptr;
+
 }
 
 //game loop
 void gameLoop() {
 	es->update();
-	g->draw();
+	g->update();
 	ui->update();
 	a->update();
 }

@@ -4,7 +4,10 @@
 #include <string>
 #include <iostream>
 #include <queue>
+#include <vector>
 #include "EventSystem.h"
+#include "Entity.h"
+#include "ShapeEntity.h"
 
 using namespace std;
 
@@ -13,17 +16,23 @@ public:
 	Graphic(sf::RenderWindow* window);
 	~Graphic();
 	bool loadImage(string path);
-	bool draw();
+	bool update();
 	void getEventSystem(EventSystem* es);
 	void handleEvent(int eventType);
 	void openglInit();
 	void openglDraw();
+	void addEntity(Entity* e, Entity::rType renderType);
+	void draw();
 
 
 private:
 	bool load; // whether the image is loaded
 	sf::RenderWindow* window; //a sfml window pointer
 	EventSystem* es; //pointer for event system
+	vector<ShapeEntity*> shapeList; //a list of shapes
+	vector<Entity*> meshList; //a list of mesh
+	vector<Entity*> spriteList; //a list of mesh
+
 
 	//opengl parameters
 	GLfloat light_diffuse[4] = { 1.0, 0.0, 0.0, 1.0 };  /* Red diffuse light. */
