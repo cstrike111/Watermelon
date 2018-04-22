@@ -131,5 +131,11 @@
     <ClInclude Include="ShapeEntity.h">
       <Filter>Entity</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerStopY.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStopX.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

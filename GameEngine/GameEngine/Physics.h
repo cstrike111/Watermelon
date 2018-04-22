@@ -15,7 +15,7 @@ public:
 	void update(); //update every entity and apply some features (gravity etc.)
 	void handleEvent(int eventType); //handle the events
 	void addEntity(Entity* e); //add entity to the system
-	void getEventSystem(EventSystem* es);
+	void setEventSystem(EventSystem* es);
 	void getPlayer(Entity* player);
 
 private:

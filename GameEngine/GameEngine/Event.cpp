@@ -48,9 +48,18 @@ void Event::popAudio() {
 	active[AUDIO] = false;
 }
 
+void Event::popAssetManager() {
+	active[ASSETMANAGER] = false;
+}
+
+void Event::popProfile() {
+	active[PROFILE] = false;
+}
+
 bool Event::isActive() {
 	bool systemActive = false;
-	for (int i = 0; i < 4; i++) {
+	//i = number of sub-system
+	for (int i = 0; i < 6; i++) {
 		if (active[i] == true) {
 			systemActive = true;
 			break;

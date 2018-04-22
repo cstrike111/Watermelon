@@ -25,7 +25,7 @@ public:
 	void update();
 	void handleEvent();
 	bool deleteAsset(string path, AssetType type);
-	void getEventSystem(EventSystem* es);
+	void setEventSystem(EventSystem* es);
 
 private:
 	map<string, sf::SoundBuffer> soundBuffer;

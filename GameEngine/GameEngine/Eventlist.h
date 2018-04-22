@@ -11,3 +11,5 @@
 #include "ControllerDisconnected.h"
 #include "ButtonPress.h"
 #include "KeyRelease.h"
+#include "PlayerStopX.h"
+#include "PlayerStopY.h"

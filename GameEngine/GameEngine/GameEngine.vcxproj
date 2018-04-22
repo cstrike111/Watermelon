@@ -157,6 +157,8 @@
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="KeyRelease.h" />
+    <ClInclude Include="PlayerStopY.h" />
+    <ClInclude Include="PlayerStopX.h" />
     <ClInclude Include="ShapeEntity.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="KeyPress.h" />

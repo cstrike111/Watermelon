@@ -1,8 +1,10 @@
 #include "Graphic.h"
+sf::Font font;
 
 Graphic::Graphic(sf::RenderWindow* window) {
 	this->window = window;
 	openglInit();
+
 }
 
 Graphic::~Graphic() {
@@ -39,11 +41,15 @@ void Graphic::draw() {
 	//draw shape
 	for (int i = 0; i < shapeList.size(); i++) {
 		ShapeEntity* se = shapeList.at(i);
-		window->draw(*(se->getShape()));
+		sf::Shape* s = shapeList.at(i)->getShape();
+		//update position
+		s->setPosition(se->getPosition().x, se->getPosition().y);
+		window->draw(*s);
 	}
+	window->draw(playerPosition);
 }
 
-void Graphic::getEventSystem(EventSystem* es){
+void Graphic::setEventSystem(EventSystem* es){
 	this->es = es;
 }
 

@@ -50,6 +50,6 @@ void Audio::update() {
 	}
 }
 
-void Audio::getEventSystem(EventSystem* es) {
+void Audio::setEventSystem(EventSystem* es) {
 	this->es = es;
 }

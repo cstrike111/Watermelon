@@ -37,9 +37,10 @@ bool init() {
 		es = new EventSystem(window);
 		p = new Physics();
 		//pass the event system to sub-systems
-		g->getEventSystem(es);
-		ui->getEventSystem(es);
-		a->getEventSystem(es);
+		g->setEventSystem(es);
+		ui->setEventSystem(es);
+		a->setEventSystem(es);
+		p->setEventSystem(es);
 		//set up assets
 		player = new ShapeEntity();
 		player->setShape(new sf::CircleShape(50));
@@ -82,6 +83,7 @@ void gameLoop() {
 	g->update();
 	ui->update();
 	a->update();
+	p->update();
 }
 
 int main()

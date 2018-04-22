@@ -2,6 +2,10 @@
 
 UserInterface::UserInterface(sf::RenderWindow* window) {
 	this->window = window;
+	KEY_LEFT_RELEASE = true;
+	KEY_RIGHT_RELEASE = true;
+	KEY_UP_RELEASE = true;
+	KEY_DOWN_RELEASE = true;
 }
 
 UserInterface::~UserInterface(){
@@ -29,20 +33,45 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 	}
 	if (sf::Keyboard::isKeyPressed(playerUp)) {
 		//move the player
-		es->addEvent(new PlayerMoveUp());
+		if (KEY_UP_RELEASE) {
+			es->addEvent(new PlayerMoveUp());
+			KEY_UP_RELEASE = false;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(playerDown)) {
 		//move the player
-		es->addEvent(new PlayerMoveDown());
+		if (KEY_DOWN_RELEASE) {
+			es->addEvent(new PlayerMoveDown());
+			KEY_DOWN_RELEASE = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(playerUp) && sf::Keyboard::isKeyPressed(playerDown)) {
+		if (KEY_UP_DOWN_RELEASE) {
+			KEY_UP_DOWN_RELEASE = false;
+			es->addEvent(new PlayerStopY());
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(playerLeft)) {
 		//move the player
-		es->addEvent(new PlayerMoveLeft());
+		if (KEY_LEFT_RELEASE) {
+			es->addEvent(new PlayerMoveLeft());
+			KEY_LEFT_RELEASE = false;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(playerRight)) {
 		//move the player
-		es->addEvent(new PlayerMoveRight());
+		if (KEY_RIGHT_RELEASE) {
+			es->addEvent(new PlayerMoveRight());
+			KEY_RIGHT_RELEASE = false;
+		}
 	}
+	if (sf::Keyboard::isKeyPressed(playerLeft) && sf::Keyboard::isKeyPressed(playerRight)) {
+		if (KEY_LEFT_RIGHT_RELEASE) {
+			KEY_LEFT_RIGHT_RELEASE = false;
+			es->addEvent(new PlayerStopX());
+		}
+	}
+
 
 }
 
@@ -50,20 +79,45 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 void UserInterface::handleKeyRelease(sf::Keyboard::Key key) {
 	if (key == playerUp) {
 		//stop the player
-		cout << "Up key release" << endl;
+		KEY_UP_RELEASE = true;
+		KEY_UP_DOWN_RELEASE = true;
+		es->addEvent(new PlayerStopY());
+		if (!KEY_DOWN_RELEASE) {
+			es->addEvent(new PlayerMoveDown());
+		}
 	}
 	if (key == playerDown) {
 		//stop the player
-		cout << "Down key release" << endl;
+		KEY_DOWN_RELEASE = true;
+		KEY_UP_DOWN_RELEASE = true;
+		es->addEvent(new PlayerStopY());
+		if (!KEY_UP_RELEASE) {
+			es->addEvent(new PlayerMoveUp());
+		}
+		
 	}
 	if (key == playerLeft) {
+		KEY_LEFT_RELEASE = true;
+		KEY_LEFT_RIGHT_RELEASE = true;
 		//stop the player
-		cout << "Left key release" << endl;
+		es->addEvent(new PlayerStopX());
+		if (!KEY_RIGHT_RELEASE) {
+			es->addEvent(new PlayerMoveRight());
+		}
+		
 	}
 	if (key == playerRight) {
+		KEY_RIGHT_RELEASE = true;
+		KEY_LEFT_RIGHT_RELEASE = true;
 		//stop the player
-		cout << "Right key release" << endl;
+		es->addEvent(new PlayerStopX());
+		if (!KEY_LEFT_RELEASE) {
+			es->addEvent(new PlayerMoveLeft());
+
+		}
+		
 	}
+	
 }
 
 void UserInterface::setKey(int action, sf::Keyboard::Key key) {
@@ -120,11 +174,12 @@ void UserInterface::setButton(int action, int button) {
 	}
 }
 
-void UserInterface::getEventSystem(EventSystem* es) {
+void UserInterface::setEventSystem(EventSystem* es) {
 	this->es = es;
 }
 
 void UserInterface::update() {
+
 	//handle sfml event 
 	while (window->pollEvent(sfEvent))
 	{

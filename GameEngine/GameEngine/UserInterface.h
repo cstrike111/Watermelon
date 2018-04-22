@@ -22,7 +22,7 @@ public:
 	void handleButton(int button); //react according to the button that user presses on the controller
 	void setButton(int action, int button); //configure the button
 	void setKey(int action, sf::Keyboard::Key key); //change the configuration of the key
-	void getEventSystem(EventSystem* es); //get the event sub-system
+	void setEventSystem(EventSystem* es); //get the event sub-system
 	void update(); //update the user interface
 
 private:
@@ -47,6 +47,15 @@ private:
 
 	//sfml event
 	sf::Event sfEvent;
+
+	//key flag
+	bool KEY_UP_RELEASE;
+	bool KEY_DOWN_RELEASE;
+	bool KEY_LEFT_RELEASE;
+	bool KEY_RIGHT_RELEASE;
+	bool KEY_LEFT_RIGHT_RELEASE;
+	bool KEY_UP_DOWN_RELEASE;
+
 };
 
 

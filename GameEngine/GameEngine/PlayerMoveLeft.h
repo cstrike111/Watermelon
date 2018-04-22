@@ -4,9 +4,8 @@ class PlayerMoveLeft: public Event {
 public:
 	PlayerMoveLeft() {
 		eventType = event::PLAYER_MOVE_LEFT;
-		active[GRAPHIC] = true;
 		active[AUDIO] = true;
-		//active[PHYSICS] = true;
+		active[PHYSICS] = true;
 	}
 	
 	

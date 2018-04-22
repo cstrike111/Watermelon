@@ -22,6 +22,8 @@ public:
 		PLAYER_MOVE_RIGHT,
 		PLAYER_MOVE_UP,
 		PLAYER_MOVE_DOWN,
+		PLAYER_STOP_Y,
+		PLAYER_STOP_X,
 		KEYRELEASE,
 		QUIT
 	};
@@ -35,6 +37,8 @@ public:
 	void popPhysics();
 	void popUI();
 	void popAudio();
+	void popAssetManager();
+	void popProfile();
 
 	//check whether there is system that still has job to do
 	bool isActive();
@@ -43,5 +47,5 @@ protected:
 	int eventType; //type of event
 	//a list records which system has job to do
 	//the index will indicate which subsystem it is (refer to subsystem enum)
-	bool active[4] = { false, false, false, false };
+	bool active[6] = { false, false, false, false, false, false };
 };

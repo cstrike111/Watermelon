@@ -2,7 +2,10 @@
 
 
 Entity::Entity() {
-
+	position = glm::vec2(0, 0);
+	velocity = glm::vec2(0, 0);
+	scale = glm::vec2(0, 0);
+	origin = glm::vec2(0,0);
 }
 
 Entity::~Entity() {

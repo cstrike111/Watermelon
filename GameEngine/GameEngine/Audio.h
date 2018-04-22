@@ -14,7 +14,7 @@ public:
 	void loadSounds(); //load the sound, get memory for memory manager
 	void handleEvent(int eventType);
 	void update();
-	void getEventSystem(EventSystem* es);
+	void setEventSystem(EventSystem* es);
 
 private:
 	EventSystem* es; //pointer for event system

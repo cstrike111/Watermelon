@@ -17,7 +17,7 @@ public:
 	~Graphic();
 	bool loadImage(string path);
 	bool update();
-	void getEventSystem(EventSystem* es);
+	void setEventSystem(EventSystem* es);
 	void handleEvent(int eventType);
 	void openglInit();
 	void openglDraw();
@@ -32,7 +32,7 @@ private:
 	vector<ShapeEntity*> shapeList; //a list of shapes
 	vector<Entity*> meshList; //a list of mesh
 	vector<Entity*> spriteList; //a list of mesh
-
+	sf::Text playerPosition;
 
 	//opengl parameters
 	GLfloat light_diffuse[4] = { 1.0, 0.0, 0.0, 1.0 };  /* Red diffuse light. */

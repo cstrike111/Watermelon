@@ -19,7 +19,7 @@ void Physics::update() {
 			//handle event
 			handleEvent(es->getEventQueue()->front().getEventType());
 			//tell the event that the sub-system has finished its job
-			es->getEventQueue()->front().popAudio();
+			es->getEventQueue()->front().popPhysics();
 		}
 	}
 
@@ -45,16 +45,22 @@ void Physics::handleEvent(int eventType) {
 		//add y speed
 		//jumpReady = false
 		//when the entity land on floor, rest jumpReady
-		player->setVelocity(glm::vec2(0, 5));
+		player->setVelocity(glm::vec2(player->getVelocity().x, -5));
 		break;
 	case Event::PLAYER_MOVE_DOWN:
-		player->setVelocity(glm::vec2(0, -5));
+		player->setVelocity(glm::vec2(player->getVelocity().x, 5));
 		break;
 	case Event::PLAYER_MOVE_LEFT:
-		player->setVelocity(glm::vec2(-5, 0));
+		player->setVelocity(glm::vec2(-5, player->getVelocity().y));
 		break;
 	case Event::PLAYER_MOVE_RIGHT:
-		player->setVelocity(glm::vec2(5, 0));
+		player->setVelocity(glm::vec2(5, player->getVelocity().y));
+		break;
+	case Event::PLAYER_STOP_Y:
+		player->setVelocity(glm::vec2(player->getVelocity().x, 0));
+		break;
+	case Event::PLAYER_STOP_X:
+		player->setVelocity(glm::vec2(0, player->getVelocity().y));
 		break;
 	default:
 		break;
@@ -65,7 +71,7 @@ void Physics::addEntity(Entity* e) {
 	entityList.push_back(e);
 }
 
-void Physics::getEventSystem(EventSystem* es) {
+void Physics::setEventSystem(EventSystem* es) {
 	this->es = es;
 }
 
