@@ -21,6 +21,12 @@ bool Event::getSubSystem(int subsystem) {
 	case AUDIO:
 		return active[AUDIO];
 		break;
+	case ASSETMANAGER:
+		return active[ASSETMANAGER];
+		break;
+	case PROFILE:
+		return active[PROFILE];
+		break;
 	default:
 		return false;
 		break;

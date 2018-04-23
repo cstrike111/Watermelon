@@ -5,6 +5,7 @@
 #include "Physics.h"
 #include "ShapeEntity.h"
 #include "AssetManager.h"
+#include "Profile.h"
 
 //configuration of the parameters
 //resolution
@@ -18,6 +19,7 @@ EventSystem* es; //event system
 Audio* a; //audio system
 Physics* p; //physics system
 AssetManager* asset; //Asset Manager
+Profile* pro; //Profile system
 sf::RenderWindow* window;
 
 //pointer of asset
@@ -36,10 +38,12 @@ bool init() {
 		//be careful with the order
 		es = new EventSystem(window);
 		asset = new AssetManager();
-		g = new Graphic(window);
+		g = new Graphic(window, asset);
 		ui = new UserInterface(window);
 		p = new Physics();
 		a = new Audio(asset);
+		pro = new Profile();
+		g->setProfileSystem(pro);
 		//pass the event system to sub-systems
 		g->setEventSystem(es);
 		ui->setEventSystem(es);
@@ -47,6 +51,7 @@ bool init() {
 		p->setEventSystem(es);
 		a->setEventSystem(es);
 		asset->setEventSystem(es);
+		pro->setEventSystem(es);
 		//set up assets
 		//pass asset manager to the sub-systems
 		a->setAssetManager(asset);
@@ -105,6 +110,7 @@ void gameLoop() {
 	a->update();
 	p->update();
 	asset->update();
+	pro->update();
 }
 
 int main()

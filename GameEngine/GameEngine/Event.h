@@ -25,6 +25,7 @@ public:
 		PLAYER_STOP_Y,
 		PLAYER_STOP_X,
 		KEYRELEASE,
+		TOGGLE_SHOW_FPS,
 		QUIT
 	};
 	Event();

@@ -1,18 +1,20 @@
 #include "Graphic.h"
-sf::Font font;
 
-Graphic::Graphic(sf::RenderWindow* window) {
+Graphic::Graphic(sf::RenderWindow* window, AssetManager* am) {
 	this->window = window;
+	this->am = am;
 	openglInit();
-
+	loadAsset();
 }
 
 Graphic::~Graphic() {
 	window = nullptr;
 }
 
-bool Graphic::loadImage(string path) {
-	return true;
+void Graphic::loadAsset() {
+	//load the font
+	Calibri = static_cast<sf::Font*>(am->loadAsset("asset/font/Calibri.ttf", AssetManager::FONT));
+	fps.setFont(*Calibri);
 }
 
 bool Graphic::update() {
@@ -47,6 +49,7 @@ void Graphic::draw() {
 		window->draw(*s);
 	}
 	window->draw(playerPosition);
+	showFps();
 }
 
 void Graphic::setEventSystem(EventSystem* es){
@@ -55,6 +58,14 @@ void Graphic::setEventSystem(EventSystem* es){
 
 void Graphic::handleEvent(int eventType) {
 	switch (eventType) {
+	case Event::TOGGLE_SHOW_FPS:
+		if (fpsEnable) {
+			fpsEnable = false;
+		}
+		else {
+			fpsEnable = true;
+		}
+		break;
 	default:
 		break;
 	}
@@ -115,5 +126,19 @@ void Graphic::addEntity(Entity* e, Entity::rType renderType) {
 		break;
 	}
 	
+}
+
+void Graphic::setProfileSystem(Profile* p) {
+	this->p = p;
+}
+
+void Graphic::showFps() {
+	if (fpsEnable) {
+		string fpsString = "FPS: " + to_string(p->getFps());
+		fps.setString(fpsString);
+		fps.setCharacterSize(24);
+		fps.setFillColor(sf::Color::White);
+		window->draw(fps);
+	}
 }
 

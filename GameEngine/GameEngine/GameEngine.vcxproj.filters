@@ -37,6 +37,9 @@
     <Filter Include="Asset Manager">
       <UniqueIdentifier>{620e7a05-79f0-4ac8-b5a4-26cb19fc3b10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Profile">
+      <UniqueIdentifier>{74acfed9-ed6d-4b0a-ab85-8716f32b876c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="ShapeEntity.cpp">
       <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Profile.cpp">
+      <Filter>Profile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +141,12 @@
       <Filter>Event System\Events</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStopX.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Profile.h">
+      <Filter>Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="ToggleShowFps.h">
       <Filter>Event System\Events</Filter>
     </ClInclude>
   </ItemGroup>

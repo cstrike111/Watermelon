@@ -71,6 +71,9 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 			es->addEvent(new PlayerStopX());
 		}
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+		es->addEvent(new ToggleShowFps());
+	}
 
 
 }
