@@ -14,23 +14,33 @@ public:
 		MUSIC,
 		TEXTURE,
 		MESH,
-		SHADER
+		FONT,
+		ENTITY
 	};
 	AssetManager();
 	~AssetManager();
 
+	//this function is for loading asset. if the asset is loaded, it will return a pointer to that asset.
 	void* loadAsset(string path, AssetType type);
+	//this function will return a pointer of asset if loaded
 	void* getAsset(string path, AssetType type);
+	//check whether the asset is loaded
 	bool isLoad(string path, AssetType type);
+	//update asset manager
 	void update();
-	void handleEvent();
+	//handle event
+	void handleEvent(int eventType);
+	//delete the asset of in the map
 	bool deleteAsset(string path, AssetType type);
+	//set the event system
 	void setEventSystem(EventSystem* es);
 
 private:
-	map<string, sf::SoundBuffer> soundBuffer;
-	map<string, sf::Music> musicBuffer;
-	map<string, sf::Texture> Texture;
+	EventSystem * es;
+	map<string, sf::SoundBuffer*> soundBuffer;
+	map<string, sf::Music*> musicBuffer;
+	map<string, sf::Texture*> texture;
+	map<string, sf::Font*> fontBuffer;
 	map<string, Entity*> Entity;
-	//mesh map
+	//mesh, map
 };
