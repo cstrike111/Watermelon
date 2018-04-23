@@ -1,6 +1,7 @@
 #include "Audio.h"
 
-Audio::Audio() {
+Audio::Audio(AssetManager* am) {
+	setAssetManager(am);
 	loadSounds();
 }
 
@@ -8,15 +9,18 @@ Audio::~Audio() {
 	//delete the sound
 	delete playerStep;
 	playerStep = nullptr;
-	delete playerStepBuffer;
-	playerStepBuffer = nullptr;
 }
 
 void Audio::loadSounds() {
-	playerStepBuffer = new sf::SoundBuffer();
+	am->loadAsset("ss.wav", AssetManager::SOUND);
+	//am->loadAsset("test.wav", AssetManager::MUSIC);
+	//am->loadAsset("test.wav", AssetManager::SOUND);
+	//std::cout << am->isLoad("test.wav", AssetManager::SOUND) << endl;
+	//am->deleteAsset("test.wav", AssetManager::SOUND);
+	//std::cout << am->isLoad("test.wav", AssetManager::SOUND) << endl;
 	playerStep = new sf::Sound();
-	playerStepBuffer->loadFromFile("ss.wav");
-	playerStep->setBuffer(*playerStepBuffer);
+	//playerStep->setBuffer(*(static_cast<sf::SoundBuffer*>(am->loadAsset("ss.wav", AssetManager::SOUND))));
+	playerStep->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("ss.wav", AssetManager::SOUND))));
 }
 
 void Audio::handleEvent(int eventType) {
@@ -52,4 +56,8 @@ void Audio::update() {
 
 void Audio::setEventSystem(EventSystem* es) {
 	this->es = es;
+}
+
+void Audio::setAssetManager(AssetManager* am) {
+	this->am = am;
 }

@@ -41,6 +41,6 @@ private:
 	map<string, sf::Music*> musicBuffer;
 	map<string, sf::Texture*> texture;
 	map<string, sf::Font*> fontBuffer;
-	map<string, Entity*> Entity;
+	//map<string, Entity*> Entity;
 	//mesh, map
 };

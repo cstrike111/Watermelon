@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "Physics.h"
 #include "ShapeEntity.h"
+#include "AssetManager.h"
 
 //configuration of the parameters
 //resolution
@@ -16,6 +17,7 @@ UserInterface* ui; //user interface sub-system
 EventSystem* es; //event system
 Audio* a; //audio system
 Physics* p; //physics system
+AssetManager* asset; //Asset Manager
 sf::RenderWindow* window;
 
 //pointer of asset
@@ -30,18 +32,24 @@ bool init() {
 	if (window->isOpen()) {
 		success = true;
 		window->setFramerateLimit(60); //limit the fps
-		//pass the window to sub-systems
-		a = new Audio();
+		//pass the window to sub-systems and create sub-systems
+		//be careful with the order
+		es = new EventSystem(window);
+		asset = new AssetManager();
 		g = new Graphic(window);
 		ui = new UserInterface(window);
-		es = new EventSystem(window);
 		p = new Physics();
+		a = new Audio(asset);
 		//pass the event system to sub-systems
 		g->setEventSystem(es);
 		ui->setEventSystem(es);
 		a->setEventSystem(es);
 		p->setEventSystem(es);
+		a->setEventSystem(es);
+		asset->setEventSystem(es);
 		//set up assets
+		//pass asset manager to the sub-systems
+		a->setAssetManager(asset);
 		player = new ShapeEntity();
 		player->setShape(new sf::CircleShape(50));
 		player->getShape()->setFillColor(sf::Color::Green);
@@ -72,6 +80,18 @@ void close() {
 	delete es;
 	es = nullptr;
 
+	//clean the physics system
+	delete p;
+	p = nullptr;
+
+	//clean asset manager system
+	delete asset;
+	asset = nullptr;
+
+	//clean audio system
+	delete a;
+	a = nullptr;
+
 	delete player;
 	player = nullptr;
 
@@ -84,6 +104,7 @@ void gameLoop() {
 	ui->update();
 	a->update();
 	p->update();
+	asset->update();
 }
 
 int main()
