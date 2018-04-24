@@ -3,11 +3,14 @@
 #include <map>
 #include "Entity.h"
 #include "EventSystem.h"
+#include "Box2D\Box2D.h"
 #include <vector>
+
 using namespace std;
 
 class Physics {
 public:
+	/* For the unit conversion: 1 cm = 0.4 pixels. 1 m = 40 pixels */
 	Physics();
 	~Physics();
 

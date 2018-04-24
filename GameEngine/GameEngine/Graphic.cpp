@@ -5,6 +5,9 @@ Graphic::Graphic(sf::RenderWindow* window, AssetManager* am) {
 	this->am = am;
 	openglInit();
 	loadAsset();
+	playerSprite.setTexture((*static_cast<sf::Texture*>(am->getAsset("asset/texture/testTex.png", AssetManager::TEXTURE))));
+	playerSprite.setPosition(50, 50);
+	playerSprite.setTextureRect(sf::IntRect(66, 80, 226, 71));
 }
 
 Graphic::~Graphic() {
@@ -15,6 +18,8 @@ void Graphic::loadAsset() {
 	//load the font
 	Calibri = static_cast<sf::Font*>(am->loadAsset("asset/font/Calibri.ttf", AssetManager::FONT));
 	fps.setFont(*Calibri);
+	//load texture
+	am->loadAsset("asset/texture/testTex.png", AssetManager::TEXTURE);
 }
 
 bool Graphic::update() {
@@ -49,6 +54,7 @@ void Graphic::draw() {
 		window->draw(*s);
 	}
 	window->draw(playerPosition);
+	window->draw(playerSprite);
 	showFps();
 }
 

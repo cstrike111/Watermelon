@@ -139,6 +139,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventSystem.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Profile.cpp" />
     <ClCompile Include="ShapeEntity.cpp" />
     <ClCompile Include="UserInterface.cpp" />
@@ -152,6 +153,9 @@
     <ClInclude Include="ButtonPress.h" />
     <ClInclude Include="ControllerConnected.h" />
     <ClInclude Include="ControllerDisconnected.h" />
+    <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Load.h" />
+    <ClInclude Include="Save.h" />
     <ClInclude Include="ToggleShowFps.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Event.h" />

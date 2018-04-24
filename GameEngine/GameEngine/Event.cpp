@@ -27,6 +27,9 @@ bool Event::getSubSystem(int subsystem) {
 	case PROFILE:
 		return active[PROFILE];
 		break;
+	case FILE:
+		return active[FILE];
+		break;
 	default:
 		return false;
 		break;
@@ -60,6 +63,10 @@ void Event::popAssetManager() {
 
 void Event::popProfile() {
 	active[PROFILE] = false;
+}
+
+void Event::popFile() {
+	active[FILE] = false;
 }
 
 bool Event::isActive() {

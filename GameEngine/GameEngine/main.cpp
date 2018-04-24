@@ -6,6 +6,7 @@
 #include "ShapeEntity.h"
 #include "AssetManager.h"
 #include "Profile.h"
+#include "FileSystem.h"
 
 //configuration of the parameters
 //resolution
@@ -20,6 +21,7 @@ Audio* a; //audio system
 Physics* p; //physics system
 AssetManager* asset; //Asset Manager
 Profile* pro; //Profile system
+FileSystem* file; //file system
 sf::RenderWindow* window;
 
 //pointer of asset
@@ -43,6 +45,7 @@ bool init() {
 		p = new Physics();
 		a = new Audio(asset);
 		pro = new Profile();
+		file = new FileSystem();
 		g->setProfileSystem(pro);
 		//pass the event system to sub-systems
 		g->setEventSystem(es);
@@ -52,6 +55,7 @@ bool init() {
 		a->setEventSystem(es);
 		asset->setEventSystem(es);
 		pro->setEventSystem(es);
+		file->setEventSystem(es);
 		//set up assets
 		//pass asset manager to the sub-systems
 		a->setAssetManager(asset);
@@ -60,6 +64,7 @@ bool init() {
 		player->getShape()->setFillColor(sf::Color::Green);
 		g->addEntity(player, Entity::rType::SHAPE);
 		p->getPlayer(player);
+		file->setPlayer(player);
 	}
 	else {
 		success = false;
@@ -111,6 +116,7 @@ void gameLoop() {
 	p->update();
 	asset->update();
 	pro->update();
+	file->update();
 }
 
 int main()

@@ -26,11 +26,24 @@ void UserInterface::handleEvent(int eventType) {
 
 //handle user's input and add events
 void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
-	//might need to use some features of sfml
+	//system key
 	if (key == sf::Keyboard::Escape) {
 		//exit the game
 		es->addEvent(new Quit());
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+		es->addEvent(new ToggleShowFps());
+	}
+	if (key == sf::Keyboard::F5) {
+		//save
+		es->addEvent(new Save());
+	}
+	if (key == sf::Keyboard::F6) {
+		//save
+		es->addEvent(new Load());
+	}
+
+	//player control key
 	if (sf::Keyboard::isKeyPressed(playerUp)) {
 		//move the player
 		if (KEY_UP_RELEASE) {
@@ -71,9 +84,7 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 			es->addEvent(new PlayerStopX());
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
-		es->addEvent(new ToggleShowFps());
-	}
+	
 
 
 }

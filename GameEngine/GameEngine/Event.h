@@ -11,7 +11,8 @@ public:
 		UI,
 		AUDIO,
 		ASSETMANAGER,
-		PROFILE
+		PROFILE,
+		FILE
 	};
 	enum event {
 		KEYPRESS,
@@ -26,6 +27,8 @@ public:
 		PLAYER_STOP_X,
 		KEYRELEASE,
 		TOGGLE_SHOW_FPS,
+		SAVE,
+		LOAD,
 		QUIT
 	};
 	Event();
@@ -40,6 +43,7 @@ public:
 	void popAudio();
 	void popAssetManager();
 	void popProfile();
+	void popFile();
 
 	//check whether there is system that still has job to do
 	bool isActive();
@@ -48,5 +52,5 @@ protected:
 	int eventType; //type of event
 	//a list records which system has job to do
 	//the index will indicate which subsystem it is (refer to subsystem enum)
-	bool active[6] = { false, false, false, false, false, false };
+	bool active[7] = { false, false, false, false, false, false, false };
 };

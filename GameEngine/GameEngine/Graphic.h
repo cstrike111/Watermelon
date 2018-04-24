@@ -58,4 +58,5 @@ private:
 	//asset pointer
 	sf::Font* Calibri;
 	sf::Text fps;
+	sf::Sprite playerSprite;
 };
