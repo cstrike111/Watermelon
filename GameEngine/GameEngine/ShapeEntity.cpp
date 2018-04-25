@@ -1,7 +1,13 @@
 #include "ShapeEntity.h"
 
 ShapeEntity::ShapeEntity() {
-	
+	//box2d configuration
+	bodyDef.type = b2_dynamicBody; //set the body type
+	polygonShape.SetAsBox(1.0f, 1.0f); //set as a box
+	bodyDef.position.Set(0.0f, 0.0f);
+	fixtureDef.shape = &polygonShape;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
 }
 
 ShapeEntity::~ShapeEntity() {

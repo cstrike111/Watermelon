@@ -3,29 +3,48 @@
 #include <map>
 #include "Entity.h"
 #include "EventSystem.h"
-#include "Box2D\Box2D.h"
-#include <vector>
+#include "Profile.h"
+#include "Box2D\Box2D\Box2D.h"
+#include <vector> 
 
 using namespace std;
 
 class Physics {
 public:
-	/* For the unit conversion: 1 cm = 0.4 pixels. 1 m = 40 pixels */
-	Physics();
+	/* For the unit conversion: 1 m = 100 pixels. 1 m = 1 unit pixel. */
+	Physics(b2Vec2 gravity);
 	~Physics();
 
+	//constant
+	float UNIT_PIXEL = 50;
 	bool collisionDetect(Entity* e1, Entity* e2); //collision detect between 2 entity
 	void update(); //update every entity and apply some features (gravity etc.)
 	void handleEvent(int eventType); //handle the events
-	void addEntity(Entity* e); //add entity to the system
+	//add entity to the system
+	void addStaticEntity(Entity* e); 
+	void addDynamicEntity(Entity* e); 
 	void setEventSystem(EventSystem* es);
 	void getPlayer(Entity* player);
+	void setGravity(b2Vec2 gravity); //change the gravity
+	void createBody(Entity* e);
+	void setProfileSystem(Profile* pro);
 
 private:
 	/* Here! This is a list of pointers of entities. Don't forget clean the memory of 
 	entities after you use them. */
-	vector<Entity*> entityList;
+	vector<Entity*> dynamicEntityList;
+	vector<Entity*> staticEntityList;
+	Entity* player; //player object
+
 	//static entity list?
 	EventSystem* es; //get the event system
-	Entity* player;
+	Profile* pro; //get the profile system
+
+	//store the information of box2d
+	b2Vec2 gravity;
+	b2World* world;
+	float timeStep = 1.0f / 60.0f;
+
+	//parameter for the player
+	float PLAYER_MOVE_SPEED = 5;
 };

@@ -1,16 +1,11 @@
 #pragma once
 #include "glm\glm.hpp"
+#include "Box2D\Box2D.h"
 #include <SFML\Graphics.hpp>
 
 class Entity {
 public:
-	//render type
-	enum rType {
-		MESH,
-		SPRITE,
-		SHAPE
-	};
-	/* Entity should be created in main.cpp and deleted in main.cpp! */
+	/* Entity should be created in main.cpp and deleted in main.cpp! Later will managed with game player sub-system. */
 	Entity();
 	~Entity();
 
@@ -29,19 +24,21 @@ public:
 	glm::vec2 getScale();
 	void setRenderType(int type);
 	int getRenderType();
+
+	//physics information
+	b2BodyDef bodyDef;
+	b2Body* body;
+	//collision rectangle
+	b2PolygonShape polygonShape;
+	b2FixtureDef fixtureDef;
 	
 protected:
-	//physics infomation
+	//general infomation
 	glm::vec2 position;
 	glm::vec2 velocity;
 	glm::vec2 scale;
 	glm::vec2 origin;
 	float width;
 	float height;
-	//collision rectangle
-
-	//render infomation
-	int renderType;
-	//Mesh
-	//Texture
+	
 };

@@ -14,4 +14,5 @@ public:
 
 protected:
 	sf::Shape* shape;
+	
 };

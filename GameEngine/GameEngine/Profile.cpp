@@ -38,9 +38,13 @@ void Profile::setEventSystem(EventSystem* es) {
 }
 
 void Profile::calculateFps() {
+	fps = 1.0f / getDtTime();
+}
+
+float Profile::getDtTime() {
 	time = clock.getElapsedTime();
 	clock.restart().asSeconds();
-	fps = 1.0f / time.asSeconds();
+	return time.asSeconds();
 }
 
 int Profile::getFps() {

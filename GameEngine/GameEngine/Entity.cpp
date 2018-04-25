@@ -9,7 +9,7 @@ Entity::Entity() {
 }
 
 Entity::~Entity() {
-
+	
 }
 
 void Entity::setPosition(glm::vec2 position) {

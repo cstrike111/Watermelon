@@ -1,11 +1,12 @@
 #include "Physics.h"
 
-Physics::Physics() {
-
+Physics::Physics(b2Vec2 gravity) {
+	world = new b2World(gravity);
 }
 
 Physics::~Physics() {
-
+	delete world;
+	world = nullptr;
 }
 
 bool Physics::collisionDetect(Entity* e1, Entity* e2) {
@@ -24,13 +25,16 @@ void Physics::update() {
 	}
 
 	//update physics
-	//position change?
-	for (int i = 0; i < entityList.size(); i++) {
-		Entity* e = entityList.at(i);
-		glm::vec2 newPos = e->getPosition();
-		newPos.x += e->getVelocity().x;
-		newPos.y += e->getVelocity().y;
-		e->setPosition(newPos);
+	//update dynamic objects' position
+	world->Step(pro->getDtTime(), 6, 2);
+	for (int i = 0; i < dynamicEntityList.size(); i++) {
+		Entity* e = dynamicEntityList.at(i);
+		b2Vec2 position = e->body->GetPosition();
+		//covert into pixel
+		float posX = position.x * UNIT_PIXEL;
+		//be careful: sfml doesn't share THE SAME COORDINATE SYSTEM with box2d
+		float posY = position.y * -UNIT_PIXEL; 
+		e->setPosition(glm::vec2(posX, posY));
 	}
 	//detect collision
 	//gravity
@@ -39,36 +43,51 @@ void Physics::update() {
 }
 
 void Physics::handleEvent(int eventType) {
+	b2Vec2 vel = player->body->GetLinearVelocity();
 	switch (eventType) {
 	case Event::PLAYER_MOVE_UP:
 		//if the entity is on the floor
 		//add y speed
 		//jumpReady = false
 		//when the entity land on floor, rest jumpReady
-		player->setVelocity(glm::vec2(player->getVelocity().x, -5));
+		vel.y = -PLAYER_MOVE_SPEED;
+		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_DOWN:
-		player->setVelocity(glm::vec2(player->getVelocity().x, 5));
+		vel.y = PLAYER_MOVE_SPEED;
+		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_LEFT:
-		player->setVelocity(glm::vec2(-5, player->getVelocity().y));
+		vel.x = -PLAYER_MOVE_SPEED;
+		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_RIGHT:
-		player->setVelocity(glm::vec2(5, player->getVelocity().y));
+		vel.x = PLAYER_MOVE_SPEED;
+		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_STOP_Y:
-		player->setVelocity(glm::vec2(player->getVelocity().x, 0));
+		vel.y = 0;
+		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_STOP_X:
-		player->setVelocity(glm::vec2(0, player->getVelocity().y));
+		vel.x = 0;
+		player->body->SetLinearVelocity(vel);
 		break;
 	default:
 		break;
 	}
 }
 
-void Physics::addEntity(Entity* e) {
-	entityList.push_back(e);
+void Physics::addStaticEntity(Entity* e) {
+	createBody(e);
+	e->body->CreateFixture(&(e->polygonShape), 0.0f);
+	staticEntityList.push_back(e);
+}
+
+void Physics::addDynamicEntity(Entity* e) {
+	createBody(e);
+	e->body->CreateFixture(&(e->fixtureDef));
+	dynamicEntityList.push_back(e);
 }
 
 void Physics::setEventSystem(EventSystem* es) {
@@ -77,7 +96,17 @@ void Physics::setEventSystem(EventSystem* es) {
 
 void Physics::getPlayer(Entity* player) {
 	this->player = player;
-	addEntity(player);
+	addDynamicEntity(player);
 }
 
+void Physics::setGravity(b2Vec2 gravity) {
+	this->gravity = gravity;
+}
 
+void Physics::createBody(Entity* e) {
+	e->body = world->CreateBody(&(e->bodyDef));
+}
+
+void Physics::setProfileSystem(Profile* pro) {
+	this->pro = pro;
+}

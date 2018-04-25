@@ -13,6 +13,9 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+//world parameters
+b2Vec2 gravity(0.0f, -10.0f);
+
 //declare of sub-system and window
 Graphic* g; //renderer
 UserInterface* ui; //user interface sub-system
@@ -42,11 +45,12 @@ bool init() {
 		asset = new AssetManager();
 		g = new Graphic(window, asset);
 		ui = new UserInterface(window);
-		p = new Physics();
+		p = new Physics(gravity);
 		a = new Audio(asset);
 		pro = new Profile();
 		file = new FileSystem();
 		g->setProfileSystem(pro);
+		p->setProfileSystem(pro);
 		//pass the event system to sub-systems
 		g->setEventSystem(es);
 		ui->setEventSystem(es);
@@ -101,6 +105,14 @@ void close() {
 	//clean audio system
 	delete a;
 	a = nullptr;
+
+	//clean profile system
+	delete pro;
+	pro = nullptr;
+
+	//clean file system
+	delete file;
+	file = nullptr;
 
 	delete player;
 	player = nullptr;

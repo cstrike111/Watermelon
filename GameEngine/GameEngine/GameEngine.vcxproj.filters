@@ -81,6 +81,12 @@
     <ClCompile Include="FileSystem.cpp">
       <Filter>File I/O</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticSpriteEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphic.h">
@@ -163,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="Load.h">
       <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticSpriteEntity.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

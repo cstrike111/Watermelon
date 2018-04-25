@@ -14,6 +14,7 @@ public:
 	void update();
 	void setEventSystem(EventSystem* es);
 	void calculateFps();
+	float getDtTime();
 	int getFps();
 
 private:
