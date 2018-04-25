@@ -1,0 +1,1 @@
+If there is linking error, maybe the proper lib isn't load. Please load the correct lib according to debug mode or release mode.

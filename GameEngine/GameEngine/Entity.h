@@ -20,6 +20,7 @@ public:
 	float UNIT_PIXEL = 50;
 
 	//getter and setter for the data
+	//set position will only work before add into physics system (need another way to move object)
 	void setPosition(glm::vec2 position);
 	glm::vec2 getPosition();
 	void setVelocity(glm::vec2 velocity);
