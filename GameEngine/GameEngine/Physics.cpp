@@ -50,11 +50,11 @@ void Physics::handleEvent(int eventType) {
 		//add y speed
 		//jumpReady = false
 		//when the entity land on floor, rest jumpReady
-		vel.y = -PLAYER_MOVE_SPEED;
+		vel.y = PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_DOWN:
-		vel.y = PLAYER_MOVE_SPEED;
+		vel.y = -PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_LEFT:

@@ -5,9 +5,19 @@
 
 class Entity {
 public:
+	//render type
+	enum rType {
+		MESH,
+		SPRITE,
+		SHAPE,
+		CHARACTER
+	};
+
 	/* Entity should be created in main.cpp and deleted in main.cpp! Later will managed with game player sub-system. */
 	Entity();
 	~Entity();
+
+	float UNIT_PIXEL = 50;
 
 	//getter and setter for the data
 	void setPosition(glm::vec2 position);
@@ -24,6 +34,11 @@ public:
 	glm::vec2 getScale();
 	void setRenderType(int type);
 	int getRenderType();
+	void setRotation(float rotation);
+	float getRotation();
+
+	//update physics information
+	void updateCollisionRect();
 
 	//physics information
 	b2BodyDef bodyDef;
@@ -38,7 +53,13 @@ protected:
 	glm::vec2 velocity;
 	glm::vec2 scale;
 	glm::vec2 origin;
-	float width;
-	float height;
+	float width; //in pixel
+	float height; //in pixel
+	float rotation;
+
+	//render infomation
+	int renderType;
+	//Mesh
+	//Texture
 	
 };

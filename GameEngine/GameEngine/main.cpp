@@ -7,6 +7,7 @@
 #include "AssetManager.h"
 #include "Profile.h"
 #include "FileSystem.h"
+#include "StaticSpriteEntity.h"
 
 //configuration of the parameters
 //resolution
@@ -14,7 +15,7 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 //world parameters
-b2Vec2 gravity(0.0f, -10.0f);
+b2Vec2 gravity(0.0f, 0.0f);
 
 //declare of sub-system and window
 Graphic* g; //renderer
@@ -27,8 +28,9 @@ Profile* pro; //Profile system
 FileSystem* file; //file system
 sf::RenderWindow* window;
 
-//pointer of asset
+//pointer of entity
 ShapeEntity* player;
+StaticSpriteEntity* platform;
 
 bool init() {
 	//initializing flag
@@ -49,8 +51,11 @@ bool init() {
 		a = new Audio(asset);
 		pro = new Profile();
 		file = new FileSystem();
+
+		//pass the profile system to sub-systems
 		g->setProfileSystem(pro);
 		p->setProfileSystem(pro);
+
 		//pass the event system to sub-systems
 		g->setEventSystem(es);
 		ui->setEventSystem(es);
@@ -60,15 +65,25 @@ bool init() {
 		asset->setEventSystem(es);
 		pro->setEventSystem(es);
 		file->setEventSystem(es);
-		//set up assets
-		//pass asset manager to the sub-systems
-		a->setAssetManager(asset);
+
+		//set up assets and entity
 		player = new ShapeEntity();
 		player->setShape(new sf::CircleShape(50));
 		player->getShape()->setFillColor(sf::Color::Green);
+		player->updateCollisionRect();
+		//configurate box2d
+
+		platform = new StaticSpriteEntity();
+		platform->setSprite(new sf::Sprite());
+		platform->setPosition(glm::vec2(200, 200));
+		platform->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
+		platform->setTextureRect(0, 0, 500, 333);
+
+		//add entity to graphic system and physics system
 		g->addEntity(player, Entity::rType::SHAPE);
 		p->getPlayer(player);
-		file->setPlayer(player);
+		file->setPlayer(player); //tract player's information
+		g->addEntity(platform, Entity::rType::SPRITE);
 	}
 	else {
 		success = false;

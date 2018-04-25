@@ -67,3 +67,15 @@ void Entity::setRenderType(int type) {
 int Entity::getRenderType() {
 	return renderType;
 }
+
+void Entity::setRotation(float rotation) {
+	this->rotation = rotation;
+}
+
+float Entity::getRotation() {
+	return rotation;
+}
+
+void Entity::updateCollisionRect() {
+	polygonShape.SetAsBox(width / (UNIT_PIXEL * 2), height / (UNIT_PIXEL * 2));
+}

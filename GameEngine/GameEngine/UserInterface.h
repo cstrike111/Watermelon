@@ -19,7 +19,9 @@ public:
 	void handleKeyPress(sf::Keyboard::Key key); //react according to the key that user presses
 	void handleKeyRelease(sf::Keyboard::Key key); //react according to the key that user presses
 	//handle button
-	void handleButton(int button); //react according to the button that user presses on the controller
+	void handleButtonPressed(); //react according to the button that user presses on the controller
+	void handleButtonReleased(int button); //react according to the button that user releases on the controller
+	void handleAxisMove(int axis, float position); //react according to the axis that user moves on the controller
 	void setButton(int action, int button); //configure the button
 	void setKey(int action, sf::Keyboard::Key key); //change the configuration of the key
 	void setEventSystem(EventSystem* es); //get the event sub-system
@@ -39,10 +41,10 @@ private:
 	sf::Keyboard::Key playerRight = sf::Keyboard::Right;
 	
 	//controller
-	int playerUpC = sf::Joystick::R;
-	int playerDownC = sf::Joystick::X;
-	int playerLeftC = sf::Joystick::Z;
-	int playerRightC = sf::Joystick::Y;
+	int buttonR = sf::Joystick::R;
+	int buttonX = sf::Joystick::X;
+	int buttonZ = sf::Joystick::Z;
+	int buttonY = sf::Joystick::Y;
 	//xbox controller
 
 	//sfml event

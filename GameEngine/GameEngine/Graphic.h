@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "Event.h"
 #include "ShapeEntity.h"
+#include "StaticSpriteEntity.h"
 #include "Profile.h"
 #include "AssetManager.h"
 
@@ -38,7 +39,8 @@ private:
 	AssetManager* am; //asset manager pointer
 	vector<ShapeEntity*> shapeList; //a list of shapes
 	vector<Entity*> meshList; //a list of mesh
-	vector<Entity*> spriteList; //a list of mesh
+	vector<StaticSpriteEntity*> spriteList; //a list of sprite
+	vector<Entity*> playerList; //a list of mesh
 	sf::Text playerPosition;
 
 	//fps enable flag
@@ -58,5 +60,5 @@ private:
 	//asset pointer
 	sf::Font* Calibri;
 	sf::Text fps;
-	sf::Sprite playerSprite;
+
 };

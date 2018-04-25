@@ -5,9 +5,6 @@ Graphic::Graphic(sf::RenderWindow* window, AssetManager* am) {
 	this->am = am;
 	openglInit();
 	loadAsset();
-	playerSprite.setTexture((*static_cast<sf::Texture*>(am->getAsset("asset/texture/testTex.png", AssetManager::TEXTURE))));
-	playerSprite.setPosition(50, 50);
-	playerSprite.setTextureRect(sf::IntRect(66, 80, 226, 71));
 }
 
 Graphic::~Graphic() {
@@ -18,8 +15,6 @@ void Graphic::loadAsset() {
 	//load the font
 	Calibri = static_cast<sf::Font*>(am->loadAsset("asset/font/Calibri.ttf", AssetManager::FONT));
 	fps.setFont(*Calibri);
-	//load texture
-	am->loadAsset("asset/texture/testTex.png", AssetManager::TEXTURE);
 }
 
 bool Graphic::update() {
@@ -33,7 +28,6 @@ bool Graphic::update() {
 		}
 	}
 	
-
 	window->clear();
 	openglDraw();
 	window->pushGLStates();
@@ -53,8 +47,14 @@ void Graphic::draw() {
 		s->setPosition(se->getPosition().x, se->getPosition().y);
 		window->draw(*s);
 	}
+	//draw sprite
+	for (int i = 0; i < shapeList.size(); i++) {
+		StaticSpriteEntity* se = spriteList.at(i);
+		sf::Sprite* s = spriteList.at(i)->getSprite();
+		window->draw(*s);
+	}
+
 	window->draw(playerPosition);
-	window->draw(playerSprite);
 	showFps();
 }
 
@@ -126,7 +126,10 @@ void Graphic::addEntity(Entity* e, Entity::rType renderType) {
 		shapeList.push_back(static_cast<ShapeEntity*> (e));
 		break;
 	case Entity::rType::SPRITE:
-		spriteList.push_back(e);
+		spriteList.push_back(static_cast<StaticSpriteEntity*> (e));
+		break;
+	case Entity::rType::CHARACTER:
+		playerList.push_back(e);
 		break;
 	default:
 		break;
@@ -147,4 +150,5 @@ void Graphic::showFps() {
 		window->draw(fps);
 	}
 }
+
 

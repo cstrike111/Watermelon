@@ -151,41 +151,57 @@ void UserInterface::setKey(int action, sf::Keyboard::Key key) {
 	}
 }
 
-void UserInterface::handleButton(int button) {
+void UserInterface::handleButtonPressed() {
 
-	if (sf::Joystick::isButtonPressed(0, playerUpC)) {
-		//move the player
-		es->addEvent(new PlayerMoveUp());
+	if (sf::Joystick::isButtonPressed(0, buttonR)) {
+		cout << "Button R pressed!" << endl;
 	}
-	if (sf::Joystick::isButtonPressed(0, playerDownC)) {
-		//move the player
-		es->addEvent(new PlayerMoveDown());
+	if (sf::Joystick::isButtonPressed(0, buttonX)) {
+		cout << "Button X pressed!" << endl;
 	}
-	if (sf::Joystick::isButtonPressed(0, playerLeftC)) {
-		//move the player
-		es->addEvent(new PlayerMoveLeft());
+	if (sf::Joystick::isButtonPressed(0, buttonZ)) {
+		cout << "Button Z pressed!" << endl;
 	}
-	if (sf::Joystick::isButtonPressed(0, playerRightC)) {
-		//move the player
-		es->addEvent(new PlayerMoveRight());
+	if (sf::Joystick::isButtonPressed(0, buttonY)) {
+		cout << "Button Y pressed!" << endl;
+	}
+}
+
+void UserInterface::handleButtonReleased(int button) {
+
+	if (button == buttonR) {
+		cout << "R released!" << endl;
+	}
+	if (button == buttonX) {
+		cout << "X released!" << endl;
+	}
+	if (button == buttonZ) {
+		cout << "Z released!" << endl;
+	}
+	if (button == buttonY) {
+		cout << "Y released!" << endl;
 	}
 }
 
 void UserInterface::setButton(int action, int button) {
 	switch (action) {
 	case action::PLAYER_UP:
-		playerUpC = button;
+		buttonR = button;
 		break;
 	case action::PLAYER_DOWN:
-		playerDownC = button;
+		buttonX = button;
 		break;
 	case action::PLAYER_LEFT:
-		playerLeftC = button;
+		buttonZ = button;
 		break;
 	case action::PLAYER_RIGHT:
-		playerRightC = button;
+		buttonY = button;
 		break;
 	}
+}
+
+void UserInterface::handleAxisMove(int axis, float position) {
+	cout << "The moving axis is: " << axis << " Position: " << position << endl;
 }
 
 void UserInterface::setEventSystem(EventSystem* es) {
@@ -222,9 +238,15 @@ void UserInterface::update() {
 			break;
 			//if the controller button is pressed
 		case sf::Event::JoystickButtonPressed:
-			handleButton(sfEvent.JoystickButtonPressed);
+			handleButtonPressed();
 			break;
-			//by default, do nothing
+		case sf::Event::JoystickButtonReleased:
+			handleButtonReleased(sfEvent.joystickButton.button);
+			break;
+		case sf::Event::JoystickMoved:
+			handleAxisMove(sfEvent.joystickMove.axis, sfEvent.joystickMove.position);
+			break;
+		//by default, do nothing
 		default:
 			break;
 		}
