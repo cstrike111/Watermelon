@@ -2,8 +2,8 @@
 
 StaticSpriteEntity::StaticSpriteEntity() {
 	//box2d configuration (default)
-	polygonShape.SetAsBox(100.0f, 10.0f); //set as a box
-	bodyDef.position.Set(0.0f, -5.0f);
+	polygonShape.SetAsBox(20.0f, 5.0f); //set as a box
+	bodyDef.position.Set(20.0f, -5.0f);
 }
 
 StaticSpriteEntity::~StaticSpriteEntity() {
@@ -76,5 +76,5 @@ void StaticSpriteEntity::setCollisionRect(float width, float height) {
 
 void StaticSpriteEntity::updatePhysics() {
 	glm::vec2 pos = getPosition();
-	bodyDef.position.Set(pos.x / UNIT_PIXEL, pos.y / UNIT_PIXEL);
+	bodyDef.position.Set(pos.x / UNIT_PIXEL, -pos.y / UNIT_PIXEL);
 }

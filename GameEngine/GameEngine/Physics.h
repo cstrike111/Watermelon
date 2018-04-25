@@ -11,12 +11,12 @@ using namespace std;
 
 class Physics {
 public:
-	/* For the unit conversion: 1 m = 100 pixels. 1 m = 1 unit pixel. */
+	/* For the unit conversion: 1 m = 10 pixels. 1 m = 1 unit pixel. */
 	Physics(b2Vec2 gravity);
 	~Physics();
 
 	//constant
-	float UNIT_PIXEL = 50;
+	float UNIT_PIXEL = 10;
 	bool collisionDetect(Entity* e1, Entity* e2); //collision detect between 2 entity
 	void update(); //update every entity and apply some features (gravity etc.)
 	void handleEvent(int eventType); //handle the events
@@ -46,5 +46,5 @@ private:
 	float timeStep = 1.0f / 60.0f;
 
 	//parameter for the player
-	float PLAYER_MOVE_SPEED = 5;
+	float PLAYER_MOVE_SPEED = 50;
 };

@@ -26,20 +26,22 @@ void Physics::update() {
 
 	//update physics
 	//update dynamic objects' position
-	world->Step(pro->getDtTime(), 6, 2);
+	world->Step(1.0f/60.0f, 6, 2);
 	for (int i = 0; i < dynamicEntityList.size(); i++) {
 		Entity* e = dynamicEntityList.at(i);
 		b2Vec2 position = e->body->GetPosition();
 		//covert into pixel
 		float posX = position.x * UNIT_PIXEL;
 		//be careful: sfml doesn't share THE SAME COORDINATE SYSTEM with box2d
-		float posY = position.y * UNIT_PIXEL; 
+		float posY = position.y * -UNIT_PIXEL; 
 		e->setPosition(glm::vec2(posX, posY));
-		cout << "X = " << position.x << " Y = " << position.y << endl;
 	}
-	//detect collision
-	//gravity
-	//if player is not landing on the ground, apply gravity 
+	//get the render infomation of player
+	pro->setPlayerRenderInfo(player->getPosition().x, player->getPosition().y);
+	//get the physics information
+	b2Vec2 vel = player->body->GetLinearVelocity();
+	b2Vec2 pos = player->body->GetPosition();
+	pro->setPlayerPhysicsInfo(pos.x, pos.y, vel.x, vel.y);
 
 }
 
@@ -48,15 +50,11 @@ void Physics::handleEvent(int eventType) {
 	b2Vec2 pos = player->body->GetPosition();
 	switch (eventType) {
 	case Event::PLAYER_MOVE_UP:
-		//if the entity is on the floor
-		//add y speed
-		//jumpReady = false
-		//when the entity land on floor, rest jumpReady
-		vel.y = -PLAYER_MOVE_SPEED;
+		vel.y = PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_DOWN:
-		vel.y = PLAYER_MOVE_SPEED;
+		vel.y = -PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_LEFT:
@@ -70,6 +68,8 @@ void Physics::handleEvent(int eventType) {
 	case Event::PLAYER_STOP_Y:
 		vel.y = 0;
 		player->body->SetLinearVelocity(vel);
+		//pass the physics info
+		pro->setPlayerPhysicsInfo(pos.x, pos.y, vel.x, vel.y);
 		break;
 	case Event::PLAYER_STOP_X:
 		vel.x = 0;
@@ -82,6 +82,7 @@ void Physics::handleEvent(int eventType) {
 	default:
 		break;
 	}
+	
 }
 
 void Physics::addStaticEntity(Entity* e) {

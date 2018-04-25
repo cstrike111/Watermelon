@@ -77,9 +77,6 @@ bool init() {
 		player->setWidth(106);
 		player->setHeight(233);
 		player->updatePhysics();
-		player->polygonShape.SetAsBox(1.0f, 1.0f);
-		player->bodyDef.position.Set(0, 4.0f);
-		//configurate box2d
 
 		//platform
 		platform = new StaticSpriteEntity();
@@ -88,10 +85,8 @@ bool init() {
 		platform->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
 		platform->setTextureRect(0, 0, 200, 50);
 		platform->setWidth(200);
-		platform->setHeight(100);
+		platform->setHeight(50);
 		platform->updatePhysics();
-		platform->bodyDef.position.Set(0.0f, -5.0f);
-		platform->polygonShape.SetAsBox(100.f, 10.0f);
 
 		//demo circle
 		circle = new ShapeEntity();
@@ -154,6 +149,7 @@ void close() {
 
 	delete player;
 	player = nullptr;
+
 
 }
 

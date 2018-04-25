@@ -37,7 +37,7 @@ void ShapeEntity::setCollisionRect(float width, float height) {
 
 void ShapeEntity::updatePhysics() {
 	glm::vec2 pos = getPosition();
-	bodyDef.position.Set(pos.x / UNIT_PIXEL, pos.y / UNIT_PIXEL);
+	bodyDef.position.Set(pos.x / UNIT_PIXEL, -pos.y / UNIT_PIXEL);
 }
 
 void ShapeEntity::setTexture(sf::Texture* texture) {

@@ -14,6 +14,8 @@ Graphic::~Graphic() {
 void Graphic::loadAsset() {
 	//load the font
 	Calibri = static_cast<sf::Font*>(am->loadAsset("asset/font/Calibri.ttf", AssetManager::FONT));
+	playerRenderInfo.setFont(*Calibri);
+	playerPhysicsInfo.setFont(*Calibri);
 	fps.setFont(*Calibri);
 }
 
@@ -64,7 +66,7 @@ void Graphic::draw() {
 		window->draw(*s);
 	}
 
-	window->draw(playerPosition);
+	showPlayerRenderInfo();
 	showFps();
 }
 
@@ -82,49 +84,26 @@ void Graphic::handleEvent(int eventType) {
 			fpsEnable = true;
 		}
 		break;
+
+	case Event::TOGGLE_SHOW_INFO:
+		if (playerinfo) {
+			playerinfo = false;
+		}
+		else {
+			playerinfo = true;
+		}
+		break;
 	default:
 		break;
 	}
 }
 
 void Graphic::openglDraw() {
-	int i;
 
-	for (i = 0; i < 6; i++) {
-		glBegin(GL_QUADS);
-		glNormal3fv(&n[i][0]);
-		glVertex3fv(&v[faces[i][0]][0]);
-		glVertex3fv(&v[faces[i][1]][0]);
-		glVertex3fv(&v[faces[i][2]][0]);
-		glVertex3fv(&v[faces[i][3]][0]);
-		glEnd();
-	}
 }
 
 void Graphic::openglInit() {
-	/* Setup cube vertex data. */
-	v[0][0] = v[1][0] = v[2][0] = v[3][0] = -1;
-	v[4][0] = v[5][0] = v[6][0] = v[7][0] = 1;
-	v[0][1] = v[1][1] = v[4][1] = v[5][1] = -1;
-	v[2][1] = v[3][1] = v[6][1] = v[7][1] = 1;
-	v[0][2] = v[3][2] = v[4][2] = v[7][2] = 1;
-	v[1][2] = v[2][2] = v[5][2] = v[6][2] = -1;
-
-	/* Enable a single OpenGL light. */
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
-
-	/* Use depth buffering for hidden surface elimination. */
-	glEnable(GL_DEPTH_TEST);
-
-	/* Setup the view of the cube. */
-	glMatrixMode(GL_PROJECTION);
-	glMatrixMode(GL_MODELVIEW);
-	glTranslatef(0.0, 0.0, -2.5);
-	glRotatef(60, 1.0, 0.0, 0.0);
-	glRotatef(-20, 0.0, 0.0, 1.0);
+	
 }
 
 void Graphic::addEntity(Entity* e, Entity::rType renderType) {
@@ -158,6 +137,30 @@ void Graphic::showFps() {
 		fps.setCharacterSize(24);
 		fps.setFillColor(sf::Color::White);
 		window->draw(fps);
+	}
+}
+
+void Graphic::showPlayerRenderInfo() {
+	if (playerinfo) {
+		float x = p->getPlayerRenderInfo().posX;
+		float y = p->getPlayerRenderInfo().posY;
+		string posInfoR = "Render Infomation: X = " + to_string(x) + " Y = " + to_string(y);
+		playerRenderInfo.setString(posInfoR);
+		playerRenderInfo.setCharacterSize(12);
+		playerRenderInfo.setFillColor(sf::Color::White);
+		playerRenderInfo.setPosition(0, 30);
+		float posx = p->getPlayerPhysicsInfo().posX;
+		float posy = p->getPlayerPhysicsInfo().posY;
+		float velx = p->getPlayerPhysicsInfo().velX;
+		float vely = p->getPlayerPhysicsInfo().velY;
+		string posInfoP = "Physics Infomation: pos: X = " + to_string(posx) + " Y = " + to_string(posy)
+			+ " vel: X = " + to_string(velx) + " Y = " + to_string(vely);
+		playerPhysicsInfo.setString(posInfoP);
+		playerPhysicsInfo.setCharacterSize(12);
+		playerPhysicsInfo.setFillColor(sf::Color::White);
+		playerPhysicsInfo.setPosition(0, 60);
+		window->draw(playerRenderInfo);
+		window->draw(playerPhysicsInfo);
 	}
 }
 

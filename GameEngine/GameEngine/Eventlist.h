@@ -16,4 +16,5 @@
 #include "ToggleShowFps.h"
 #include "Save.h"
 #include "Load.h"
+#include "ToggleShowInfo.h"
 

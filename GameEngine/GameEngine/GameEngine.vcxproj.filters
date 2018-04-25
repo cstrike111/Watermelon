@@ -176,5 +176,8 @@
     <ClInclude Include="StaticSpriteEntity.h">
       <Filter>Entity</Filter>
     </ClInclude>
+    <ClInclude Include="ToggleShowInfo.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

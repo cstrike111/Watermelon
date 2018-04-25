@@ -34,6 +34,9 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
 		es->addEvent(new ToggleShowFps());
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
+		es->addEvent(new ToggleShowInfo());
+	}
 	if (key == sf::Keyboard::F5) {
 		//save
 		es->addEvent(new Save());

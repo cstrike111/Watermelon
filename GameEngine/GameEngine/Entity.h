@@ -17,7 +17,7 @@ public:
 	Entity();
 	~Entity();
 
-	float UNIT_PIXEL = 50;
+	float UNIT_PIXEL = 10;
 
 	//getter and setter for the data
 	//set position will only work before add into physics system (need another way to move object)

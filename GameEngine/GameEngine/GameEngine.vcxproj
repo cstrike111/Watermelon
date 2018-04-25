@@ -157,6 +157,7 @@
     <ClInclude Include="ControllerConnected.h" />
     <ClInclude Include="ControllerDisconnected.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="ToggleShowInfo.h" />
     <ClInclude Include="Load.h" />
     <ClInclude Include="Save.h" />
     <ClInclude Include="StaticSpriteEntity.h" />

@@ -47,6 +47,25 @@ float Profile::getDtTime() {
 	return time.asSeconds();
 }
 
+
 int Profile::getFps() {
 	return fps;
 }
+
+Profile::physicsInfo Profile::getPlayerPhysicsInfo() {
+	return pInfo;
+}
+
+void Profile::setPlayerPhysicsInfo(float posX, float posY, float velX, float velY) {
+	pInfo = { posX, posY, velX, velY };
+}
+
+void Profile::setPlayerRenderInfo(float posX, float posY) {
+	rInfo = { posX, posY};
+}
+
+Profile::renderInfo Profile::getPlayerRenderInfo() {
+	return rInfo;
+}
+
+
