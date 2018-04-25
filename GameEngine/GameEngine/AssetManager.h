@@ -9,6 +9,7 @@ using namespace std;
 
 class AssetManager {
 public:
+	//enum for asset type
 	enum AssetType {
 		SOUND,
 		MUSIC,
@@ -35,7 +36,9 @@ public:
 	void setEventSystem(EventSystem* es);
 
 private:
-	EventSystem * es;
+	EventSystem * es; //EventSystem pointer
+
+	//map for buffers
 	map<string, sf::SoundBuffer*> soundBuffer;
 	map<string, sf::Music*> musicBuffer;
 	map<string, sf::Texture*> texture;

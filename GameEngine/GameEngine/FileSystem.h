@@ -11,9 +11,9 @@ public:
 	FileSystem();
 	~FileSystem();
 
-	void handleEvent(int eventType);
-	void update();
-	void setEventSystem(EventSystem* es);
+	void handleEvent(int eventType); //handle event
+	void update(); //update the system
+	void setEventSystem(EventSystem* es); //set event system
 	bool save(); //currently, it can only save the information of player
 	bool load(); //again, it can only load the information of player for now
 	void setPlayer(Entity* player); //let the system know which player's information needed to be saved

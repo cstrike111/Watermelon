@@ -50,6 +50,7 @@ void* AssetManager::loadAsset(string path, AssetType type) {
 			return static_cast<sf::SoundBuffer*>(soundBuffer[path]);
 		}
 		else {
+			//else, return the point 
 			return static_cast<sf::SoundBuffer*>(soundBuffer[path]);
 		}
 		break;
@@ -64,6 +65,7 @@ void* AssetManager::loadAsset(string path, AssetType type) {
 			return static_cast<sf::Music*> (musicBuffer[path]);
 		}
 		else {
+			//else, return the point 
 			return static_cast<sf::Music*> (musicBuffer[path]);
 		}
 		break;
@@ -78,6 +80,7 @@ void* AssetManager::loadAsset(string path, AssetType type) {
 			return texture[path];
 		}
 		else {
+			//else, return the point 
 			return static_cast<sf::Texture*> (texture[path]);
 		}
 		break;
@@ -92,6 +95,7 @@ void* AssetManager::loadAsset(string path, AssetType type) {
 			return fontBuffer[path];
 		}
 		else {
+			//else, return the point 
 			return static_cast<sf::Font*> (fontBuffer[path]);
 		}
 		break;
@@ -152,6 +156,7 @@ void* AssetManager::getAsset(string path, AssetType type) {
 }
 
 bool AssetManager::isLoad(string path, AssetType type) {
+	//find the corresponding asset by path and tell the caller whether the asset is loaded
 	switch (type) {
 	case AssetType::SOUND:
 		if (soundBuffer.find(path) != soundBuffer.end()) {

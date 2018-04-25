@@ -12,15 +12,9 @@ Audio::~Audio() {
 }
 
 void Audio::loadSounds() {
-	am->loadAsset("ss.wav", AssetManager::SOUND);
-	//am->loadAsset("test.wav", AssetManager::MUSIC);
-	//am->loadAsset("test.wav", AssetManager::SOUND);
-	//std::cout << am->isLoad("test.wav", AssetManager::SOUND) << endl;
-	//am->deleteAsset("test.wav", AssetManager::SOUND);
-	//std::cout << am->isLoad("test.wav", AssetManager::SOUND) << endl;
+	am->loadAsset("asset/sounds/ss.wav", AssetManager::SOUND);
 	playerStep = new sf::Sound();
-	//playerStep->setBuffer(*(static_cast<sf::SoundBuffer*>(am->loadAsset("ss.wav", AssetManager::SOUND))));
-	playerStep->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("ss.wav", AssetManager::SOUND))));
+	playerStep->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("asset/sounds/ss.wav", AssetManager::SOUND))));
 }
 
 void Audio::handleEvent(int eventType) {

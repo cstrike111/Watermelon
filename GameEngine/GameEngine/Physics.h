@@ -21,12 +21,12 @@ public:
 	void update(); //update every entity and apply some features (gravity etc.)
 	void handleEvent(int eventType); //handle the events
 	//add entity to the system
-	void addStaticEntity(Entity* e); 
-	void addDynamicEntity(Entity* e); 
+	void addStaticEntity(Entity* e); //add static entity
+	void addDynamicEntity(Entity* e); //add dynamic entity
 	void setEventSystem(EventSystem* es);
-	void getPlayer(Entity* player);
+	void getPlayer(Entity* player); //get player pointer
 	void setGravity(b2Vec2 gravity); //change the gravity
-	void createBody(Entity* e);
+	void createBody(Entity* e); //create box2d body
 	void setProfileSystem(Profile* pro);
 
 private:

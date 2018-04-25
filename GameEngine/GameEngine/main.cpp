@@ -112,7 +112,7 @@ bool init() {
 void close() {
 	//clean the memory
 	//window
-	delete window;
+	window->close();
 	window = nullptr;
 
 	//clean the graphic subsystem
@@ -147,9 +147,17 @@ void close() {
 	delete file;
 	file = nullptr;
 
+	//clean the memory of entities
+	//delete player
 	delete player;
 	player = nullptr;
 
+	delete platform;
+	platform = nullptr;
+
+	delete circle;
+	circle = nullptr;
+	
 
 }
 

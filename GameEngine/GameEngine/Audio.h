@@ -13,10 +13,10 @@ public:
 	Audio(AssetManager* am);
 	~Audio();
 	void loadSounds(); //load the sound, get memory for memory manager
-	void handleEvent(int eventType);
-	void update();
-	void setEventSystem(EventSystem* es);
-	void setAssetManager(AssetManager* am);
+	void handleEvent(int eventType); //handle events
+	void update(); //sub-system update
+	void setEventSystem(EventSystem* es); //set event system
+	void setAssetManager(AssetManager* am); //set asset manager system
 
 private:
 	EventSystem* es; //pointer for event system

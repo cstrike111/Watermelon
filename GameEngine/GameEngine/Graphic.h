@@ -20,16 +20,16 @@ class Graphic {
 public:
 	Graphic(sf::RenderWindow* window, AssetManager* am);
 	~Graphic();
-	void loadAsset();
-	bool update();
+	void loadAsset(); //load the asset
+	bool update(); //update the system
 	void setEventSystem(EventSystem* es);
 	void handleEvent(int eventType);
-	void openglInit();
-	void openglDraw();
-	void addEntity(Entity* e, Entity::rType renderType);
-	void draw();
-	void showFps();
-	void showPlayerRenderInfo();
+	void openglInit(); //initialize for opengl
+	void openglDraw(); //draw opengl things
+	void addEntity(Entity* e, Entity::rType renderType); //add entity
+	void draw(); //draw
+	void showFps(); //show fps
+	void showPlayerRenderInfo(); //show information of player
 	void setProfileSystem(Profile* p);
 
 

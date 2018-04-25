@@ -59,7 +59,4 @@ void EventSystem::update() {
 	}
 }
 
-sf::Event EventSystem::getsfEvent() {
-	return sfEvent;
-}
 

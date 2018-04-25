@@ -60,7 +60,5 @@ protected:
 
 	//render infomation
 	int renderType;
-	//Mesh
-	//Texture
 	
 };

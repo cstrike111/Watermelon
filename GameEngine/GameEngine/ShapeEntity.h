@@ -8,6 +8,7 @@ public:
 	void updateRenderInfo();
 	void getRenderInfo();
 	//don't forget to update and set collision rectangle before put it into physics system
+	//overrider some functions of base class and add some new function
 	void setCollisionRect(float width, float height);
 	void updatePhysics();
 	void setTexture(sf::Texture* texture);
