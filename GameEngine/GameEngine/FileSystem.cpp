@@ -50,7 +50,7 @@ bool FileSystem::save() {
 		saveFile << player->getPosition().y << " ";
 		saveFile << player->getVelocity().x << " ";
 		saveFile << player->getVelocity().y << " ";
-		cout << "save!";
+		cout << "save!" << endl;
 		saveFile.close();
 		return true;
 	}
@@ -70,15 +70,10 @@ bool FileSystem::load() {
 		if (type == 'p') {
 			float posX;
 			float posY;
-			float veloX;
-			float veloY;
 			saveFile >> posX;
 			saveFile >> posY;
-			saveFile >> veloX;
-			saveFile >> veloY;
-			player->setPosition(glm::vec2(posX, posY));
-			player->setVelocity(glm::vec2(veloX, veloY));
-			cout << "load!";
+			circle->setPosition(glm::vec2(posX, posY));
+			cout << "load!" <<endl;
 			saveFile.close();
 			return true;
 		}
@@ -91,4 +86,8 @@ bool FileSystem::load() {
 
 void FileSystem::setPlayer(Entity* player) {
 	this->player = player;
+}
+
+void FileSystem::demoCircle(ShapeEntity* circle) {
+	this->circle = circle;
 }

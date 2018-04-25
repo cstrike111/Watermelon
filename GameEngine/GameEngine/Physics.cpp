@@ -44,6 +44,7 @@ void Physics::update() {
 
 void Physics::handleEvent(int eventType) {
 	b2Vec2 vel = player->body->GetLinearVelocity();
+	b2Vec2 pos = player->body->GetPosition();
 	switch (eventType) {
 	case Event::PLAYER_MOVE_UP:
 		//if the entity is on the floor
@@ -72,6 +73,10 @@ void Physics::handleEvent(int eventType) {
 	case Event::PLAYER_STOP_X:
 		vel.x = 0;
 		player->body->SetLinearVelocity(vel);
+		break;
+	case Event::SAVE:
+		player->setPosition(glm::vec2(pos.x * UNIT_PIXEL, pos.y * UNIT_PIXEL));
+		player->setVelocity(glm::vec2(vel.x, vel.y));
 		break;
 	default:
 		break;

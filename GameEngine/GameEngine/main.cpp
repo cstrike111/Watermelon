@@ -8,6 +8,7 @@
 #include "Profile.h"
 #include "FileSystem.h"
 #include "StaticSpriteEntity.h"
+#include "CharacterEntity.h"
 
 //configuration of the parameters
 //resolution
@@ -29,8 +30,9 @@ FileSystem* file; //file system
 sf::RenderWindow* window;
 
 //pointer of entity
-ShapeEntity* player;
+CharacterEntity* player;
 StaticSpriteEntity* platform;
+ShapeEntity* circle;
 
 bool init() {
 	//initializing flag
@@ -67,20 +69,30 @@ bool init() {
 		file->setEventSystem(es);
 
 		//set up assets and entity
-		player = new ShapeEntity();
-		player->setShape(new sf::CircleShape(50));
-		player->getShape()->setFillColor(sf::Color::Green);
+		//player
+		player = new CharacterEntity();
+		player->setSprite(new sf::Sprite());
+		player->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/player.png", AssetManager::TEXTURE)));
+		player->setTextureRect(0, 0, 106, 233);
 		player->updateCollisionRect();
 		//configurate box2d
 
+		//platform
 		platform = new StaticSpriteEntity();
 		platform->setSprite(new sf::Sprite());
 		platform->setPosition(glm::vec2(200, 200));
 		platform->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
 		platform->setTextureRect(0, 0, 500, 333);
 
+		//demo circle
+		circle = new ShapeEntity();
+		circle->setShape(new sf::CircleShape(50));
+		circle->getShape()->setFillColor(sf::Color::Green);
+		file->demoCircle(circle);
+
 		//add entity to graphic system and physics system
-		g->addEntity(player, Entity::rType::SHAPE);
+		g->addEntity(player, Entity::rType::CHARACTER);
+		g->addEntity(circle, Entity::rType::SHAPE);
 		p->getPlayer(player);
 		file->setPlayer(player); //tract player's information
 		g->addEntity(platform, Entity::rType::SPRITE);

@@ -47,10 +47,20 @@ void Graphic::draw() {
 		s->setPosition(se->getPosition().x, se->getPosition().y);
 		window->draw(*s);
 	}
-	//draw sprite
+	//draw static sprite
 	for (int i = 0; i < shapeList.size(); i++) {
 		StaticSpriteEntity* se = spriteList.at(i);
 		sf::Sprite* s = spriteList.at(i)->getSprite();
+		window->draw(*s);
+	}
+
+	//draw character
+	for (int i = 0; i < chaList.size(); i++) {
+		CharacterEntity* c = chaList.at(i);
+		sf::Sprite* s = chaList.at(i)->getSprite();
+		//update position
+		s->setPosition(c->getPosition().x, c->getPosition().y);
+		//get animation
 		window->draw(*s);
 	}
 
@@ -129,7 +139,7 @@ void Graphic::addEntity(Entity* e, Entity::rType renderType) {
 		spriteList.push_back(static_cast<StaticSpriteEntity*> (e));
 		break;
 	case Entity::rType::CHARACTER:
-		playerList.push_back(e);
+		chaList.push_back(static_cast<CharacterEntity*> (e));
 		break;
 	default:
 		break;
