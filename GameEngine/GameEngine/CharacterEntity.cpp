@@ -4,7 +4,7 @@ CharacterEntity::CharacterEntity() {
 	//box2d configuration (default)
 	bodyDef.type = b2_dynamicBody; //set the body type
 	polygonShape.SetAsBox(1.0f, 1.0f); //set as a box
-	bodyDef.position.Set(0.0f, 0.0f);
+	bodyDef.position.Set(0.0f, 4.0f);
 	fixtureDef.shape = &polygonShape;
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
@@ -29,6 +29,15 @@ void CharacterEntity::getRenderInfo() {
 	sf::Vector2f s = sprite->getScale();
 	scale.x = s.x;
 	scale.y = s.y;
+}
+
+void CharacterEntity::setCollisionRect(float width, float height) {
+	polygonShape.SetAsBox(width / (UNIT_PIXEL * 2), height / (UNIT_PIXEL * 2));
+}
+
+void CharacterEntity::updatePhysics() {
+	glm::vec2 pos = getPosition();
+	bodyDef.position.Set(pos.x / UNIT_PIXEL, pos.y / UNIT_PIXEL);
 }
 
 void CharacterEntity::setTexture(sf::Texture* texture) {

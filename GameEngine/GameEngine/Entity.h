@@ -50,8 +50,8 @@ public:
 	
 protected:
 	//general infomation
-	glm::vec2 position;
-	glm::vec2 velocity;
+	glm::vec2 position; //here, the unit to define position is pixel
+	glm::vec2 velocity; //the unit to define velocity is meter (in the game world)
 	glm::vec2 scale;
 	glm::vec2 origin;
 	float width; //in pixel

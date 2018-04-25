@@ -33,8 +33,9 @@ void Physics::update() {
 		//covert into pixel
 		float posX = position.x * UNIT_PIXEL;
 		//be careful: sfml doesn't share THE SAME COORDINATE SYSTEM with box2d
-		float posY = position.y * -UNIT_PIXEL; 
+		float posY = position.y * UNIT_PIXEL; 
 		e->setPosition(glm::vec2(posX, posY));
+		cout << "X = " << position.x << " Y = " << position.y << endl;
 	}
 	//detect collision
 	//gravity
@@ -51,11 +52,11 @@ void Physics::handleEvent(int eventType) {
 		//add y speed
 		//jumpReady = false
 		//when the entity land on floor, rest jumpReady
-		vel.y = PLAYER_MOVE_SPEED;
+		vel.y = -PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_DOWN:
-		vel.y = -PLAYER_MOVE_SPEED;
+		vel.y = PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_LEFT:
@@ -86,6 +87,7 @@ void Physics::handleEvent(int eventType) {
 void Physics::addStaticEntity(Entity* e) {
 	createBody(e);
 	e->body->CreateFixture(&(e->polygonShape), 0.0f);
+	cout << e->body->GetPosition().x << " " << e->body->GetPosition().y << endl;
 	staticEntityList.push_back(e);
 }
 
@@ -109,6 +111,7 @@ void Physics::setGravity(b2Vec2 gravity) {
 }
 
 void Physics::createBody(Entity* e) {
+	glm::vec2 pos = e->getPosition();
 	e->body = world->CreateBody(&(e->bodyDef));
 }
 

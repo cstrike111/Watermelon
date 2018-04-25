@@ -74,15 +74,24 @@ bool init() {
 		player->setSprite(new sf::Sprite());
 		player->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/player.png", AssetManager::TEXTURE)));
 		player->setTextureRect(0, 0, 106, 233);
-		player->updateCollisionRect();
+		player->setWidth(106);
+		player->setHeight(233);
+		player->updatePhysics();
+		player->polygonShape.SetAsBox(1.0f, 1.0f);
+		player->bodyDef.position.Set(0, 4.0f);
 		//configurate box2d
 
 		//platform
 		platform = new StaticSpriteEntity();
 		platform->setSprite(new sf::Sprite());
-		platform->setPosition(glm::vec2(200, 200));
+		platform->setPosition(glm::vec2(200, 300));
 		platform->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
-		platform->setTextureRect(0, 0, 500, 333);
+		platform->setTextureRect(0, 0, 200, 50);
+		platform->setWidth(200);
+		platform->setHeight(100);
+		platform->updatePhysics();
+		platform->bodyDef.position.Set(0.0f, -5.0f);
+		platform->polygonShape.SetAsBox(100.f, 10.0f);
 
 		//demo circle
 		circle = new ShapeEntity();
@@ -91,11 +100,13 @@ bool init() {
 		file->demoCircle(circle);
 
 		//add entity to graphic system and physics system
+		file->setPlayer(player); //tract player's information
 		g->addEntity(player, Entity::rType::CHARACTER);
 		g->addEntity(circle, Entity::rType::SHAPE);
-		p->getPlayer(player);
-		file->setPlayer(player); //tract player's information
 		g->addEntity(platform, Entity::rType::SPRITE);
+		p->getPlayer(player);
+		p->addStaticEntity(platform);
+	
 	}
 	else {
 		success = false;
@@ -159,7 +170,7 @@ void gameLoop() {
 }
 
 int main()
-{
+{		
 	//start
 	if (!init()) {
 		cout << "Oops! Something wrong happened!\n";

@@ -31,6 +31,15 @@ void ShapeEntity::getRenderInfo() {
 	scale.y = s.y;
 }
 
+void ShapeEntity::setCollisionRect(float width, float height) {
+	polygonShape.SetAsBox(width / (UNIT_PIXEL * 2), height / (UNIT_PIXEL * 2));
+}
+
+void ShapeEntity::updatePhysics() {
+	glm::vec2 pos = getPosition();
+	bodyDef.position.Set(pos.x / UNIT_PIXEL, pos.y / UNIT_PIXEL);
+}
+
 void ShapeEntity::setTexture(sf::Texture* texture) {
 	shape->setTexture(texture);
 }
