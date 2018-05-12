@@ -73,20 +73,24 @@ bool init() {
 		player = new CharacterEntity();
 		player->setSprite(new sf::Sprite());
 		player->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/player.png", AssetManager::TEXTURE)));
-		player->setTextureRect(0, 0, 106, 233);
+		player->getSprite()->setOrigin(106 / 2, 233 / 2);
 		player->setWidth(106);
 		player->setHeight(233);
-		player->updatePhysics();
+		player->setTextureRect(0, 0, 106, 233);
+		player->bodyDef.position.Set(0, 0);
+		player->polygonShape.SetAsBox(5.3f, 11.65f);
 
 		//platform
 		platform = new StaticSpriteEntity();
 		platform->setSprite(new sf::Sprite());
 		platform->setPosition(glm::vec2(200, 300));
 		platform->setTexture(static_cast<sf::Texture*> (asset->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
+		platform->getSprite()->setOrigin(200 / 2, 50 / 2);
 		platform->setTextureRect(0, 0, 200, 50);
 		platform->setWidth(200);
 		platform->setHeight(50);
-		platform->updatePhysics();
+		platform->bodyDef.position.Set(20.0f, -30.0f);
+		platform->polygonShape.SetAsBox(10.0f, 2.5f);
 
 		//demo circle
 		circle = new ShapeEntity();

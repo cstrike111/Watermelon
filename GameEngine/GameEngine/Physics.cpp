@@ -32,8 +32,10 @@ void Physics::update() {
 		b2Vec2 position = e->body->GetPosition();
 		//covert into pixel
 		float posX = position.x * UNIT_PIXEL;
+		//float posX = position.x * UNIT_PIXEL - e->getWideth();
 		//be careful: sfml doesn't share THE SAME COORDINATE SYSTEM with box2d
 		float posY = position.y * -UNIT_PIXEL; 
+		//float posY = (position.y * -UNIT_PIXEL) - e->getHeight();
 		e->setPosition(glm::vec2(posX, posY));
 	}
 	//get the render infomation of player
@@ -50,30 +52,38 @@ void Physics::handleEvent(int eventType) {
 	b2Vec2 pos = player->body->GetPosition();
 	switch (eventType) {
 	case Event::PLAYER_MOVE_UP:
+		//player->body->ApplyLinearImpulse(b2Vec2(0, 5000), player->body->GetWorldCenter(), true);
 		vel.y = PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_DOWN:
+		//player->body->ApplyLinearImpulse(b2Vec2(0, -5000), player->body->GetWorldCenter(), true);
 		vel.y = -PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_LEFT:
+		//player->body->ApplyLinearImpulse(b2Vec2(-5000 , 0), player->body->GetWorldCenter(), true);
 		vel.x = -PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_MOVE_RIGHT:
+		//player->body->ApplyLinearImpulse(b2Vec2(5000, 0), player->body->GetWorldCenter(), true);
 		vel.x = PLAYER_MOVE_SPEED;
 		player->body->SetLinearVelocity(vel);
 		break;
 	case Event::PLAYER_STOP_Y:
 		vel.y = 0;
 		player->body->SetLinearVelocity(vel);
+		//player->body->ApplyLinearImpulse(b2Vec2(0, 0), player->body->GetWorldCenter(), true);
 		//pass the physics info
 		pro->setPlayerPhysicsInfo(pos.x, pos.y, vel.x, vel.y);
 		break;
 	case Event::PLAYER_STOP_X:
 		vel.x = 0;
+		//player->body->ApplyLinearImpulse(b2Vec2(0, 0), player->body->GetWorldCenter(), true);
 		player->body->SetLinearVelocity(vel);
+		//pass the physics info
+		pro->setPlayerPhysicsInfo(pos.x, pos.y, vel.x, vel.y);
 		break;
 	case Event::SAVE:
 		player->setPosition(glm::vec2(pos.x * UNIT_PIXEL, pos.y * UNIT_PIXEL));
