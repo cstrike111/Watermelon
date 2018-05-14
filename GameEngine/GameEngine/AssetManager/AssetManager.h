@@ -3,8 +3,8 @@
 #include <map>
 #include "SFML\Audio.hpp"
 #include "SFML\Graphics.hpp"
-#include "EventSystem.h"
-#include "Entity.h"
+#include "..\EventSystem\EventSystem.h"
+#include "..\Entity\Entity.h"
 using namespace std;
 
 class AssetManager {

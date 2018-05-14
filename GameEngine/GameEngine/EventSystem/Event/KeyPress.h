@@ -1,5 +1,5 @@
 #pragma once
-#include "Event.h"
+#include "..\Event.h"
 class KeyPress : public Event {
 public:
 	KeyPress() {

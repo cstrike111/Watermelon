@@ -3,8 +3,8 @@
 #include <string>
 #include <iostream>
 #include <queue>
-#include "EventSystem.h"
-#include "AssetManager.h"
+#include "..\EventSystem\EventSystem.h"
+#include "..\AssetManager\AssetManager.h"
 
 using namespace std;
 

@@ -2,8 +2,8 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 #include <iostream>
-#include "EventSystem.h"
-#include "glm\glm.hpp"
+#include "..\EventSystem\EventSystem.h"
+#include "..\glm\glm.hpp"
 
 using namespace std;
 

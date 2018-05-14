@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
 #include <map>
-#include "Entity.h"
-#include "EventSystem.h"
-#include "Profile.h"
-#include "Box2D\Box2D\Box2D.h"
+#include "..\Entity\Entity.h"
+#include "..\EventSystem\EventSystem.h"
+#include "..\Profile\Profile.h"
+#include "Box2D\Box2D.h"
 #include <vector> 
 
 using namespace std;

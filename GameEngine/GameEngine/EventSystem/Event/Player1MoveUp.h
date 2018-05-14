@@ -1,5 +1,5 @@
 #pragma once
-#include "Event.h"
+#include "..\Event.h"
 class Player1MoveUp : public Event {
 public:
 	Player1MoveUp() {

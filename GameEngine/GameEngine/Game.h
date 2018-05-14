@@ -1,9 +1,10 @@
 #pragma once
-#include "Graphic.h"
-#include "Physics.h"
-#include "EventSystem.h"
-#include "FileSystem.h"
-#include "AssetManager.h"
+#include "..\Graphic\Graphic.h"
+#include "..\Physics\Physics.h"
+#include "..\EventSystem\EventSystem.h"
+#include "..\FileSystem\FileSystem.h"
+#include "..\AssetManager\AssetManager.h"
+#include "..\Entity\CharacterEntity.h"
 
 class Game
 {

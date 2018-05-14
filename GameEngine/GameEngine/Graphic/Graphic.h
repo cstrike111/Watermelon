@@ -5,14 +5,14 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include "EventSystem.h"
-#include "Entity.h"
-#include "Event.h"
-#include "ShapeEntity.h"
-#include "StaticSpriteEntity.h"
-#include "CharacterEntity.h"
-#include "Profile.h"
-#include "AssetManager.h"
+#include "..\EventSystem\EventSystem.h"
+#include "..\Entity\Entity.h"
+#include "..\EventSystem\Event.h"
+#include "..\Entity\ShapeEntity.h"
+#include "..\Entity\StaticSpriteEntity.h"
+#include "..\Entity\CharacterEntity.h"
+#include "..\Profile\Profile.h"
+#include "..\AssetManager\AssetManager.h"
 
 using namespace std;
 

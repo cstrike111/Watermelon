@@ -1,11 +1,11 @@
 #pragma once
-#include "EventSystem.h"
-#include "Entity.h"
-#include "ShapeEntity.h"
+#include "..\EventSystem\EventSystem.h"
+#include "..\Entity\Entity.h"
+#include "..\Entity\ShapeEntity.h"
 #include <iostream>
 #include <fstream>
-#include "StaticSpriteEntity.h"
-#include "AssetManager.h"
+#include "..\Entity\StaticSpriteEntity.h"
+#include "..\AssetManager\AssetManager.h"
 
 class FileSystem
 {

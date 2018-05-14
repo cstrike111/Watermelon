@@ -51,154 +51,154 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="EventSystem.cpp">
-      <Filter>Event System</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Event System</Filter>
-    </ClCompile>
-    <ClCompile Include="UserInterface.cpp">
-      <Filter>User Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Asset Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapeEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Profile.cpp">
-      <Filter>Profile</Filter>
-    </ClCompile>
-    <ClCompile Include="FileSystem.cpp">
-      <Filter>File I/O</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticSpriteEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="boundingBox.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\Graphic.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Physics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager\AssetManager.cpp">
+      <Filter>Asset Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Audio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Animation.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\boundingBox.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\StaticSpriteEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\CharacterEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UserInterface.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\ShapeEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem\EventSystem.cpp">
+      <Filter>Event System</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem\Event.cpp">
+      <Filter>Event System</Filter>
+    </ClCompile>
+    <ClCompile Include="Profile\Profile.cpp">
+      <Filter>Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem\FileSystem.cpp">
+      <Filter>File I/O</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphic.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="EventSystem.h">
-      <Filter>Event System</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Event System</Filter>
-    </ClInclude>
-    <ClInclude Include="Quit.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyPress.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="UserInterface.h">
-      <Filter>User Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="ControllerConnected.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="ControllerDisconnected.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonPress.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Eventlist.h">
-      <Filter>Event System</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyRelease.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Asset Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapeEntity.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Profile.h">
-      <Filter>Profile</Filter>
-    </ClInclude>
-    <ClInclude Include="ToggleShowFps.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="FileSystem.h">
-      <Filter>File I/O</Filter>
-    </ClInclude>
-    <ClInclude Include="Save.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Load.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterEntity.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticSpriteEntity.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="ToggleShowInfo.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="boundingBox.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Player1MoveDown.h">
+    <ClInclude Include="Graphic\Graphic.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Physics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager\AssetManager.h">
+      <Filter>Asset Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Audio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Animation.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\boundingBox.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\StaticSpriteEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\CharacterEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UserInterface.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\ShapeEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\EventSystem.h">
+      <Filter>Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event.h">
+      <Filter>Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Eventlist.h">
+      <Filter>Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\ButtonPress.h">
       <Filter>Event System\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Player1MoveLeft.h">
+    <ClInclude Include="EventSystem\Event\ControllerConnected.h">
       <Filter>Event System\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Player1MoveRight.h">
+    <ClInclude Include="EventSystem\Event\ControllerDisconnected.h">
       <Filter>Event System\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Player1MoveUp.h">
+    <ClInclude Include="EventSystem\Event\KeyPress.h">
       <Filter>Event System\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Player1StopX.h">
+    <ClInclude Include="EventSystem\Event\KeyRelease.h">
       <Filter>Event System\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Player1StopY.h">
+    <ClInclude Include="EventSystem\Event\Load.h">
       <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1MoveDown.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1MoveLeft.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1MoveRight.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1MoveUp.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1StopX.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1StopY.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Quit.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Save.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\ToggleShowFps.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\ToggleShowInfo.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Profile\Profile.h">
+      <Filter>Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\FileSystem.h">
+      <Filter>File I/O</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

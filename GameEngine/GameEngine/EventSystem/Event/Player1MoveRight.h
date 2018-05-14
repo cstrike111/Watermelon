@@ -1,6 +1,6 @@
 #pragma once
 #pragma once
-#include "Event.h"
+#include "..\Event.h"
 class PlayerMoveRight : public Event {
 public:
 	PlayerMoveRight() {

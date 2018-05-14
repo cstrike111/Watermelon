@@ -42,8 +42,50 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 		es->addEvent(new Save());
 	}
 	if (key == sf::Keyboard::F6) {
-		//save
+		//load
 		es->addEvent(new Load());
+	}
+
+	//player 2 control key
+	if (sf::Keyboard::isKeyPressed(player1Up)) {
+		//move the player
+		if (KEY_UP_RELEASE) {
+			es->addEvent(new Player1MoveUp());
+			KEY_UP_RELEASE = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player1Down)) {
+		//move the player
+		if (KEY_DOWN_RELEASE) {
+			es->addEvent(new Player1MoveDown());
+			KEY_DOWN_RELEASE = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player1Up) && sf::Keyboard::isKeyPressed(player1Down)) {
+		if (KEY_UP_DOWN_RELEASE) {
+			KEY_UP_DOWN_RELEASE = false;
+			es->addEvent(new Player1StopY());
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player1Left)) {
+		//move the player
+		if (KEY_LEFT_RELEASE) {
+			es->addEvent(new Player1MoveLeft());
+			KEY_LEFT_RELEASE = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player1Right)) {
+		//move the player
+		if (KEY_RIGHT_RELEASE) {
+			es->addEvent(new PlayerMoveRight());
+			KEY_RIGHT_RELEASE = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player1Left) && sf::Keyboard::isKeyPressed(player1Right)) {
+		if (KEY_LEFT_RIGHT_RELEASE) {
+			KEY_LEFT_RIGHT_RELEASE = false;
+			es->addEvent(new Player1StopX());
+		}
 	}
 
 	//player 1 control key
