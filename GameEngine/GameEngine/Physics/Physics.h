@@ -24,7 +24,7 @@ public:
 	void addStaticEntity(Entity* e); //add static entity
 	void addDynamicEntity(Entity* e); //add dynamic entity
 	void setEventSystem(EventSystem* es);
-	void getPlayer(Entity* player); //get player pointer
+	void getPlayer(Entity* player1, Entity* player2); //get player pointer
 	void setGravity(b2Vec2 gravity); //change the gravity
 	void createBody(Entity* e); //create box2d body
 	void setProfileSystem(Profile* pro);

@@ -153,6 +153,14 @@
     <ClCompile Include="Physics\Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EventSystem\Event\Player2Fire.h" />
+    <ClInclude Include="EventSystem\Event\Player2MoveDown.h" />
+    <ClInclude Include="EventSystem\Event\Player2MoveLeft.h" />
+    <ClInclude Include="EventSystem\Event\Player2MoveRight.h" />
+    <ClInclude Include="EventSystem\Event\Player2MoveUp.h" />
+    <ClInclude Include="EventSystem\Event\Player2StopX.h" />
+    <ClInclude Include="EventSystem\Event\Player2StopY.h" />
+    <ClInclude Include="FileSystem\GameData.h" />
     <ClInclude Include="Graphic\Animation.h" />
     <ClInclude Include="AssetManager\AssetManager.h" />
     <ClInclude Include="Audio\Audio.h" />
@@ -176,6 +184,7 @@
     <ClInclude Include="EventSystem\Event\KeyRelease.h" />
     <ClInclude Include="EventSystem\Event\Player1StopY.h" />
     <ClInclude Include="EventSystem\Event\Player1StopX.h" />
+    <ClInclude Include="EventSystem\Event\Player1Fire.h" />
     <ClInclude Include="Profile\Profile.h" />
     <ClInclude Include="Entity\ShapeEntity.h" />
     <ClInclude Include="UserInterface\UserInterface.h" />

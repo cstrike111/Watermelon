@@ -2,10 +2,14 @@
 
 UserInterface::UserInterface(sf::RenderWindow* window) {
 	this->window = window;
-	KEY_LEFT_RELEASE = true;
-	KEY_RIGHT_RELEASE = true;
-	KEY_UP_RELEASE = true;
-	KEY_DOWN_RELEASE = true;
+	KEY_LEFT_RELEASE_1 = true;
+	KEY_RIGHT_RELEASE_1 = true;
+	KEY_UP_RELEASE_1 = true;
+	KEY_DOWN_RELEASE_1 = true;
+	KEY_LEFT_RELEASE_2 = true;
+	KEY_RIGHT_RELEASE_2 = true;
+	KEY_UP_RELEASE_2 = true;
+	KEY_DOWN_RELEASE_2 = true;
 }
 
 UserInterface::~UserInterface(){
@@ -25,7 +29,7 @@ void UserInterface::handleEvent(int eventType) {
 }
 
 //handle user's input and add events
-void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
+void UserInterface::handleKeyPress1(sf::Keyboard::Key key) {
 	//system key
 	if (key == sf::Keyboard::Escape) {
 		//exit the game
@@ -46,137 +50,105 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 		es->addEvent(new Load());
 	}
 
-	//player 2 control key
-	if (sf::Keyboard::isKeyPressed(player1Up)) {
-		//move the player
-		if (KEY_UP_RELEASE) {
-			es->addEvent(new Player1MoveUp());
-			KEY_UP_RELEASE = false;
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(player1Down)) {
-		//move the player
-		if (KEY_DOWN_RELEASE) {
-			es->addEvent(new Player1MoveDown());
-			KEY_DOWN_RELEASE = false;
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(player1Up) && sf::Keyboard::isKeyPressed(player1Down)) {
-		if (KEY_UP_DOWN_RELEASE) {
-			KEY_UP_DOWN_RELEASE = false;
-			es->addEvent(new Player1StopY());
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(player1Left)) {
-		//move the player
-		if (KEY_LEFT_RELEASE) {
-			es->addEvent(new Player1MoveLeft());
-			KEY_LEFT_RELEASE = false;
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(player1Right)) {
-		//move the player
-		if (KEY_RIGHT_RELEASE) {
-			es->addEvent(new PlayerMoveRight());
-			KEY_RIGHT_RELEASE = false;
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(player1Left) && sf::Keyboard::isKeyPressed(player1Right)) {
-		if (KEY_LEFT_RIGHT_RELEASE) {
-			KEY_LEFT_RIGHT_RELEASE = false;
-			es->addEvent(new Player1StopX());
-		}
-	}
-
 	//player 1 control key
 	if (sf::Keyboard::isKeyPressed(player1Up)) {
 		//move the player
-		if (KEY_UP_RELEASE) {
+		if (KEY_UP_RELEASE_1) {
 			es->addEvent(new Player1MoveUp());
-			KEY_UP_RELEASE = false;
+			KEY_UP_RELEASE_1 = false;
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(player1Down)) {
 		//move the player
-		if (KEY_DOWN_RELEASE) {
+		if (KEY_DOWN_RELEASE_1) {
 			es->addEvent(new Player1MoveDown());
-			KEY_DOWN_RELEASE = false;
+			KEY_DOWN_RELEASE_1 = false;
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(player1Up) && sf::Keyboard::isKeyPressed(player1Down)) {
-		if (KEY_UP_DOWN_RELEASE) {
-			KEY_UP_DOWN_RELEASE = false;
+		if (KEY_UP_DOWN_RELEASE_1) {
+			KEY_UP_DOWN_RELEASE_1 = false;
 			es->addEvent(new Player1StopY());
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(player1Left)) {
 		//move the player
-		if (KEY_LEFT_RELEASE) {
+		if (KEY_LEFT_RELEASE_1) {
 			es->addEvent(new Player1MoveLeft());
-			KEY_LEFT_RELEASE = false;
+			KEY_LEFT_RELEASE_1 = false;
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(player1Right)) {
 		//move the player
-		if (KEY_RIGHT_RELEASE) {
-			es->addEvent(new PlayerMoveRight());
-			KEY_RIGHT_RELEASE = false;
+		if (KEY_RIGHT_RELEASE_1) {
+			es->addEvent(new Player1MoveRight());
+			KEY_RIGHT_RELEASE_1 = false;
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(player1Left) && sf::Keyboard::isKeyPressed(player1Right)) {
-		if (KEY_LEFT_RIGHT_RELEASE) {
-			KEY_LEFT_RIGHT_RELEASE = false;
+		if (KEY_LEFT_RIGHT_RELEASE_1) {
+			KEY_LEFT_RIGHT_RELEASE_1 = false;
 			es->addEvent(new Player1StopX());
 		}
 	}
-	
-
+	//player 1 fire
+	if (sf::Keyboard::isKeyPressed(player1Fire)) {
+		if (KEY_FIRE_RELEASE_1) {
+			KEY_FIRE_RELEASE_1 = false;
+			es->addEvent(new Player1Fire());
+		}
+	}
 
 }
 
 //handle user's input and add events
-void UserInterface::handleKeyRelease(sf::Keyboard::Key key) {
+void UserInterface::handleKeyRelease1(sf::Keyboard::Key key) {
+	//player 1
 	if (key == player1Up) {
 		//stop the player
-		KEY_UP_RELEASE = true;
-		KEY_UP_DOWN_RELEASE = true;
+		KEY_UP_RELEASE_1 = true;
+		KEY_UP_DOWN_RELEASE_1 = true;
 		es->addEvent(new Player1StopY());
-		if (!KEY_DOWN_RELEASE) {
+		if (!KEY_DOWN_RELEASE_1) {
 			es->addEvent(new Player1MoveDown());
 		}
 	}
 	if (key == player1Down) {
 		//stop the player
-		KEY_DOWN_RELEASE = true;
-		KEY_UP_DOWN_RELEASE = true;
+		KEY_DOWN_RELEASE_1 = true;
+		KEY_UP_DOWN_RELEASE_1 = true;
 		es->addEvent(new Player1StopY());
-		if (!KEY_UP_RELEASE) {
+		if (!KEY_UP_RELEASE_1) {
 			es->addEvent(new Player1MoveUp());
 		}
 		
 	}
 	if (key == player1Left) {
-		KEY_LEFT_RELEASE = true;
-		KEY_LEFT_RIGHT_RELEASE = true;
+		KEY_LEFT_RELEASE_1 = true;
+		KEY_LEFT_RIGHT_RELEASE_1 = true;
 		//stop the player
 		es->addEvent(new Player1StopX());
-		if (!KEY_RIGHT_RELEASE) {
-			es->addEvent(new PlayerMoveRight());
+		if (!KEY_RIGHT_RELEASE_1) {
+			es->addEvent(new Player1MoveRight());
 		}
 		
 	}
 	if (key == player1Right) {
-		KEY_RIGHT_RELEASE = true;
-		KEY_LEFT_RIGHT_RELEASE = true;
+		KEY_RIGHT_RELEASE_1 = true;
+		KEY_LEFT_RIGHT_RELEASE_1 = true;
 		//stop the player
 		es->addEvent(new Player1StopX());
-		if (!KEY_LEFT_RELEASE) {
+		if (!KEY_LEFT_RELEASE_1) {
 			es->addEvent(new Player1MoveLeft());
 
 		}
 		
 	}
-	
+	if (key == player1Fire) {
+		//reset the flag
+		KEY_FIRE_RELEASE_1 = true;
+	}
+
 }
 
 void UserInterface::setKey(int action, sf::Keyboard::Key key) {
@@ -193,10 +165,23 @@ void UserInterface::setKey(int action, sf::Keyboard::Key key) {
 	case action::PLAYER1_RIGHT:
 		player1Right = key;
 		break;
+	case action::PLAYER2_UP:
+		player2Up = key;
+		break;
+	case action::PLAYER2_DOWN:
+		player2Down = key;
+		break;
+	case action::PLAYER2_LEFT:
+		player2Left = key;
+		break;
+	case action::PLAYER2_RIGHT:
+		player2Right = key;
+		break;
 	}
+
 }
 
-void UserInterface::handleButtonPressed() {
+void UserInterface::handleButtonPressed1() {
 
 	if (sf::Joystick::isButtonPressed(0, buttonR)) {
 		cout << "Button R pressed!" << endl;
@@ -212,7 +197,7 @@ void UserInterface::handleButtonPressed() {
 	}
 }
 
-void UserInterface::handleButtonReleased(int button) {
+void UserInterface::handleButtonReleased1(int button) {
 
 	if (button == buttonR) {
 		cout << "R released!" << endl;
@@ -228,6 +213,104 @@ void UserInterface::handleButtonReleased(int button) {
 	}
 }
 
+void UserInterface::handleKeyPress2(sf::Keyboard::Key key)
+{
+	//player 2 control key
+	if (sf::Keyboard::isKeyPressed(player2Up)) {
+		//move the player
+		if (KEY_UP_RELEASE_2) {
+			es->addEvent(new Player2MoveUp());
+			KEY_UP_RELEASE_2 = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player2Down)) {
+		//move the player
+		if (KEY_DOWN_RELEASE_2) {
+			es->addEvent(new Player2MoveDown());
+			KEY_DOWN_RELEASE_2 = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player2Up) && sf::Keyboard::isKeyPressed(player2Down)) {
+		if (KEY_UP_DOWN_RELEASE_2) {
+			KEY_UP_DOWN_RELEASE_2 = false;
+			es->addEvent(new Player2StopY());
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player2Left)) {
+		//move the player
+		if (KEY_LEFT_RELEASE_2) {
+			es->addEvent(new Player2MoveLeft());
+			KEY_LEFT_RELEASE_2 = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player2Right)) {
+		//move the player
+		if (KEY_RIGHT_RELEASE_2) {
+			es->addEvent(new Player2MoveRight());
+			KEY_RIGHT_RELEASE_2 = false;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(player2Left) && sf::Keyboard::isKeyPressed(player2Right)) {
+		if (KEY_LEFT_RIGHT_RELEASE_2) {
+			KEY_LEFT_RIGHT_RELEASE_2 = false;
+			es->addEvent(new Player2StopX());
+		}
+	}
+}
+
+void UserInterface::handleKeyRelease2(sf::Keyboard::Key key)
+{
+	//player 2 control key
+	if (key == player2Up) {
+		//stop the player
+		KEY_UP_RELEASE_2 = true;
+		KEY_UP_DOWN_RELEASE_2 = true;
+		es->addEvent(new Player2StopY());
+		if (!KEY_DOWN_RELEASE_2) {
+			es->addEvent(new Player2MoveDown());
+		}
+	}
+	if (key == player2Down) {
+		//stop the player
+		KEY_DOWN_RELEASE_2 = true;
+		KEY_UP_DOWN_RELEASE_2 = true;
+		es->addEvent(new Player2StopY());
+		if (!KEY_UP_RELEASE_2) {
+			es->addEvent(new Player2MoveUp());
+		}
+
+	}
+	if (key == player2Left) {
+		KEY_LEFT_RELEASE_2 = true;
+		KEY_LEFT_RIGHT_RELEASE_2 = true;
+		//stop the player
+		es->addEvent(new Player2StopX());
+		if (!KEY_RIGHT_RELEASE_2) {
+			es->addEvent(new Player2MoveRight());
+		}
+
+	}
+	if (key == player2Right) {
+		KEY_RIGHT_RELEASE_2 = true;
+		KEY_LEFT_RIGHT_RELEASE_2 = true;
+		//stop the player
+		es->addEvent(new Player2StopX());
+		if (!KEY_LEFT_RELEASE_2) {
+			es->addEvent(new Player2MoveLeft());
+
+		}
+
+	}
+}
+
+void UserInterface::handleButtonPressed2()
+{
+}
+
+void UserInterface::handleButtonReleased2(int button)
+{
+}
+
 void UserInterface::setButton(int action, int button) {
 	switch (action) {
 	case action::PLAYER1_UP:
@@ -240,6 +323,18 @@ void UserInterface::setButton(int action, int button) {
 		buttonZ = button;
 		break;
 	case action::PLAYER1_RIGHT:
+		buttonY = button;
+		break;
+	case action::PLAYER2_UP:
+		buttonR = button;
+		break;
+	case action::PLAYER2_DOWN:
+		buttonX = button;
+		break;
+	case action::PLAYER2_LEFT:
+		buttonZ = button;
+		break;
+	case action::PLAYER2_RIGHT:
 		buttonY = button;
 		break;
 	}
@@ -265,11 +360,13 @@ void UserInterface::update() {
 			break;
 			//if the user press something
 		case sf::Event::KeyPressed:
-			handleKeyPress(sfEvent.key.code);
+			handleKeyPress1(sfEvent.key.code);
+			handleKeyPress2(sfEvent.key.code);
 			break;
 			//if player release the key
 		case sf::Event::KeyReleased:
-			handleKeyRelease(sfEvent.key.code);
+			handleKeyRelease1(sfEvent.key.code);
+			handleKeyRelease2(sfEvent.key.code);
 			break;
 			//if the controller is connected
 		case sf::Event::JoystickConnected:
@@ -283,10 +380,10 @@ void UserInterface::update() {
 			break;
 			//if the controller button is pressed
 		case sf::Event::JoystickButtonPressed:
-			handleButtonPressed();
+			handleButtonPressed1();
 			break;
 		case sf::Event::JoystickButtonReleased:
-			handleButtonReleased(sfEvent.joystickButton.button);
+			handleButtonReleased1(sfEvent.joystickButton.button);
 			break;
 		case sf::Event::JoystickMoved:
 			handleAxisMove(sfEvent.joystickMove.axis, sfEvent.joystickMove.position);

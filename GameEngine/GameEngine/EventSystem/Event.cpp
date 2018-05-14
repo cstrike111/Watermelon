@@ -30,6 +30,9 @@ bool Event::getSubSystem(int subsystem) {
 	case FILE:
 		return active[FILE];
 		break;
+	case GAME:
+		return active[GAME];
+		break;
 	default:
 		return false;
 		break;
@@ -69,10 +72,15 @@ void Event::popFile() {
 	active[FILE] = false;
 }
 
+void Event::popGame()
+{
+	active[GAME] = false;
+}
+
 bool Event::isActive() {
 	bool systemActive = false;
 	//i = number of sub-system
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 8; i++) {
 		if (active[i] == true) {
 			systemActive = true;
 			break;

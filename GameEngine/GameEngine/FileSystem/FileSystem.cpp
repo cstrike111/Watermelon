@@ -85,7 +85,7 @@ bool FileSystem::load() {
 	}
 }
 
-bool FileSystem::loadLevel1(vector<StaticSpriteEntity*>* list)
+bool FileSystem::loadLevel1(GameData* d)
 {
 	//load from file
 	ifstream map("asset/map/map.dat");
@@ -95,9 +95,9 @@ bool FileSystem::loadLevel1(vector<StaticSpriteEntity*>* list)
 		std::string line;
 		while(std::getline(map, line))
 		{	
-			char type;
+			int type;
 			map >> type;
-			if (type == 'p') {
+			if (type == PLATFORM) {
 				float posX;
 				float posY;
 				float width;
@@ -108,24 +108,43 @@ bool FileSystem::loadLevel1(vector<StaticSpriteEntity*>* list)
 				map >> height;
 				StaticSpriteEntity* obj = new StaticSpriteEntity();
 				obj->setSprite(new sf::Sprite());
-				obj->setPosition(glm::vec2(posX * UNIT_PIXEL, posY * UNIT_PIXEL));
+				obj->setPosition(glm::vec2(posX * UNIT_PIXEL, -posY * UNIT_PIXEL));
 				obj->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
 				obj->getSprite()->setOrigin(width * UNIT_PIXEL / 2, height * UNIT_PIXEL / 2);
 				obj->setTextureRect(0, 0, width * UNIT_PIXEL, height * UNIT_PIXEL);
 				//obj->setWidth(width * UNIT_PIXEL);
 				//obj->setHeight(height * UNIT_PIXEL);
-				obj->bodyDef.position.Set(posX, -posY);
+				obj->bodyDef.position.Set(posX, posY);
 				obj->polygonShape.SetAsBox(width/2, height/2); 
-				list->push_back(obj);
+				d->platformList->push_back(obj);
 				cout << "load!" << endl;
 			}
-			else {
-				cout << "Oops! Fail to load!" << endl;
-				return false;
+			if (type == PLAYER1_SPAWN) {
+				float posX;
+				float posY;
+				map >> posX;
+				map >> posY;
+				d->player1SpawnX = posX;
+				d->player1SpawnY = posY;
+				cout << "load!" << endl;
 			}
+			if (type == PLAYER2_SPAWN) {
+				float posX;
+				float posY;
+				map >> posX;
+				map >> posY;
+				d->player2SpawnX = posX;
+				d->player2SpawnY = posY;
+				cout << "load!" << endl;
+			}
+			
 		}
 		//close the file
 		map.close();
+	}
+	else {
+		cout << "Oops! Fail to load!" << endl;
+		return false;
 	}
 	
 	

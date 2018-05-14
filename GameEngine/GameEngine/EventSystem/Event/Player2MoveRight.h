@@ -1,10 +1,10 @@
 #pragma once
 #pragma once
 #include "..\Event.h"
-class Player1MoveRight : public Event {
+class Player2MoveRight : public Event {
 public:
-	Player1MoveRight() {
-		eventType = event::PLAYER1_MOVE_RIGHT;
+	Player2MoveRight() {
+		eventType = event::PLAYER2_MOVE_RIGHT;
 		active[AUDIO] = true;
 		active[PHYSICS] = true;
 	}

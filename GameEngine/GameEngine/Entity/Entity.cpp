@@ -1,5 +1,5 @@
 #include "Entity.h"
-
+#include <iostream>
 
 Entity::Entity() {
 	position = glm::vec2(0, 0);
@@ -40,7 +40,7 @@ void Entity::setWidth(float width) {
 	this->width = width;
 }
 
-float Entity::getWideth() {
+float Entity::getWidth() {
 	return width;
 }
 
@@ -54,6 +54,7 @@ float Entity::getHeight() {
 
 void Entity::setScale(glm::vec2 scale) {
 	this->scale = scale;
+	std::cout << "change scale" << std::endl;
 }
 
 glm::vec2 Entity::getScale() {

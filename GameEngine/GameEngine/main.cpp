@@ -18,7 +18,7 @@ const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
 
 //world parameters
-b2Vec2 gravity(0.0f, -0.0f);
+b2Vec2 gravity(0.0f, -100.0f);
 
 //declare of sub-system and window
 Graphic* g; //renderer
@@ -61,7 +61,6 @@ bool init() {
 		ui->setEventSystem(es);
 		a->setEventSystem(es);
 		p->setEventSystem(es);
-		a->setEventSystem(es);
 		asset->setEventSystem(es);
 		pro->setEventSystem(es);
 		file->setEventSystem(es);

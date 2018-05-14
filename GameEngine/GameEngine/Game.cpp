@@ -7,17 +7,25 @@ Game::Game(Physics* p, Graphic* g, EventSystem* e, AssetManager* am, FileSystem*
 	this->e = e;
 	this->f = f;
 	this->am = am;
+
+	//initialize the bullet lists
 }
 
 Game::~Game()
 {
+	delete player1;
+	player1 = nullptr;
+	delete player2;
+	player2 = nullptr;
+
+	bullet1.clear();
+	bullet2.clear();
+	
 	if(level1Load)
 	{	
 		level1Load = false;
 		platformList->clear();
 		platformList = nullptr;
-		delete player1;
-		player1 = nullptr;
 		delete platform;
 		platform = nullptr;
 		delete platform2;
@@ -33,16 +41,38 @@ Game::~Game()
 void Game::loadLevel1()
 {
 	//set up assets and entity
-	//player
+	//test for loading level
+	platformList = new vector<StaticSpriteEntity*>();
+	//make game data struct
+	GameData* gameData = new GameData();
+	gameData->platformList = platformList;
+	f->loadLevel1(gameData);
+	player1spawnX = gameData->player1SpawnX;
+	player1spawnY = gameData->player1SpawnY;
+	player2spawnX = gameData->player2SpawnX;
+	player2spawnY = gameData->player2SpawnY;
+
+	//player 1
 	player1 = new CharacterEntity();
 	player1->setSprite(new sf::Sprite());
-	player1->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/player.png", AssetManager::TEXTURE)));
+	player1->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/player1.png", AssetManager::TEXTURE)));
 	player1->getSprite()->setOrigin(106 / 2, 233 / 2);
 	player1->setWidth(106);
 	player1->setHeight(233);
 	player1->setTextureRect(0, 0, 106, 233);
-	player1->bodyDef.position.Set(0, 0);
+	player1->bodyDef.position.Set(player1spawnX, player1spawnY);
 	player1->polygonShape.SetAsBox(5.3f, 11.65f);
+
+	//player 2
+	player2 = new CharacterEntity();
+	player2->setSprite(new sf::Sprite());
+	player2->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/player2.png", AssetManager::TEXTURE)));
+	player2->getSprite()->setOrigin(106 / 2, 233 / 2);
+	player2->setWidth(106);
+	player2->setHeight(233);
+	player2->setTextureRect(0, 0, 106, 233);
+	player2->bodyDef.position.Set(player2spawnX, player2spawnY);
+	player2->polygonShape.SetAsBox(5.3f, 11.65f);
 
 	//platform
 	platform = new StaticSpriteEntity();
@@ -94,25 +124,153 @@ void Game::loadLevel1()
 	//add entity to graphic system and physics system
 	f->setPlayer(player1); //tract player's information
 	g->addEntity(player1, Entity::rType::CHARACTER);
+	g->addEntity(player2, Entity::rType::CHARACTER);
 	g->addEntity(circle, Entity::rType::SHAPE);
 	g->addEntity(platform, Entity::rType::SPRITE);
 	g->addEntity(platform2, Entity::rType::SPRITE);
 	g->addEntity(animationTest, Entity::rType::CHARACTER);
-	p->getPlayer(player1);
+	p->getPlayer(player1, player2);
 	p->addStaticEntity(platform);
 	p->addStaticEntity(platform2);
 
-	//test for loading level
-	platformList = new vector<StaticSpriteEntity*>();
-	f->loadLevel1(platformList);
+	
+	
+	//f->loadLevel1();
 	//load the level
 	for (int i = 0; i < platformList->size(); i++)
 	{
 		g->addEntity(platformList->at(i), Entity::rType::SPRITE);
 		p->addStaticEntity(platformList->at(i));
 	}
+
+	currentLevel = 1;
+
+	//clean the memory
+	delete gameData;
 }
 
+
+
 void Game::update()
-{
+{	//handle the event
+	//check the queue
+	if (e->getEventQueue()->size() != 0) {
+		if (e->getEventQueue()->front().getSubSystem(Event::subsystem::GAME)) {
+			//handle event
+			handleEvent(e->getEventQueue()->front().getEventType());
+			//tell the event that the sub-system has finished its job
+			e->getEventQueue()->front().popGame();
+		}
+	}
+
+	//if a player touch the dead border, show win message
+	
+	
 }
+
+
+
+void Game::handleEvent(int eventType)
+{
+	switch (eventType) {
+		ShapeEntity * b;
+	case Event::PLAYER1_FIRE:
+		//add bullet
+		b = createBullet(1);
+		bullet1.push_back(b);
+		//push bullet to the renderer and physics list
+		p->addDynamicEntity(b);
+		g->addEntity(b, Entity::rType::SHAPE);
+		break;
+	case Event::PLAYER2_FIRE:
+		b = createBullet(2);
+		bullet2.push_back(b);
+		//push bullet to the renderer and physics list
+		p->addDynamicEntity(b);
+		g->addEntity(b, Entity::rType::SHAPE);
+		break;
+	//player 1 get hit
+	//player 2 get hit
+	//player 1 touch the dead border
+	//player 2 touch the dead border
+
+	default:
+		break;
+	}
+}
+
+ShapeEntity* Game::createBullet(int player)
+{
+	ShapeEntity * b = new ShapeEntity();
+	switch(player)
+	{
+	case 1:
+		//configure the bullet according to the weapon type
+		b->setShape(new sf::CircleShape(10));
+		b->getShape()->setFillColor(sf::Color::Blue);
+		//face to right
+		if(player1->getScale().x > 0)
+		{
+			float width = player1->getWidth() / player1->UNIT_PIXEL;
+			float posX = player1->body->GetPosition().x;
+			float posY = player1->body->GetPosition().y;
+			b->bodyDef.position.Set(posX + width + 0.5, posY);
+			b->bodyDef.bullet = true;
+			b->bodyDef.fixedRotation = true;
+			b->bodyDef.gravityScale = 0;
+			b->bodyDef.linearVelocity = b2Vec2(100000, 0);
+			b->fixtureDef.isSensor = true;
+			b->fixtureDef.density = 1000;
+			b->polygonShape.SetAsBox(0.5, 0.5);
+		}else if(player1->getScale().x < 0)
+		{
+			float width = player1->getWidth() / player1->UNIT_PIXEL;
+			float posX = player1->body->GetPosition().x;
+			float posY = player1->body->GetPosition().y;
+			b->bodyDef.position.Set(posX - width - 0.5, posY);
+			b->bodyDef.bullet = true;
+			b->bodyDef.fixedRotation = true;
+			b->bodyDef.gravityScale = 0;
+			b->bodyDef.linearVelocity = b2Vec2(-1000, 0);
+			b->fixtureDef.isSensor = true;
+			b->fixtureDef.density = 1000;
+			b->polygonShape.SetAsBox(0.5, 0.5);
+		}
+		
+		return b;
+		break;
+
+	case 2:
+		b->setShape(new sf::CircleShape(10));
+		b->getShape()->setFillColor(sf::Color::Blue);
+		//face to right
+		if (player2->getScale().x > 0)
+		{
+			float width = player2->getWidth() / player2->UNIT_PIXEL;
+			float posX = player2->body->GetPosition().x;
+			float posY = player2->body->GetPosition().y;
+			b->bodyDef.position.Set(posX + width + 0.5, posY);
+			b->body->SetBullet(true);
+			b->polygonShape.SetAsBox(0.5, 0.5);
+		}
+		else if (player2->getScale().x < 0)
+		{
+			float width = player2->getWidth() / player1->UNIT_PIXEL;
+			float posX = player2->body->GetPosition().x;
+			float posY = player2->body->GetPosition().y;
+			b->bodyDef.position.Set(posX - width - 0.5, posY);
+			b->body->SetBullet(true);
+			b->polygonShape.SetAsBox(0.5, 0.5);
+		}
+		return b;
+		break;
+
+	default:
+		return nullptr;
+		break;
+	}
+
+	
+}
+
+

@@ -15,28 +15,28 @@ public:
 
 	/* Entity should be created in main.cpp and deleted in main.cpp! Later will managed with game player sub-system. */
 	Entity();
-	~Entity();
+	virtual ~Entity();
 
 	float UNIT_PIXEL = 10;
 
 	//getter and setter for the data
 	//set position will only work before add into physics system (need another way to move object)
-	void setPosition(glm::vec2 position);
-	glm::vec2 getPosition();
+	virtual void setPosition(glm::vec2 position);
+	virtual glm::vec2 getPosition();
 	void setVelocity(glm::vec2 velocity);
 	glm::vec2 getVelocity();
 	void setOrigin(glm::vec2 origin);
 	glm::vec2 getOrigin();
 	void setWidth(float width);
-	float getWideth();
+	float getWidth();
 	void setHeight(float height);
 	float getHeight();
-	void setScale(glm::vec2 scale);
+	virtual void setScale(glm::vec2 scale);
 	glm::vec2 getScale();
 	void setRenderType(int type);
 	int getRenderType();
-	void setRotation(float rotation);
-	float getRotation();
+	virtual void setRotation(float rotation);
+	virtual float getRotation();
 
 	//update physics information
 	void updateCollisionRect();

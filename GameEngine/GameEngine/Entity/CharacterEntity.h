@@ -32,6 +32,6 @@ public:
 	bool isAnimated = false;
 private:
 	sf::Sprite* sprite;
-
+	float coolDownTime;
 	
 };

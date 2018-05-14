@@ -8,7 +8,7 @@ CharacterEntity::CharacterEntity() {
 	polygonShape.SetAsBox(1.0f, 1.0f); //set as a box
 	bodyDef.position.Set(0.0f, 0.0f);
 	fixtureDef.shape = &polygonShape;
-	fixtureDef.density = 100.0f;
+	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
 }
 
@@ -79,6 +79,7 @@ void CharacterEntity::setOrigin(glm::vec2 origin) {
 void CharacterEntity::setScale(glm::vec2 scale) {
 	this->scale = scale;
 	sprite->setScale(scale.x, scale.y);
+	std::cout << "change scale" << std::endl;
 }
 
 void CharacterEntity::setRotation(float rotation) {

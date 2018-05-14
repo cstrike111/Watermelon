@@ -200,5 +200,32 @@
     <ClInclude Include="FileSystem\FileSystem.h">
       <Filter>File I/O</Filter>
     </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2MoveDown.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2MoveLeft.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2MoveRight.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2MoveUp.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2StopX.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2StopY.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\GameData.h">
+      <Filter>File I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1Fire.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2Fire.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

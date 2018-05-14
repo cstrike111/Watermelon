@@ -48,55 +48,108 @@ void Physics::update() {
 }
 
 void Physics::handleEvent(int eventType) {
-	b2Vec2 vel = player1->body->GetLinearVelocity();
-	b2Vec2 pos = player1->body->GetPosition();
-	float desiredVel = 0;
-	float velChange = 0;
-	float impulse = 0;
+	b2Vec2 vel1 = player1->body->GetLinearVelocity();
+	b2Vec2 pos1 = player1->body->GetPosition();
+	float desiredVel1 = 0;
+	float velChange1 = 0;
+	float impulse1 = 0;
+	b2Vec2 vel2 = player2->body->GetLinearVelocity();
+	b2Vec2 pos2 = player2->body->GetPosition();
+	float desiredVel2 = 0;
+	float velChange2 = 0;
+	float impulse2 = 0;
 	switch (eventType) {
 	case Event::PLAYER1_MOVE_UP:
-		desiredVel = PLAYER_MOVE_SPEED;
-		velChange = desiredVel - vel.y;
-		impulse = player1->body->GetMass() * velChange;
-		player1->body->ApplyLinearImpulse(b2Vec2(0, impulse), player1->body->GetWorldCenter(), true);
+		desiredVel1 = PLAYER_MOVE_SPEED;
+		velChange1 = desiredVel1 - vel1.y;
+		impulse1 = player1->body->GetMass() * velChange1;
+		player1->body->ApplyLinearImpulse(b2Vec2(0, impulse1), player1->body->GetWorldCenter(), true);
 		break;
 	case Event::PLAYER1_MOVE_DOWN:
-		desiredVel = -PLAYER_MOVE_SPEED;
-		velChange = desiredVel - vel.y;
-		impulse = player1->body->GetMass() * velChange;
-		player1->body->ApplyLinearImpulse(b2Vec2(0, impulse), player1->body->GetWorldCenter(), true);
+		desiredVel1 = -PLAYER_MOVE_SPEED;
+		velChange1 = desiredVel1 - vel1.y;
+		impulse1 = player1->body->GetMass() * velChange1;
+		player1->body->ApplyLinearImpulse(b2Vec2(0, impulse1), player1->body->GetWorldCenter(), true);
 		break;
 	case Event::PLAYER1_MOVE_LEFT:
-		desiredVel = -PLAYER_MOVE_SPEED;
-		velChange = desiredVel - vel.x;
-		impulse = player1->body->GetMass() * velChange;
-		player1->body->ApplyLinearImpulse(b2Vec2(impulse, 0), player1->body->GetWorldCenter(), true);
+		desiredVel1 = -PLAYER_MOVE_SPEED;
+		velChange1 = desiredVel1 - vel1.x;
+		impulse1 = player1->body->GetMass() * velChange1;
+		player1->body->ApplyLinearImpulse(b2Vec2(impulse1, 0), player1->body->GetWorldCenter(), true);
+		//set the facing direction of the player
+		player1->setScale(glm::vec2(-1, 1));
 		break;
 	case Event::PLAYER1_MOVE_RIGHT:
-		desiredVel = PLAYER_MOVE_SPEED;
-		velChange = desiredVel - vel.x;
-		impulse = player1->body->GetMass() * velChange;
-		player1->body->ApplyLinearImpulse(b2Vec2(impulse, 0), player1->body->GetWorldCenter(), true);
+		desiredVel1 = PLAYER_MOVE_SPEED;
+		velChange1 = desiredVel1 - vel1.x;
+		impulse1 = player1->body->GetMass() * velChange1;
+		player1->body->ApplyLinearImpulse(b2Vec2(impulse1, 0), player1->body->GetWorldCenter(), true);
+		//set the facing direction of the player
+		player1->setScale(glm::vec2(1, 1));
 		break;
 	case Event::PLAYER1_STOP_Y:
-		desiredVel = 0;
-		velChange = desiredVel - vel.y;
-		impulse = player1->body->GetMass() * velChange;
-		player1->body->ApplyLinearImpulse(b2Vec2(0, impulse), player1->body->GetWorldCenter(), true);
+		desiredVel1 = 0;
+		velChange1 = desiredVel1 - vel1.y;
+		impulse1 = player1->body->GetMass() * velChange1;
+		player1->body->ApplyLinearImpulse(b2Vec2(0, impulse1), player1->body->GetWorldCenter(), true);
 		//pass the physics info
-		pro->setPlayerPhysicsInfo(pos.x, pos.y, vel.x, vel.y);
+		pro->setPlayerPhysicsInfo(pos1.x, pos1.y, vel1.x, vel1.y);
 		break;
 	case Event::PLAYER1_STOP_X:
-		desiredVel = 0;
-		velChange = desiredVel - vel.x;
-		impulse = player1->body->GetMass() * velChange;
-		player1->body->ApplyLinearImpulse(b2Vec2(impulse, 0), player1->body->GetWorldCenter(), true);
+		desiredVel1 = 0;
+		velChange1 = desiredVel1 - vel1.x;
+		impulse1 = player1->body->GetMass() * velChange1;
+		player1->body->ApplyLinearImpulse(b2Vec2(impulse1, 0), player1->body->GetWorldCenter(), true);
 		//pass the physics info
-		pro->setPlayerPhysicsInfo(pos.x, pos.y, vel.x, vel.y);
+		pro->setPlayerPhysicsInfo(pos1.x, pos1.y, vel1.x, vel1.y);
 		break;
 	case Event::SAVE:
-		player1->setPosition(glm::vec2(pos.x * UNIT_PIXEL, pos.y * UNIT_PIXEL));
-		player1->setVelocity(glm::vec2(vel.x, vel.y));
+		player1->setPosition(glm::vec2(pos1.x * UNIT_PIXEL, pos1.y * UNIT_PIXEL));
+		player1->setVelocity(glm::vec2(vel1.x, vel1.y));
+		break;
+	case Event::PLAYER2_MOVE_UP:
+		desiredVel2 = PLAYER_MOVE_SPEED;
+		velChange2 = desiredVel2 - vel2.y;
+		impulse2 = player2->body->GetMass() * velChange2;
+		player2->body->ApplyLinearImpulse(b2Vec2(0, impulse2), player2->body->GetWorldCenter(), true);
+		break;
+	case Event::PLAYER2_MOVE_DOWN:
+		desiredVel2 = -PLAYER_MOVE_SPEED;
+		velChange2 = desiredVel2 - vel2.y;
+		impulse2 = player2->body->GetMass() * velChange2;
+		player2->body->ApplyLinearImpulse(b2Vec2(0, impulse2), player2->body->GetWorldCenter(), true);
+		break;
+	case Event::PLAYER2_MOVE_LEFT:
+		desiredVel2 = -PLAYER_MOVE_SPEED;
+		velChange2 = desiredVel2 - vel2.x;
+		impulse2 = player2->body->GetMass() * velChange2;
+		player2->body->ApplyLinearImpulse(b2Vec2(impulse2, 0), player2->body->GetWorldCenter(), true);
+		//set the facing direction of the player
+		player2->setScale(glm::vec2(-1, 1));
+		break;
+	case Event::PLAYER2_MOVE_RIGHT:
+		desiredVel2 = PLAYER_MOVE_SPEED;
+		velChange2 = desiredVel2 - vel2.x;
+		impulse2 = player2->body->GetMass() * velChange2;
+		player2->body->ApplyLinearImpulse(b2Vec2(impulse2, 0), player2->body->GetWorldCenter(), true);
+		//set the facing direction of the player
+		player2->setScale(glm::vec2(1, 1));
+		break;
+	case Event::PLAYER2_STOP_Y:
+		desiredVel2 = 0;
+		velChange2 = desiredVel2 - vel2.y;
+		impulse2 = player2->body->GetMass() * velChange2;
+		player2->body->ApplyLinearImpulse(b2Vec2(0, impulse2), player2->body->GetWorldCenter(), true);
+		//pass the physics info
+		//pro->setPlayerPhysicsInfo(pos1.x, pos1.y, vel1.x, vel1.y);
+		break;
+	case Event::PLAYER2_STOP_X:
+		desiredVel2 = 0;
+		velChange2 = desiredVel2 - vel2.x;
+		impulse2 = player2->body->GetMass() * velChange2;
+		player2->body->ApplyLinearImpulse(b2Vec2(impulse2, 0), player2->body->GetWorldCenter(), true);
+		//pass the physics info
+		pro->setPlayerPhysicsInfo(pos2.x, pos2.y, vel2.x, vel2.y);
 		break;
 	default:
 		break;
@@ -121,9 +174,11 @@ void Physics::setEventSystem(EventSystem* es) {
 	this->es = es;
 }
 
-void Physics::getPlayer(Entity* player) {
-	this->player1 = player;
-	addDynamicEntity(player);
+void Physics::getPlayer(Entity* player1, Entity* player2) {
+	this->player1 = player1;
+	addDynamicEntity(player1);
+	this->player2 = player2;
+	addDynamicEntity(player2);
 }
 
 void Physics::setGravity(b2Vec2 gravity) {
