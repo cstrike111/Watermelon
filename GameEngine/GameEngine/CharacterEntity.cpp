@@ -1,8 +1,10 @@
 #include "CharacterEntity.h"
+#include <iostream>
 
 CharacterEntity::CharacterEntity() {
 	//box2d configuration (default)
 	bodyDef.type = b2_dynamicBody; //set the body type
+	bodyDef.fixedRotation = true;
 	polygonShape.SetAsBox(1.0f, 1.0f); //set as a box
 	bodyDef.position.Set(0.0f, 0.0f);
 	fixtureDef.shape = &polygonShape;
@@ -82,4 +84,21 @@ void CharacterEntity::setScale(glm::vec2 scale) {
 void CharacterEntity::setRotation(float rotation) {
 	this->rotation = rotation;
 	sprite->setRotation(rotation);
+}
+
+void CharacterEntity::setAnimation(Animation a)
+{
+	isAnimated = true;
+	setTexture(a.texture);
+	this->a = a;
+}
+
+void CharacterEntity::playAnimation()
+{
+	sprite->setTextureRect(a.playAnimation());
+}
+
+void CharacterEntity::playCurrentFrame(int index)
+{
+	sprite->setTextureRect(a.getCurrentFrame());
 }

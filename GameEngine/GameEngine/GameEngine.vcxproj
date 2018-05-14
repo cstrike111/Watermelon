@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="CharacterEntity.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="ButtonPress.h" />

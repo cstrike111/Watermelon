@@ -87,6 +87,9 @@
     <ClCompile Include="StaticSpriteEntity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphic.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="ToggleShowInfo.h">
       <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Graphic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -84,6 +84,11 @@ bool FileSystem::load() {
 	}
 }
 
+bool FileSystem::loadLevel()
+{
+	return false;
+}
+
 void FileSystem::setPlayer(Entity* player) {
 	this->player = player;
 }

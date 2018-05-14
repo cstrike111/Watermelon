@@ -63,6 +63,10 @@ void Graphic::draw() {
 		//update position
 		s->setPosition(c->getPosition().x, c->getPosition().y);
 		//get animation
+		if(c->isAnimated)
+		{
+			c->playAnimation();
+		}
 		window->draw(*s);
 	}
 

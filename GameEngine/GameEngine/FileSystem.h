@@ -16,6 +16,7 @@ public:
 	void setEventSystem(EventSystem* es); //set event system
 	bool save(); //currently, it can only save the information of player
 	bool load(); //again, it can only load the information of player for now
+	bool loadLevel();
 	void setPlayer(Entity* player); //let the system know which player's information needed to be saved
 	void demoCircle(ShapeEntity* circle); //set a circle for demo
 

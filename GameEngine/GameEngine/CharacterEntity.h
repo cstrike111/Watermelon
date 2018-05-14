@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "Animation.h"
 
 class CharacterEntity : public Entity {
 public:
@@ -19,8 +20,18 @@ public:
 	void setOrigin(glm::vec2 origin);
 	void setScale(glm::vec2 scale);
 	void setRotation(float rotation);
+	void setAnimation(Animation a);
+	
+	//play animation
+	void playAnimation();
+	//play current frame of animation
+	void playCurrentFrame(int index);
 
+	Animation a;
+	//get animation?
+	bool isAnimated = false;
 private:
 	sf::Sprite* sprite;
-	//Animation
+
+	
 };

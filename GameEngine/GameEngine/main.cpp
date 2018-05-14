@@ -9,11 +9,12 @@
 #include "FileSystem.h"
 #include "StaticSpriteEntity.h"
 #include "CharacterEntity.h"
+#include "Animation.h"
 
 //configuration of the parameters
 //resolution
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 //world parameters
 b2Vec2 gravity(0.0f, 0.0f);
@@ -33,6 +34,7 @@ sf::RenderWindow* window;
 CharacterEntity* player;
 StaticSpriteEntity* platform;
 ShapeEntity* circle;
+CharacterEntity* animationTest;
 
 bool init() {
 	//initializing flag
@@ -77,7 +79,7 @@ bool init() {
 		player->setWidth(106);
 		player->setHeight(233);
 		player->setTextureRect(0, 0, 106, 233);
-		player->bodyDef.position.Set(0, 0);
+		player->bodyDef.position.Set(92, -63);
 		player->polygonShape.SetAsBox(5.3f, 11.65f);
 
 		//platform
@@ -98,11 +100,32 @@ bool init() {
 		circle->getShape()->setFillColor(sf::Color::Green);
 		file->demoCircle(circle);
 
+		//animation test
+		animationTest = new CharacterEntity();
+		animationTest->setSprite(new sf::Sprite());
+		//set up animation
+		//20x30
+		Animation* animation = new Animation();
+		animation->setTexture((sf::Texture*)asset->loadAsset( "asset/animation/spritesheet.png", AssetManager::TEXTURE));
+		animation->frameColumn = 2;
+		animation->frameRow = 4;
+		animation->frameWidth = 100;
+		animation->frameHeight = 64;
+		animation->createAnimation();
+		animationTest->setAnimation(*animation);
+		animationTest->getSprite()->setOrigin(animation->frameWidth/2, animation->frameHeight / 2);
+		animationTest->setPosition(glm::vec2(200, 300));
+		animationTest->bodyDef.position.Set(30, 30);
+		animationTest->polygonShape.SetAsBox(5.3f, 11.65f);
+		
+		
+
 		//add entity to graphic system and physics system
 		file->setPlayer(player); //tract player's information
 		g->addEntity(player, Entity::rType::CHARACTER);
 		g->addEntity(circle, Entity::rType::SHAPE);
 		g->addEntity(platform, Entity::rType::SPRITE);
+		g->addEntity(animationTest, Entity::rType::CHARACTER);
 		p->getPlayer(player);
 		p->addStaticEntity(platform);
 	
