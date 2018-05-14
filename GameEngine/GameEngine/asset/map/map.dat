@@ -1,0 +1,5 @@
+//format: platform type, x, y, width, height
+p 20 30 20 5
+p 10 10 20 5 
+p 15 20 10 10
+p 40 50 10 10 

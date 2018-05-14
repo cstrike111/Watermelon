@@ -34,7 +34,8 @@ private:
 	entities after you use them. */
 	vector<Entity*> dynamicEntityList;
 	vector<Entity*> staticEntityList;
-	Entity* player; //player object
+	Entity* player1; //player1 object
+	Entity* player2; //plyaer2 object
 
 	//static entity list?
 	EventSystem* es; //get the event system

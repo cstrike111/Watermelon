@@ -2,8 +2,9 @@
 
 
 
-FileSystem::FileSystem()
+FileSystem::FileSystem(AssetManager* am)
 {
+	this->am = am;
 }
 
 FileSystem::~FileSystem()
@@ -84,9 +85,51 @@ bool FileSystem::load() {
 	}
 }
 
-bool FileSystem::loadLevel()
+bool FileSystem::loadLevel1(vector<StaticSpriteEntity*>* list)
 {
-	return false;
+	//load from file
+	ifstream map("asset/map/map.dat");
+	if (map.is_open()) {
+		//data type?
+		//load the position
+		std::string line;
+		while(std::getline(map, line))
+		{	
+			char type;
+			map >> type;
+			if (type == 'p') {
+				float posX;
+				float posY;
+				float width;
+				float height;
+				map >> posX;
+				map >> posY;
+				map >> width;
+				map >> height;
+				StaticSpriteEntity* obj = new StaticSpriteEntity();
+				obj->setSprite(new sf::Sprite());
+				obj->setPosition(glm::vec2(posX * UNIT_PIXEL, posY * UNIT_PIXEL));
+				obj->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
+				obj->getSprite()->setOrigin(width * UNIT_PIXEL / 2, height * UNIT_PIXEL / 2);
+				obj->setTextureRect(0, 0, width * UNIT_PIXEL, height * UNIT_PIXEL);
+				//obj->setWidth(width * UNIT_PIXEL);
+				//obj->setHeight(height * UNIT_PIXEL);
+				obj->bodyDef.position.Set(posX, -posY);
+				obj->polygonShape.SetAsBox(width/2, height/2); 
+				list->push_back(obj);
+				cout << "load!" << endl;
+			}
+			else {
+				cout << "Oops! Fail to load!" << endl;
+				return false;
+			}
+		}
+		//close the file
+		map.close();
+	}
+	
+	
+	return true;
 }
 
 void FileSystem::setPlayer(Entity* player) {

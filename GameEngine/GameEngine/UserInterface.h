@@ -6,10 +6,10 @@
 class UserInterface {
 public:
 	//action for configuration of keys
-	enum action{PLAYER_UP,
-	            PLAYER_DOWN,
-	            PLAYER_LEFT,
-	            PLAYER_RIGHT};
+	enum action{PLAYER1_UP,
+	            PLAYER1_DOWN,
+	            PLAYER1_LEFT,
+	            PLAYER1_RIGHT};
 	
 	//constructor and destructor
 	UserInterface(sf::RenderWindow* window);
@@ -35,10 +35,14 @@ private:
 
 	//configuration of the keys(player_move_up, etc.)
 	//keyboard
-	sf::Keyboard::Key playerUp = sf::Keyboard::Up;
-	sf::Keyboard::Key playerDown = sf::Keyboard::Down;
-	sf::Keyboard::Key playerLeft = sf::Keyboard::Left;
-	sf::Keyboard::Key playerRight = sf::Keyboard::Right;
+	sf::Keyboard::Key player1Up = sf::Keyboard::W;
+	sf::Keyboard::Key player1Down = sf::Keyboard::S;
+	sf::Keyboard::Key player1Left = sf::Keyboard::A;
+	sf::Keyboard::Key player1Right = sf::Keyboard::D;
+	sf::Keyboard::Key player2Up = sf::Keyboard::Up;
+	sf::Keyboard::Key player2Down = sf::Keyboard::Down;
+	sf::Keyboard::Key player2Left = sf::Keyboard::Left;
+	sf::Keyboard::Key player2Right = sf::Keyboard::Right;
 	
 	//controller
 	int buttonR = sf::Joystick::R;

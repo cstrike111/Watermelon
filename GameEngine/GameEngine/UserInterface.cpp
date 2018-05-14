@@ -46,45 +46,45 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 		es->addEvent(new Load());
 	}
 
-	//player control key
-	if (sf::Keyboard::isKeyPressed(playerUp)) {
+	//player 1 control key
+	if (sf::Keyboard::isKeyPressed(player1Up)) {
 		//move the player
 		if (KEY_UP_RELEASE) {
-			es->addEvent(new PlayerMoveUp());
+			es->addEvent(new Player1MoveUp());
 			KEY_UP_RELEASE = false;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(playerDown)) {
+	if (sf::Keyboard::isKeyPressed(player1Down)) {
 		//move the player
 		if (KEY_DOWN_RELEASE) {
-			es->addEvent(new PlayerMoveDown());
+			es->addEvent(new Player1MoveDown());
 			KEY_DOWN_RELEASE = false;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(playerUp) && sf::Keyboard::isKeyPressed(playerDown)) {
+	if (sf::Keyboard::isKeyPressed(player1Up) && sf::Keyboard::isKeyPressed(player1Down)) {
 		if (KEY_UP_DOWN_RELEASE) {
 			KEY_UP_DOWN_RELEASE = false;
-			es->addEvent(new PlayerStopY());
+			es->addEvent(new Player1StopY());
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(playerLeft)) {
+	if (sf::Keyboard::isKeyPressed(player1Left)) {
 		//move the player
 		if (KEY_LEFT_RELEASE) {
-			es->addEvent(new PlayerMoveLeft());
+			es->addEvent(new Player1MoveLeft());
 			KEY_LEFT_RELEASE = false;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(playerRight)) {
+	if (sf::Keyboard::isKeyPressed(player1Right)) {
 		//move the player
 		if (KEY_RIGHT_RELEASE) {
 			es->addEvent(new PlayerMoveRight());
 			KEY_RIGHT_RELEASE = false;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(playerLeft) && sf::Keyboard::isKeyPressed(playerRight)) {
+	if (sf::Keyboard::isKeyPressed(player1Left) && sf::Keyboard::isKeyPressed(player1Right)) {
 		if (KEY_LEFT_RIGHT_RELEASE) {
 			KEY_LEFT_RIGHT_RELEASE = false;
-			es->addEvent(new PlayerStopX());
+			es->addEvent(new Player1StopX());
 		}
 	}
 	
@@ -94,42 +94,42 @@ void UserInterface::handleKeyPress(sf::Keyboard::Key key) {
 
 //handle user's input and add events
 void UserInterface::handleKeyRelease(sf::Keyboard::Key key) {
-	if (key == playerUp) {
+	if (key == player1Up) {
 		//stop the player
 		KEY_UP_RELEASE = true;
 		KEY_UP_DOWN_RELEASE = true;
-		es->addEvent(new PlayerStopY());
+		es->addEvent(new Player1StopY());
 		if (!KEY_DOWN_RELEASE) {
-			es->addEvent(new PlayerMoveDown());
+			es->addEvent(new Player1MoveDown());
 		}
 	}
-	if (key == playerDown) {
+	if (key == player1Down) {
 		//stop the player
 		KEY_DOWN_RELEASE = true;
 		KEY_UP_DOWN_RELEASE = true;
-		es->addEvent(new PlayerStopY());
+		es->addEvent(new Player1StopY());
 		if (!KEY_UP_RELEASE) {
-			es->addEvent(new PlayerMoveUp());
+			es->addEvent(new Player1MoveUp());
 		}
 		
 	}
-	if (key == playerLeft) {
+	if (key == player1Left) {
 		KEY_LEFT_RELEASE = true;
 		KEY_LEFT_RIGHT_RELEASE = true;
 		//stop the player
-		es->addEvent(new PlayerStopX());
+		es->addEvent(new Player1StopX());
 		if (!KEY_RIGHT_RELEASE) {
 			es->addEvent(new PlayerMoveRight());
 		}
 		
 	}
-	if (key == playerRight) {
+	if (key == player1Right) {
 		KEY_RIGHT_RELEASE = true;
 		KEY_LEFT_RIGHT_RELEASE = true;
 		//stop the player
-		es->addEvent(new PlayerStopX());
+		es->addEvent(new Player1StopX());
 		if (!KEY_LEFT_RELEASE) {
-			es->addEvent(new PlayerMoveLeft());
+			es->addEvent(new Player1MoveLeft());
 
 		}
 		
@@ -139,17 +139,17 @@ void UserInterface::handleKeyRelease(sf::Keyboard::Key key) {
 
 void UserInterface::setKey(int action, sf::Keyboard::Key key) {
 	switch (action) {
-	case action::PLAYER_UP:
-		playerUp = key;
+	case action::PLAYER1_UP:
+		player1Up = key;
 		break;
-	case action::PLAYER_DOWN:
-		playerDown = key;
+	case action::PLAYER1_DOWN:
+		player1Down = key;
 		break;
-	case action::PLAYER_LEFT:
-		playerLeft = key;
+	case action::PLAYER1_LEFT:
+		player1Left = key;
 		break;
-	case action::PLAYER_RIGHT:
-		playerRight = key;
+	case action::PLAYER1_RIGHT:
+		player1Right = key;
 		break;
 	}
 }
@@ -188,16 +188,16 @@ void UserInterface::handleButtonReleased(int button) {
 
 void UserInterface::setButton(int action, int button) {
 	switch (action) {
-	case action::PLAYER_UP:
+	case action::PLAYER1_UP:
 		buttonR = button;
 		break;
-	case action::PLAYER_DOWN:
+	case action::PLAYER1_DOWN:
 		buttonX = button;
 		break;
-	case action::PLAYER_LEFT:
+	case action::PLAYER1_LEFT:
 		buttonZ = button;
 		break;
-	case action::PLAYER_RIGHT:
+	case action::PLAYER1_RIGHT:
 		buttonY = button;
 		break;
 	}

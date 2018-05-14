@@ -19,16 +19,16 @@ void Audio::loadSounds() {
 
 void Audio::handleEvent(int eventType) {
 	switch (eventType) {
-	case Event::PLAYER_MOVE_UP:
+	case Event::PLAYER1_MOVE_UP:
 		playerStep->play();
 		break;
-	case Event::PLAYER_MOVE_DOWN:
+	case Event::PLAYER1_MOVE_DOWN:
 		playerStep->play();
 		break;
-	case Event::PLAYER_MOVE_LEFT:
+	case Event::PLAYER1_MOVE_LEFT:
 		playerStep->play();
 		break;
-	case Event::PLAYER_MOVE_RIGHT:
+	case Event::PLAYER1_MOVE_RIGHT:
 		playerStep->play();
 		break;
 	default:

@@ -49,8 +49,9 @@ void Graphic::draw() {
 		s->setPosition(se->getPosition().x, se->getPosition().y);
 		window->draw(*s);
 	}
+
 	//draw static sprite
-	for (int i = 0; i < shapeList.size(); i++) {
+	for (int i = 0; i < spriteList.size(); i++) {
 		StaticSpriteEntity* se = spriteList.at(i);
 		sf::Sprite* s = spriteList.at(i)->getSprite();
 		window->draw(*s);

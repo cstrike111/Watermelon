@@ -1,10 +1,10 @@
 #pragma once
 #include "Event.h"
-class PlayerMoveDown : public Event {
+class Player1MoveDown : public Event {
 public:
-	PlayerMoveDown() {
+	Player1MoveDown() {
 		//don't need to inform graphic
-		eventType = event::PLAYER_MOVE_DOWN;
+		eventType = event::PLAYER1_MOVE_DOWN;
 		active[AUDIO] = true;
 		active[PHYSICS] = true;
 	}

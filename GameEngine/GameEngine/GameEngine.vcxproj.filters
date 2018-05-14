@@ -43,6 +43,9 @@
     <Filter Include="File I/O">
       <UniqueIdentifier>{789d1062-db88-4a8c-82c4-9055991894e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a857ecb3-4c3b-4958-bf2e-c250a80b1fab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,6 +93,12 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="boundingBox.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphic.h">
@@ -112,18 +121,6 @@
     </ClInclude>
     <ClInclude Include="UserInterface.h">
       <Filter>User Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMoveDown.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMoveLeft.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMoveRight.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMoveUp.h">
-      <Filter>Event System\Events</Filter>
     </ClInclude>
     <ClInclude Include="ControllerConnected.h">
       <Filter>Event System\Events</Filter>
@@ -152,12 +149,6 @@
     <ClInclude Include="ShapeEntity.h">
       <Filter>Entity</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerStopY.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStopX.h">
-      <Filter>Event System\Events</Filter>
-    </ClInclude>
     <ClInclude Include="Profile.h">
       <Filter>Profile</Filter>
     </ClInclude>
@@ -184,6 +175,30 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="boundingBox.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1MoveDown.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1MoveLeft.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1MoveRight.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1MoveUp.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1StopX.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1StopY.h">
+      <Filter>Event System\Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
