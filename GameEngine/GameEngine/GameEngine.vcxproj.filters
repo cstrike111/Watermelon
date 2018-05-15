@@ -99,6 +99,9 @@
     <ClCompile Include="FileSystem\FileSystem.cpp">
       <Filter>File I/O</Filter>
     </ClCompile>
+    <ClCompile Include="Entity\BulletEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="EventSystem\Event\Player2Fire.h">
       <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\BulletEntity.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

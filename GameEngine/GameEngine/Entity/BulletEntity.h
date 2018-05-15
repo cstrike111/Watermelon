@@ -1,13 +1,10 @@
 #pragma once
 #include "Entity.h"
-#include "..\Graphic\Animation.h"
-#include "BulletEntity.h"
-#include <vector>
 
-class CharacterEntity : public Entity {
+class BulletEntity : public Entity {
 public:
-	CharacterEntity();
-	~CharacterEntity();
+	BulletEntity();
+	~BulletEntity();
 	void updateRenderInfo();
 	void getRenderInfo();
 	//don't forget to update and set collision rectangle before put it into physics system
@@ -16,25 +13,15 @@ public:
 	void updatePhysics();
 	void setTexture(sf::Texture* texture);
 	void setTextureRect(int rectLeft, int rectTop, int rectWidth, int rectHeight);
-	void setSprite(sf::Sprite* sprite);
-	sf::Sprite* getSprite();
+	void setShape(sf::Shape* shape);
+	sf::Shape* getShape();
 	void setPosition(glm::vec2 position);
 	void setOrigin(glm::vec2 origin);
 	void setScale(glm::vec2 scale);
 	void setRotation(float rotation);
-	void setAnimation(Animation a);
-	
-	//play animation
-	void playAnimation();
-	//play current frame of animation
-	void playCurrentFrame(int index);
 
-	Animation a;
-	//get animation?
-	bool isAnimated = false;
-
+	//parameter of bullet
+	float bulletSpeed = 1;
 private:
-	sf::Sprite* sprite;
-	float coolDownTime;
-	
+	sf::Shape* shape;
 };

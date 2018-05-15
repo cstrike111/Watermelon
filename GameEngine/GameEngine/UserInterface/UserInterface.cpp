@@ -256,6 +256,13 @@ void UserInterface::handleKeyPress2(sf::Keyboard::Key key)
 			es->addEvent(new Player2StopX());
 		}
 	}
+	//player 2 fire
+	if (sf::Keyboard::isKeyPressed(player2Fire)) {
+		if (KEY_FIRE_RELEASE_2) {
+			KEY_FIRE_RELEASE_2 = false;
+			es->addEvent(new Player2Fire());
+		}
+	}
 }
 
 void UserInterface::handleKeyRelease2(sf::Keyboard::Key key)
@@ -300,6 +307,11 @@ void UserInterface::handleKeyRelease2(sf::Keyboard::Key key)
 
 		}
 
+	}
+
+	if (key == player2Fire) {
+		//reset the flag
+		KEY_FIRE_RELEASE_2 = true;
 	}
 }
 

@@ -38,6 +38,34 @@ void Physics::update() {
 		//float posY = (position.y * -UNIT_PIXEL) - e->getHeight();
 		e->setPosition(glm::vec2(posX, posY));
 	}
+
+	//update bullet
+	//bulletList1
+	for (int i = 0; i < bulletList1.size(); i++) {
+		Entity* e = bulletList1.at(i);
+		b2Vec2 position = e->body->GetPosition();
+		//covert into pixel
+		float posX = position.x * UNIT_PIXEL;
+		//float posX = position.x * UNIT_PIXEL - e->getWideth();
+		//be careful: sfml doesn't share THE SAME COORDINATE SYSTEM with box2d
+		float posY = position.y * -UNIT_PIXEL;
+		//float posY = (position.y * -UNIT_PIXEL) - e->getHeight();
+		e->setPosition(glm::vec2(posX, posY));
+	}
+
+	//bulletList2
+	for (int i = 0; i < bulletList2.size(); i++) {
+		Entity* e = bulletList2.at(i);
+		b2Vec2 position = e->body->GetPosition();
+		//covert into pixel
+		float posX = position.x * UNIT_PIXEL;
+		//float posX = position.x * UNIT_PIXEL - e->getWideth();
+		//be careful: sfml doesn't share THE SAME COORDINATE SYSTEM with box2d
+		float posY = position.y * -UNIT_PIXEL;
+		//float posY = (position.y * -UNIT_PIXEL) - e->getHeight();
+		e->setPosition(glm::vec2(posX, posY));
+	}
+
 	//get the render infomation of player
 	pro->setPlayerRenderInfo(player1->getPosition().x, player1->getPosition().y);
 	//get the physics information
@@ -170,6 +198,25 @@ void Physics::addDynamicEntity(Entity* e) {
 	dynamicEntityList.push_back(e);
 }
 
+void Physics::addBullet(BulletEntity * e, int player)
+{	
+	switch(player)
+	{
+	case 1:
+		createBody(e);
+		e->body->CreateFixture(&(e->fixtureDef));
+		bulletList1.push_back(e);
+		break;
+	case 2:
+		createBody(e);
+		e->body->CreateFixture(&(e->fixtureDef));
+		bulletList2.push_back(e);
+		break;
+	default:
+		break;
+	}
+}
+
 void Physics::setEventSystem(EventSystem* es) {
 	this->es = es;
 }
@@ -188,6 +235,7 @@ void Physics::setGravity(b2Vec2 gravity) {
 void Physics::createBody(Entity* e) {
 	glm::vec2 pos = e->getPosition();
 	e->body = world->CreateBody(&(e->bodyDef));
+	e->body->SetUserData(e);
 }
 
 void Physics::setProfileSystem(Profile* pro) {

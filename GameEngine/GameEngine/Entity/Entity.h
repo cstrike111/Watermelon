@@ -10,7 +10,18 @@ public:
 		MESH,
 		SPRITE,
 		SHAPE,
-		CHARACTER
+		CHARACTER,
+		BULLET
+	};
+
+	//entityCollisionCategory
+	enum collisionCategory
+	{
+		DEFAULT = 0x0001,
+		PLAYER1 = 0x0002,
+		PLAYER2 = 0x0004,
+		BULLET1 = 0x0008,
+		BULLET2 = 0x00016,
 	};
 
 	/* Entity should be created in main.cpp and deleted in main.cpp! Later will managed with game player sub-system. */

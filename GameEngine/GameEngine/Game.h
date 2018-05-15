@@ -6,11 +6,13 @@
 #include "..\AssetManager\AssetManager.h"
 #include "..\Entity\CharacterEntity.h"
 #include "..\EventSystem\EventSystem.h"
+#include "..\Entity\BulletEntity.h"
 
 class Game
 {
 public:
 	Game(Physics* p, Graphic* g, EventSystem* e, AssetManager* am, FileSystem* f);
+	//entities deletion handled by game object
 	~Game();
 
 	//after loading the level, don't delete it after the level is finished. try to reuse it when it is necessary
@@ -21,8 +23,8 @@ public:
 	//pointer of players and their entities
 	CharacterEntity* player1;
 	CharacterEntity* player2;
-	vector<ShapeEntity*> bullet1;
-	vector<ShapeEntity*> bullet2;
+	vector<BulletEntity*> bullet1;
+	vector<BulletEntity*> bullet2;
 	
 	//default spawn point
 	float player1spawnX;
@@ -50,6 +52,6 @@ private:
 	
 	int currentLevel = 0;
 	//level 1
-	ShapeEntity* createBullet(int player);
+	BulletEntity* createBullet(int player);
 };
 

@@ -5,6 +5,7 @@
 #include "..\EventSystem\EventSystem.h"
 #include "..\Profile\Profile.h"
 #include "Box2D\Box2D.h"
+#include "..\Entity\BulletEntity.h"
 #include <vector> 
 
 using namespace std;
@@ -23,11 +24,14 @@ public:
 	//add entity to the system
 	void addStaticEntity(Entity* e); //add static entity
 	void addDynamicEntity(Entity* e); //add dynamic entity
+	void addBullet(BulletEntity* e, int player);
 	void setEventSystem(EventSystem* es);
 	void getPlayer(Entity* player1, Entity* player2); //get player pointer
 	void setGravity(b2Vec2 gravity); //change the gravity
 	void createBody(Entity* e); //create box2d body
 	void setProfileSystem(Profile* pro);
+
+	
 
 private:
 	/* Here! This is a list of pointers of entities. Don't forget clean the memory of 
@@ -36,6 +40,7 @@ private:
 	vector<Entity*> staticEntityList;
 	Entity* player1; //player1 object
 	Entity* player2; //plyaer2 object
+	
 
 	//static entity list?
 	EventSystem* es; //get the event system
@@ -48,4 +53,7 @@ private:
 
 	//parameter for the player
 	float PLAYER_MOVE_SPEED = 50;
+
+	vector<BulletEntity*> bulletList1; //bulletList1
+	vector<BulletEntity*> bulletList2; //bulletList2
 };

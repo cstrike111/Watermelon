@@ -61,6 +61,9 @@ void Game::loadLevel1()
 	player1->setHeight(233);
 	player1->setTextureRect(0, 0, 106, 233);
 	player1->bodyDef.position.Set(player1spawnX, player1spawnY);
+	//collision rules
+	player1->fixtureDef.filter.categoryBits = Entity::collisionCategory::PLAYER1;
+	player1->fixtureDef.filter.maskBits = Entity::collisionCategory::DEFAULT | Entity::collisionCategory::BULLET2;
 	player1->polygonShape.SetAsBox(5.3f, 11.65f);
 
 	//player 2
@@ -72,6 +75,8 @@ void Game::loadLevel1()
 	player2->setHeight(233);
 	player2->setTextureRect(0, 0, 106, 233);
 	player2->bodyDef.position.Set(player2spawnX, player2spawnY);
+	player2->fixtureDef.filter.categoryBits = Entity::collisionCategory::PLAYER2;
+	player2->fixtureDef.filter.maskBits = Entity::collisionCategory::DEFAULT | Entity::collisionCategory::BULLET1;
 	player2->polygonShape.SetAsBox(5.3f, 11.65f);
 
 	//platform
@@ -173,21 +178,22 @@ void Game::update()
 void Game::handleEvent(int eventType)
 {
 	switch (eventType) {
-		ShapeEntity * b;
+		BulletEntity * b;
 	case Event::PLAYER1_FIRE:
 		//add bullet
 		b = createBullet(1);
 		bullet1.push_back(b);
 		//push bullet to the renderer and physics list
-		p->addDynamicEntity(b);
-		g->addEntity(b, Entity::rType::SHAPE);
+		p->addBullet(b, 1);
+		g->addEntity(b, Entity::rType::BULLET);
+		//delete bullet(pass the pointer of the bullet to the sub system)
 		break;
 	case Event::PLAYER2_FIRE:
 		b = createBullet(2);
 		bullet2.push_back(b);
 		//push bullet to the renderer and physics list
-		p->addDynamicEntity(b);
-		g->addEntity(b, Entity::rType::SHAPE);
+		p->addBullet(b, 2);
+		g->addEntity(b, Entity::rType::BULLET);
 		break;
 	//player 1 get hit
 	//player 2 get hit
@@ -199,15 +205,23 @@ void Game::handleEvent(int eventType)
 	}
 }
 
-ShapeEntity* Game::createBullet(int player)
+BulletEntity* Game::createBullet(int player)
 {
-	ShapeEntity * b = new ShapeEntity();
+	BulletEntity * b = new BulletEntity();
 	switch(player)
 	{
 	case 1:
 		//configure the bullet according to the weapon type
-		b->setShape(new sf::CircleShape(10));
+		b->setShape(new sf::CircleShape(5));
 		b->getShape()->setFillColor(sf::Color::Blue);
+		b->bodyDef.bullet = true;
+		b->bodyDef.fixedRotation = true;
+		b->fixtureDef.isSensor = true;
+		b->fixtureDef.density = 1000;
+		b->bodyDef.gravityScale = 0;
+		b->polygonShape.SetAsBox(0.5, 0.5);
+		b->fixtureDef.filter.categoryBits = Entity::collisionCategory::BULLET1;
+		b->fixtureDef.filter.maskBits = Entity::collisionCategory::DEFAULT | Entity::collisionCategory::PLAYER2;
 		//face to right
 		if(player1->getScale().x > 0)
 		{
@@ -215,52 +229,51 @@ ShapeEntity* Game::createBullet(int player)
 			float posX = player1->body->GetPosition().x;
 			float posY = player1->body->GetPosition().y;
 			b->bodyDef.position.Set(posX + width + 0.5, posY);
-			b->bodyDef.bullet = true;
-			b->bodyDef.fixedRotation = true;
-			b->bodyDef.gravityScale = 0;
-			b->bodyDef.linearVelocity = b2Vec2(100000, 0);
-			b->fixtureDef.isSensor = true;
-			b->fixtureDef.density = 1000;
-			b->polygonShape.SetAsBox(0.5, 0.5);
-		}else if(player1->getScale().x < 0)
+			b->bodyDef.linearVelocity = b2Vec2(b->bulletSpeed, 0);
+		}
+		//face to left
+		else if(player1->getScale().x < 0)
 		{
 			float width = player1->getWidth() / player1->UNIT_PIXEL;
 			float posX = player1->body->GetPosition().x;
 			float posY = player1->body->GetPosition().y;
 			b->bodyDef.position.Set(posX - width - 0.5, posY);
-			b->bodyDef.bullet = true;
-			b->bodyDef.fixedRotation = true;
-			b->bodyDef.gravityScale = 0;
-			b->bodyDef.linearVelocity = b2Vec2(-1000, 0);
-			b->fixtureDef.isSensor = true;
-			b->fixtureDef.density = 1000;
-			b->polygonShape.SetAsBox(0.5, 0.5);
+			b->bodyDef.linearVelocity = b2Vec2(-b->bulletSpeed, 0);
 		}
 		
 		return b;
 		break;
 
 	case 2:
-		b->setShape(new sf::CircleShape(10));
+		b->setShape(new sf::CircleShape(5));
 		b->getShape()->setFillColor(sf::Color::Blue);
+		b->bodyDef.bullet = true;
+		b->bodyDef.fixedRotation = true;
+		b->fixtureDef.isSensor = true;
+		b->bodyDef.gravityScale = 0;
+		b->fixtureDef.density = 1000;
+		b->polygonShape.SetAsBox(0.5, 0.5);
+		//collision rules
+		b->fixtureDef.filter.categoryBits = Entity::collisionCategory::BULLET2;
+		b->fixtureDef.filter.maskBits = Entity::collisionCategory::DEFAULT | Entity::collisionCategory::PLAYER1;
 		//face to right
 		if (player2->getScale().x > 0)
 		{
 			float width = player2->getWidth() / player2->UNIT_PIXEL;
 			float posX = player2->body->GetPosition().x;
 			float posY = player2->body->GetPosition().y;
-			b->bodyDef.position.Set(posX + width + 0.5, posY);
-			b->body->SetBullet(true);
-			b->polygonShape.SetAsBox(0.5, 0.5);
+			b->bodyDef.position.Set(posX + width + 0.5, posY);		
+			b->bodyDef.linearVelocity = b2Vec2(b->bulletSpeed, 0);
+			//b->fixtureDef.isSensor = true;			
 		}
 		else if (player2->getScale().x < 0)
 		{
-			float width = player2->getWidth() / player1->UNIT_PIXEL;
+			float width = player2->getWidth() / player2->UNIT_PIXEL;
 			float posX = player2->body->GetPosition().x;
 			float posY = player2->body->GetPosition().y;
 			b->bodyDef.position.Set(posX - width - 0.5, posY);
-			b->body->SetBullet(true);
-			b->polygonShape.SetAsBox(0.5, 0.5);
+			b->bodyDef.linearVelocity = b2Vec2(-b->bulletSpeed, 0);
+			//b->fixtureDef.isSensor = true;
 		}
 		return b;
 		break;

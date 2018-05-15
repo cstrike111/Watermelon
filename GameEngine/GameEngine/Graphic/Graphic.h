@@ -11,6 +11,7 @@
 #include "..\Entity\ShapeEntity.h"
 #include "..\Entity\StaticSpriteEntity.h"
 #include "..\Entity\CharacterEntity.h"
+#include "..\Entity\BulletEntity.h"
 #include "..\Profile\Profile.h"
 #include "..\AssetManager\AssetManager.h"
 
@@ -32,6 +33,8 @@ public:
 	void showPlayerRenderInfo(); //show information of player
 	void setProfileSystem(Profile* p);
 
+	//bullet list
+	vector<BulletEntity*> bulletList;
 
 private:
 	bool load; // whether the image is loaded

@@ -10,11 +10,14 @@ CharacterEntity::CharacterEntity() {
 	fixtureDef.shape = &polygonShape;
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
+
+	
 }
 
 CharacterEntity::~CharacterEntity() {
 	delete sprite;
 	sprite = nullptr;
+
 }
 
 void CharacterEntity::updateRenderInfo() {

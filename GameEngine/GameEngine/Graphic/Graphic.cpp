@@ -50,6 +50,15 @@ void Graphic::draw() {
 		window->draw(*s);
 	}
 
+	//draw bullet
+	for (int i = 0; i < bulletList.size(); i++) {
+		BulletEntity* b = bulletList.at(i);
+		sf::Shape* s = bulletList.at(i)->getShape();
+		//update position
+		s->setPosition(b->getPosition().x, b->getPosition().y);
+		window->draw(*s);
+	}
+
 	//draw static sprite
 	for (int i = 0; i < spriteList.size(); i++) {
 		StaticSpriteEntity* se = spriteList.at(i);
@@ -124,6 +133,9 @@ void Graphic::addEntity(Entity* e, Entity::rType renderType) {
 		break;
 	case Entity::rType::CHARACTER:
 		chaList.push_back(static_cast<CharacterEntity*> (e));
+		break;
+	case Entity::rType::BULLET:
+		bulletList.push_back(static_cast<BulletEntity*> (e));
 		break;
 	default:
 		break;

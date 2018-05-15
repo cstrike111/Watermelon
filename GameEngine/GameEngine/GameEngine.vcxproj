@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entity\BulletEntity.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
     <ClCompile Include="AssetManager\AssetManager.cpp" />
     <ClCompile Include="Audio\Audio.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Physics\Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity\BulletEntity.h" />
     <ClInclude Include="EventSystem\Event\Player2Fire.h" />
     <ClInclude Include="EventSystem\Event\Player2MoveDown.h" />
     <ClInclude Include="EventSystem\Event\Player2MoveLeft.h" />
