@@ -22,6 +22,9 @@ public:
 	void setScale(glm::vec2 scale);
 	void setRotation(float rotation);
 
+	//entity type
+	int entityType = Entity::entityType::ENTITY_STATICSPRITE;
+
 private:
 	//be careful, texture is not managed by this class
 	sf::Sprite* sprite;

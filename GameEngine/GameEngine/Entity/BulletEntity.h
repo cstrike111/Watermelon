@@ -22,6 +22,12 @@ public:
 
 	//parameter of bullet
 	float bulletSpeed = 1;
+
+	//entity type
+	int entityType = Entity::entityType::ENTITY_BULLET;
+
+	//is the bullet active?
+	bool active = true;
 private:
 	sf::Shape* shape;
 };

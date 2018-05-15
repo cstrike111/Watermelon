@@ -6,10 +6,13 @@ Entity::Entity() {
 	velocity = glm::vec2(0, 0);
 	scale = glm::vec2(0, 0);
 	origin = glm::vec2(0,0);
+	cd = new collisionData();
+	cd->pointer = this;
+	cd->type = entityType;
 }
 
 Entity::~Entity() {
-	
+	delete cd;
 }
 
 void Entity::setPosition(glm::vec2 position) {

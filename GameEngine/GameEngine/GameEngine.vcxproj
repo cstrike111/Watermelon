@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Physics\ContactListener.cpp" />
     <ClCompile Include="Entity\BulletEntity.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
     <ClCompile Include="AssetManager\AssetManager.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Physics\Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Physics\ContactListener.h" />
     <ClInclude Include="Entity\BulletEntity.h" />
     <ClInclude Include="EventSystem\Event\Player2Fire.h" />
     <ClInclude Include="EventSystem\Event\Player2MoveDown.h" />

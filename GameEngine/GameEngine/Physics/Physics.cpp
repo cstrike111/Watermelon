@@ -2,6 +2,7 @@
 
 Physics::Physics(b2Vec2 gravity) {
 	world = new b2World(gravity);
+	world->SetContactListener(&cl);
 }
 
 Physics::~Physics() {

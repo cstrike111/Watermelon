@@ -1,11 +1,16 @@
 #pragma once
 #include "Entity.h"
 #include "..\Graphic\Animation.h"
-#include "BulletEntity.h"
 #include <vector>
 
 class CharacterEntity : public Entity {
 public:
+	enum hitDirection
+	{
+		LEFT,
+		RIGHT
+	};
+
 	CharacterEntity();
 	~CharacterEntity();
 	void updateRenderInfo();
@@ -33,8 +38,14 @@ public:
 	//get animation?
 	bool isAnimated = false;
 
+	//entity type
+	int entityType = Entity::entityType::ENTITY_CHARACTER;
+
+	//hit list
+	std::vector<int> hit;
+
 private:
 	sf::Sprite* sprite;
 	float coolDownTime;
-	
+
 };

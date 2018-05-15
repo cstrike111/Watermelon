@@ -3,7 +3,7 @@
 #include "Box2D\Box2D.h"
 #include <SFML\Graphics.hpp>
 
-class Entity {
+class Entity{
 public:
 	//render type
 	enum rType {
@@ -24,6 +24,22 @@ public:
 		BULLET2 = 0x00016,
 	};
 
+	//collision data
+	struct collisionData
+	{
+		void* pointer;
+		int type;
+	};
+	
+	//entity type
+	enum entityType
+	{
+		ENTITY_DEFAULT,
+		ENTITY_STATICSPRITE,
+		ENTITY_SHAPE,
+		ENTITY_CHARACTER,
+		ENTITY_BULLET
+	};
 	/* Entity should be created in main.cpp and deleted in main.cpp! Later will managed with game player sub-system. */
 	Entity();
 	virtual ~Entity();
@@ -58,6 +74,9 @@ public:
 	//collision rectangle
 	b2PolygonShape polygonShape;
 	b2FixtureDef fixtureDef;
+
+	//entity type
+	int entityType = ENTITY_DEFAULT;
 	
 protected:
 	//general infomation
@@ -71,5 +90,9 @@ protected:
 
 	//render infomation
 	int renderType;
+
+	//user data
+	collisionData* cd;
+
 	
 };

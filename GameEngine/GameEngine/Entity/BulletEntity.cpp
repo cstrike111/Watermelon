@@ -9,6 +9,10 @@ BulletEntity::BulletEntity() {
 	fixtureDef.shape = &polygonShape;
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
+	cd = new collisionData();
+	cd->pointer = this;
+	cd->type = entityType;
+	bodyDef.userData = cd; 
 }
 
 BulletEntity::~BulletEntity() {

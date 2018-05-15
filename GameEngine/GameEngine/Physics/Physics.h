@@ -6,6 +6,7 @@
 #include "..\Profile\Profile.h"
 #include "Box2D\Box2D.h"
 #include "..\Entity\BulletEntity.h"
+#include "ContactListener.h"
 #include <vector> 
 
 using namespace std;
@@ -31,7 +32,8 @@ public:
 	void createBody(Entity* e); //create box2d body
 	void setProfileSystem(Profile* pro);
 
-	
+	//contact listener
+	ContactListener cl;
 
 private:
 	/* Here! This is a list of pointers of entities. Don't forget clean the memory of 

@@ -4,6 +4,10 @@ StaticSpriteEntity::StaticSpriteEntity() {
 	//box2d configuration (default)
 	polygonShape.SetAsBox(20.0f, 5.0f); //set as a box
 	bodyDef.position.Set(20.0f, -5.0f);
+	cd = new collisionData();
+	cd->pointer = this;
+	cd->type = entityType;
+	bodyDef.userData = cd;
 }
 
 StaticSpriteEntity::~StaticSpriteEntity() {
