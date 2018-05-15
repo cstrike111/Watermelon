@@ -6,6 +6,7 @@
 #include <fstream>
 #include "..\Entity\StaticSpriteEntity.h"
 #include "..\AssetManager\AssetManager.h"
+#include "..\Entity\boundingBox.h"
 #include "GameData.h"
 
 class FileSystem
@@ -15,7 +16,8 @@ public:
 	{
 		PLAYER1_SPAWN,
 		PLAYER2_SPAWN,
-		PLATFORM
+		PLATFORM,
+		BORDER
 	};
 
 	FileSystem(AssetManager* am);

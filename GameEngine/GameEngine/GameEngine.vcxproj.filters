@@ -105,6 +105,9 @@
     <ClCompile Include="Physics\ContactListener.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Entity\StaticShapeEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -238,6 +241,18 @@
     </ClInclude>
     <ClInclude Include="Physics\ContactListener.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\StaticShapeEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player1Win.h">
+      <Filter>Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Event\Player2Win.h">
+      <Filter>Event System\Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

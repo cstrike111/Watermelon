@@ -1,31 +1,27 @@
-#include "ShapeEntity.h"
+#include "StaticShapeEntity.h"
 
-ShapeEntity::ShapeEntity() {
+StaticShapeEntity::StaticShapeEntity() {
 	//box2d configuration (default)
-	bodyDef.type = b2_dynamicBody; //set the body type
-	polygonShape.SetAsBox(1.0f, 1.0f); //set as a box
-	bodyDef.position.Set(0.0f, 0.0f);
-	fixtureDef.shape = &polygonShape;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
+	polygonShape.SetAsBox(20.0f, 5.0f); //set as a box
+	bodyDef.position.Set(20.0f, -5.0f);
 	cd = new collisionData();
 	cd->pointer = this;
 	cd->type = entityType;
 	bodyDef.userData = cd;
 }
 
-ShapeEntity::~ShapeEntity() {
+StaticShapeEntity::~StaticShapeEntity() {
 	delete shape;
 	shape = nullptr;
 }
 
-void ShapeEntity::updateRenderInfo() {
+void StaticShapeEntity::updateRenderInfo() {
 	shape->setPosition(position.x, position.y);
 	shape->setRotation(rotation);
 	shape->setScale(scale.x, scale.y);
 }
 
-void ShapeEntity::getRenderInfo() {
+void StaticShapeEntity::getRenderInfo() {
 	sf::Vector2f pos = shape->getPosition();
 	position.x = pos.x;
 	position.y = pos.y;
@@ -35,24 +31,15 @@ void ShapeEntity::getRenderInfo() {
 	scale.y = s.y;
 }
 
-void ShapeEntity::setCollisionRect(float width, float height) {
-	polygonShape.SetAsBox(width / (UNIT_PIXEL * 2), height / (UNIT_PIXEL * 2));
-}
-
-void ShapeEntity::updatePhysics() {
-	glm::vec2 pos = getPosition();
-	bodyDef.position.Set(pos.x / UNIT_PIXEL, -pos.y / UNIT_PIXEL);
-}
-
-void ShapeEntity::setTexture(sf::Texture* texture) {
+void StaticShapeEntity::setTexture(sf::Texture* texture) {
 	shape->setTexture(texture);
 }
 
-void ShapeEntity::setTextureRect(int rectLeft, int rectTop, int rectWidth, int rectHeight) {
+void StaticShapeEntity::setTextureRect(int rectLeft, int rectTop, int rectWidth, int rectHeight) {
 	shape->setTextureRect(sf::IntRect(rectLeft, rectTop, rectWidth, rectHeight));
 }
 
-void ShapeEntity::setShape(sf::Shape* shape){
+void StaticShapeEntity::setShape(sf::Shape* shape) {
 	this->shape = shape;
 	position.x = shape->getPosition().x;
 	position.y = shape->getPosition().y;
@@ -63,26 +50,35 @@ void ShapeEntity::setShape(sf::Shape* shape){
 	rotation = shape->getRotation();
 }
 
-sf::Shape* ShapeEntity::getShape() {
+sf::Shape* StaticShapeEntity::getShape() {
 	return shape;
 }
 
-void ShapeEntity::setPosition(glm::vec2 position) {
+void StaticShapeEntity::setPosition(glm::vec2 position) {
 	this->position = position;
 	shape->setPosition(position.x, position.y);
 }
 
-void ShapeEntity::setOrigin(glm::vec2 origin) {
+void StaticShapeEntity::setOrigin(glm::vec2 origin) {
 	this->origin = origin;
 	shape->setOrigin(origin.x, origin.y);
 }
 
-void ShapeEntity::setScale(glm::vec2 scale) {
+void StaticShapeEntity::setScale(glm::vec2 scale) {
 	this->scale = scale;
 	shape->setScale(scale.x, scale.y);
 }
 
-void ShapeEntity::setRotation(float rotation) {
+void StaticShapeEntity::setRotation(float rotation) {
 	this->rotation = rotation;
 	shape->setRotation(rotation);
+}
+
+void StaticShapeEntity::setCollisionRect(float width, float height) {
+	polygonShape.SetAsBox(width / (UNIT_PIXEL * 2), height / (UNIT_PIXEL * 2));
+}
+
+void StaticShapeEntity::updatePhysics() {
+	glm::vec2 pos = getPosition();
+	bodyDef.position.Set(pos.x / UNIT_PIXEL, -pos.y / UNIT_PIXEL);
 }

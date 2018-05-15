@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "..\Entity\StaticSpriteEntity.h"
+#include "..\Entity\StaticShapeEntity.h"
 
 class GameData
 {
@@ -15,6 +16,7 @@ public:
 	float player2SpawnX = 0;
 	float player2SpawnY = 0;
 	std::vector<StaticSpriteEntity*>* platformList;
+	std::vector<boundingBox*>* border;
 
 };
 

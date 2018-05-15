@@ -7,6 +7,7 @@
 #include "..\Entity\CharacterEntity.h"
 #include "..\EventSystem\EventSystem.h"
 #include "..\Entity\BulletEntity.h"
+#include "..\Entity\StaticShapeEntity.h"
 
 class Game
 {
@@ -34,14 +35,19 @@ public:
 
 	//level information
 	//the position is the center of the entity
+	bool levelLoad = false;
 	//level 1 (doodle world)
 	bool level1Load = false;
 	vector<StaticSpriteEntity*>* platformList; //don't forget to clean your memory!
+	vector<boundingBox*>* borderList;
 	//pointer of entity
 	StaticSpriteEntity* platform;
-	StaticSpriteEntity* platform2;
+	StaticShapeEntity* platform2;
 	ShapeEntity* circle;
 	CharacterEntity* animationTest;
+
+	//win flag
+	bool win = false;
 
 private:
 	Physics * p;

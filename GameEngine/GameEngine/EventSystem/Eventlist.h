@@ -19,6 +19,7 @@
 #include "Event\Player1StopX.h"
 #include "Event\Player1StopY.h"
 #include "Event\Player1Fire.h"
+#include "Event\Player1Win.h"
 
 //player 2 event
 #include "Event\Player2MoveUp.h"
@@ -28,3 +29,4 @@
 #include "Event\Player2StopX.h"
 #include "Event\Player2StopY.h"
 #include "Event\Player2Fire.h"
+#include "Event\Player2Win.h"

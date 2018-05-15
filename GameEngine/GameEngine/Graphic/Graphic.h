@@ -10,8 +10,10 @@
 #include "..\EventSystem\Event.h"
 #include "..\Entity\ShapeEntity.h"
 #include "..\Entity\StaticSpriteEntity.h"
+#include "..\Entity\StaticShapeEntity.h"
 #include "..\Entity\CharacterEntity.h"
 #include "..\Entity\BulletEntity.h"
+#include "..\Entity\boundingbox.h"
 #include "..\Profile\Profile.h"
 #include "..\AssetManager\AssetManager.h"
 
@@ -45,7 +47,9 @@ private:
 	vector<ShapeEntity*> shapeList; //a list of shapes
 	vector<Entity*> meshList; //a list of mesh
 	vector<StaticSpriteEntity*> spriteList; //a list of sprite
-	vector<CharacterEntity*> chaList; //a list of mesh
+	vector<StaticShapeEntity*> staticShapeList; //a list of static shape
+	vector<CharacterEntity*> chaList; //a list of Character
+	vector<boundingBox*> boundingBoxList; //a list of boundingBox
 
 	//profile information enable flag
 	bool fpsEnable = false;

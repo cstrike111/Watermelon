@@ -32,8 +32,27 @@ public:
 	void createBody(Entity* e); //create box2d body
 	void setProfileSystem(Profile* pro);
 
+	//some actions to the player
+	void hitPlayer(float damage, int player, int direction);
+
 	//contact listener
 	ContactListener cl;
+
+	//bullet list
+	vector<BulletEntity*> bulletList1; //bulletList1
+	vector<BulletEntity*> bulletList2; //bulletList2
+
+	//jump parameter
+	bool jump1;
+	bool doubleJump1;
+	bool jump2;
+	bool doubleJump2;
+
+	//win flag
+	bool win = false;
+
+	//parameter for the player
+	float PLAYER_MOVE_SPEED = 50;
 
 private:
 	/* Here! This is a list of pointers of entities. Don't forget clean the memory of 
@@ -53,9 +72,7 @@ private:
 	b2World* world;
 	float timeStep = 1.0f / 60.0f;
 
-	//parameter for the player
-	float PLAYER_MOVE_SPEED = 50;
+	
 
-	vector<BulletEntity*> bulletList1; //bulletList1
-	vector<BulletEntity*> bulletList2; //bulletList2
+	
 };

@@ -137,6 +137,28 @@ bool FileSystem::loadLevel1(GameData* d)
 				d->player2SpawnY = posY;
 				cout << "load!" << endl;
 			}
+			if(type == BORDER)
+			{
+				float posX;
+				float posY;
+				float width;
+				float height;
+				map >> posX;
+				map >> posY;
+				map >> width;
+				map >> height;
+				boundingBox* obj = new boundingBox();
+				obj->setShape(new sf::RectangleShape(sf::Vector2f(width * UNIT_PIXEL, height * UNIT_PIXEL)));
+				obj->getShape()->setFillColor(sf::Color::Green);
+				obj->setPosition(glm::vec2(posX * UNIT_PIXEL, -posY * UNIT_PIXEL));
+				obj->getShape()->setOrigin(width * UNIT_PIXEL / 2, height * UNIT_PIXEL / 2);
+				obj->setWidth(width * UNIT_PIXEL);
+				obj->setHeight(height * UNIT_PIXEL);
+				obj->bodyDef.position.Set(posX, posY);
+				obj->polygonShape.SetAsBox(width / 2, height / 2);
+				d->border->push_back(obj);
+				cout << "load!" << endl;
+			}
 			
 		}
 		//close the file

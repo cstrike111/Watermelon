@@ -6,6 +6,7 @@ public:
 		eventType = event::PLAYER1_MOVE_UP;
 		active[AUDIO] = true;
 		active[PHYSICS] = true;
+		active[GAME] = true;
 	}
 
 

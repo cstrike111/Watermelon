@@ -21,13 +21,14 @@ public:
 	void setRotation(float rotation);
 
 	//parameter of bullet
-	float bulletSpeed = 1;
+	float bulletSpeed = 1000;
 
 	//entity type
 	int entityType = Entity::entityType::ENTITY_BULLET;
 
 	//is the bullet active?
 	bool active = true;
+	float damage = 10;
 private:
 	sf::Shape* shape;
 };

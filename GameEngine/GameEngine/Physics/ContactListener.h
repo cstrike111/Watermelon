@@ -12,9 +12,13 @@ public:
 	ContactListener();
 	~ContactListener();
 
+	EventSystem* e;
 	void BeginContact(b2Contact* contact);
 	void EndContact(b2Contact* contact);
 	void hitPlayer(CharacterEntity* player, BulletEntity* bullet);
-	void hitPlatform(StaticSpriteEntity* platform, BulletEntity* bullet);
+	void hitStaticObj(BulletEntity * bullet);
+	void player1Win();
+	void player2Win();
+	bool win = false;
 };
 

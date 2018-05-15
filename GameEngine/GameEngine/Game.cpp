@@ -18,14 +18,45 @@ Game::~Game()
 	delete player2;
 	player2 = nullptr;
 
+	//clean bullet
+	vector<BulletEntity*>::iterator b1 = bullet1.begin();
+	while (b1 != bullet1.end())
+	{
+		delete *b1;
+		b1++;
+	}
+	vector<BulletEntity*>::iterator b2 = bullet2.begin();
+	while (b2 != bullet2.end())
+	{
+		delete *b2;
+		b2++;
+	}
 	bullet1.clear();
 	bullet2.clear();
 	
-	if(level1Load)
+	if(levelLoad)
 	{	
-		level1Load = false;
+		levelLoad = false;
+		//clean platforms
+		vector<StaticSpriteEntity*>::iterator pList = (*platformList).begin();
+		while (pList != (*platformList).end())
+		{
+			delete (*pList);
+			pList++;
+		}
 		platformList->clear();
 		platformList = nullptr;
+
+		//clean border
+		vector<boundingBox*>::iterator bList = (*borderList).begin();
+		while (bList != (*borderList).end())
+		{
+			delete *bList;
+			bList++;
+		}
+		borderList->clear();
+		borderList = nullptr;
+	
 		delete platform;
 		platform = nullptr;
 		delete platform2;
@@ -34,18 +65,24 @@ Game::~Game()
 		circle = nullptr;
 		delete animationTest;
 		animationTest = nullptr;
+		vector<BulletEntity*>::iterator b2 = bullet2.begin();
+		
 	}
 	
 }
 
 void Game::loadLevel1()
-{
+{	
+	//set load flag
+	levelLoad = true;
 	//set up assets and entity
 	//test for loading level
 	platformList = new vector<StaticSpriteEntity*>();
+	borderList = new vector<boundingBox*>();
 	//make game data struct
 	GameData* gameData = new GameData();
 	gameData->platformList = platformList;
+	gameData->border = borderList;
 	f->loadLevel1(gameData);
 	player1spawnX = gameData->player1SpawnX;
 	player1spawnY = gameData->player1SpawnY;
@@ -61,6 +98,7 @@ void Game::loadLevel1()
 	player1->setHeight(233);
 	player1->setTextureRect(0, 0, 106, 233);
 	player1->bodyDef.position.Set(player1spawnX, player1spawnY);
+	player1->playerNumber = 1;
 	//collision rules
 	player1->fixtureDef.filter.categoryBits = Entity::collisionCategory::PLAYER1;
 	player1->fixtureDef.filter.maskBits = Entity::collisionCategory::DEFAULT | Entity::collisionCategory::BULLET2;
@@ -75,6 +113,7 @@ void Game::loadLevel1()
 	player2->setHeight(233);
 	player2->setTextureRect(0, 0, 106, 233);
 	player2->bodyDef.position.Set(player2spawnX, player2spawnY);
+	player2->playerNumber = 2;
 	player2->fixtureDef.filter.categoryBits = Entity::collisionCategory::PLAYER2;
 	player2->fixtureDef.filter.maskBits = Entity::collisionCategory::DEFAULT | Entity::collisionCategory::BULLET1;
 	player2->polygonShape.SetAsBox(5.3f, 11.65f);
@@ -91,11 +130,12 @@ void Game::loadLevel1()
 	platform->bodyDef.position.Set(20.0f, -30.0f);
 	platform->polygonShape.SetAsBox(10.0f, 2.5f); //half length!
 
-	platform2 = new StaticSpriteEntity();
-	platform2->setSprite(new sf::Sprite());
+	platform2 = new StaticShapeEntity();
+	platform2->setShape(new sf::RectangleShape(sf::Vector2f(200, 50)));
+	platform2->getShape()->setOutlineThickness(10);
 	platform2->setPosition(glm::vec2(500, 600));
 	platform2->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
-	platform2->getSprite()->setOrigin(200 / 2, 50 / 2);
+	platform2->getShape()->setOrigin(200 / 2, 50 / 2);
 	platform2->setTextureRect(0, 0, 200, 50);
 	//platform2->setWidth(200);
 	//platform2->setHeight(50);
@@ -132,20 +172,25 @@ void Game::loadLevel1()
 	g->addEntity(player2, Entity::rType::CHARACTER);
 	g->addEntity(circle, Entity::rType::SHAPE);
 	g->addEntity(platform, Entity::rType::SPRITE);
-	g->addEntity(platform2, Entity::rType::SPRITE);
+	g->addEntity(platform2, Entity::rType::STATIC_SHAPE);
 	g->addEntity(animationTest, Entity::rType::CHARACTER);
 	p->getPlayer(player1, player2);
 	p->addStaticEntity(platform);
 	p->addStaticEntity(platform2);
-
-	
 	
 	//f->loadLevel1();
 	//load the level
+	//platform
 	for (int i = 0; i < platformList->size(); i++)
 	{
 		g->addEntity(platformList->at(i), Entity::rType::SPRITE);
 		p->addStaticEntity(platformList->at(i));
+	}
+	//border
+	for (int i = 0; i < borderList->size(); i++)
+	{
+		g->addEntity(borderList->at(i), Entity::rType::BORDER);
+		p->addStaticEntity(borderList->at(i));
 	}
 
 	currentLevel = 1;
@@ -168,9 +213,111 @@ void Game::update()
 		}
 	}
 
+	//check player hit stat
+	vector<CharacterEntity::hitInfo>::iterator it1 = player1->hit.begin();
+	while(it1 != player1->hit.end())
+	{
+		p->hitPlayer(it1->damage, 1, it1->direction);
+		it1 = player1->hit.erase(it1);
+	}
+
+	vector<CharacterEntity::hitInfo>::iterator it2 = player2->hit.begin();
+	while (it2 != player2->hit.end())
+	{
+		p->hitPlayer(it2->damage, 2, it2->direction);
+		it2 = player2->hit.erase(it2);
+	}
+
+	//update jump value
+	if(player1->jump)
+	{
+		p->jump1 = true;
+	}
+	if (player1->doubleJump)
+	{
+		p->doubleJump1 = true;
+	}
+	if (player2->jump)
+	{
+		p->jump2 = true;
+	}
+	if (player2->doubleJump)
+	{
+		p->doubleJump2 = true;
+	}
+	
+
+	//delete the bullets
+	//delete bullets in the renderer
+	vector<BulletEntity*>::iterator gbList = g->bulletList.begin();
+	while (gbList != g->bulletList.end())
+	{
+		if ((*gbList)->active == false)
+		{
+			gbList = g->bulletList.erase(gbList);
+		}
+		else
+		{
+			gbList++;
+		}
+	}
+	//delete bullets in physics
+	vector<BulletEntity*>::iterator pbList1 = p->bulletList1.begin();
+	while (pbList1 != p->bulletList1.end())
+	{
+		if ((*pbList1)->active == false)
+		{
+			pbList1 = p->bulletList1.erase(pbList1);
+		}
+		else
+		{
+			pbList1++;
+		}
+	}
+	vector<BulletEntity*>::iterator pbList2 = p->bulletList2.begin();
+	while (pbList2 != p->bulletList2.end())
+	{
+		if ((*pbList2)->active == false)
+		{
+			pbList2 = p->bulletList2.erase(pbList2);
+		}
+		else
+		{
+			pbList2++;
+		}
+	}
+
+	vector<BulletEntity*>::iterator b1 = bullet1.begin();
+	while (b1 != bullet1.end())
+	{
+		if((*b1)->active == false)
+		{
+			delete (*b1);
+			b1 = bullet1.erase(b1);
+		}else
+		{
+			b1++;
+		}
+	}
+	vector<BulletEntity*>::iterator b2 = bullet2.begin();
+	while (b2 != bullet2.end())
+	{
+		if ((*b2)->active == false)
+		{
+			delete (*b2);
+			b2 = bullet2.erase(b2);
+		}
+		else
+		{
+			b2++;
+		}
+	}
+	
+
+
 	//if a player touch the dead border, show win message
-	
-	
+	p->win = win;
+	//g.draw win scene
 }
 
 
@@ -195,10 +342,41 @@ void Game::handleEvent(int eventType)
 		p->addBullet(b, 2);
 		g->addEntity(b, Entity::rType::BULLET);
 		break;
-	//player 1 get hit
-	//player 2 get hit
-	//player 1 touch the dead border
-	//player 2 touch the dead border
+	case Event::PLAYER1_WIN:
+		win = true;
+		cout << "player 1 win" << endl;
+		break;
+	case Event::PLAYER2_WIN:
+		win = true;
+		cout << "player 2 win" << endl;
+		break;
+	case Event::PLAYER1_MOVE_UP:
+		if(player1->jump)
+		{
+			player1->jump = false;
+			p->jump1 = false;
+		}else
+		{
+			if (player1->doubleJump) {
+				player1->doubleJump = false;
+				p->doubleJump1 = false;
+			}
+		}
+		break;
+	case Event::PLAYER2_MOVE_UP:
+		if (player2->jump)
+		{
+			player2->jump = false;
+			p->jump2 = false;
+		}
+		else
+		{
+			if (player2->doubleJump) {
+				player2->doubleJump = false;
+				p->doubleJump2 = false;
+			}
+		}
+		break;
 
 	default:
 		break;

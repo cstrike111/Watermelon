@@ -11,7 +11,9 @@ public:
 		SPRITE,
 		SHAPE,
 		CHARACTER,
-		BULLET
+		BULLET,
+		STATIC_SHAPE,
+		BORDER
 	};
 
 	//entityCollisionCategory
@@ -38,7 +40,8 @@ public:
 		ENTITY_STATICSPRITE,
 		ENTITY_SHAPE,
 		ENTITY_CHARACTER,
-		ENTITY_BULLET
+		ENTITY_BULLET,
+		ENTITY_BORDER
 	};
 	/* Entity should be created in main.cpp and deleted in main.cpp! Later will managed with game player sub-system. */
 	Entity();

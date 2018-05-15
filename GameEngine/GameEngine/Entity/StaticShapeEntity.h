@@ -1,11 +1,11 @@
 #pragma once
 #include "Entity.h"
-class boundingBox :
-	public Entity
+
+class StaticShapeEntity : public Entity
 {
 public:
-	boundingBox();
-	~boundingBox();
+	StaticShapeEntity();
+	~StaticShapeEntity();
 
 	void updateRenderInfo();
 	void getRenderInfo();
@@ -22,9 +22,11 @@ public:
 	void setScale(glm::vec2 scale);
 	void setRotation(float rotation);
 
+	//entity type
+	int entityType = Entity::entityType::ENTITY_STATICSPRITE;
+
 private:
-	//be careful, texture is not managed by this class. sprite is not necessary for this class. it's just for debuging. 
+	//be careful, texture is not managed by this class
 	sf::Shape* shape;
-	int entityType = ENTITY_BORDER;
 };
 

@@ -149,12 +149,14 @@
     <ClCompile Include="Profile\Profile.cpp" />
     <ClCompile Include="Entity\ShapeEntity.cpp" />
     <ClCompile Include="Entity\StaticSpriteEntity.cpp" />
+    <ClCompile Include="Entity\StaticShapeEntity.cpp" />
     <ClCompile Include="UserInterface\UserInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Graphic\Graphic.cpp" />
     <ClCompile Include="Physics\Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Physics\ContactListener.h" />
     <ClInclude Include="Entity\BulletEntity.h" />
     <ClInclude Include="EventSystem\Event\Player2Fire.h" />
@@ -189,8 +191,11 @@
     <ClInclude Include="EventSystem\Event\Player1StopY.h" />
     <ClInclude Include="EventSystem\Event\Player1StopX.h" />
     <ClInclude Include="EventSystem\Event\Player1Fire.h" />
+    <ClInclude Include="EventSystem\Event\Player1Win.h" />
+    <ClInclude Include="EventSystem\Event\Player2Win.h" />
     <ClInclude Include="Profile\Profile.h" />
     <ClInclude Include="Entity\ShapeEntity.h" />
+    <ClInclude Include="Entity\StaticShapeEntity.h" />
     <ClInclude Include="UserInterface\UserInterface.h" />
     <ClInclude Include="EventSystem\Event\KeyPress.h" />
     <ClInclude Include="Physics\Physics.h" />

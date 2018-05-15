@@ -10,6 +10,11 @@ public:
 		LEFT,
 		RIGHT
 	};
+	struct hitInfo
+	{
+		hitDirection direction;
+		float damage;
+	};
 
 	CharacterEntity();
 	~CharacterEntity();
@@ -42,7 +47,14 @@ public:
 	int entityType = Entity::entityType::ENTITY_CHARACTER;
 
 	//hit list
-	std::vector<int> hit;
+	std::vector<hitInfo> hit;
+
+	//player information
+	int playerNumber;
+
+	//jump ready
+	bool jump;
+	bool doubleJump;
 
 private:
 	sf::Sprite* sprite;
