@@ -6,7 +6,7 @@ AssetManager::AssetManager() {
 
 AssetManager::~AssetManager() {
 	//clean sound buffer
-	//delete contains in the map
+	//delete contents in the map
 	for (map<string, sf::SoundBuffer*>::iterator it = soundBuffer.begin(); it != soundBuffer.end(); it++) {
 		delete it->second;
 	}
@@ -14,7 +14,7 @@ AssetManager::~AssetManager() {
 	soundBuffer.clear();
 
 	//clean music buffer
-	//delete contains in the map
+	//delete contents in the map
 	for (map<string, sf::Music*>::iterator it = musicBuffer.begin(); it != musicBuffer.end(); it++) {
 		delete it->second;
 	}
@@ -22,7 +22,7 @@ AssetManager::~AssetManager() {
 	musicBuffer.clear();
 
 	//clean texture
-	//delete contains in the map
+	//delete contents in the map
 	for (map<string, sf::Texture*>::iterator it = texture.begin(); it != texture.end(); it++) {
 		delete it->second;
 	}
@@ -30,7 +30,7 @@ AssetManager::~AssetManager() {
 	texture.clear();
 
 	//clean font
-	//delete contains in the map
+	//delete contents in the map
 	for (map<string, sf::Font*>::iterator it = fontBuffer.begin(); it != fontBuffer.end(); it++) {
 		delete it->second;
 	}
@@ -221,7 +221,7 @@ bool AssetManager::deleteAsset(string path, AssetType type) {
 	case AssetType::SOUND:
 		//sound
 		if (soundBuffer.find(path) != soundBuffer.end()) {
-			//delete the contain
+			//delete the content
 			delete soundBuffer[path];
 			//delete the pointer
 			soundBuffer.erase(path);
@@ -235,7 +235,7 @@ bool AssetManager::deleteAsset(string path, AssetType type) {
 	case AssetType::MUSIC:
 		//music
 		if (musicBuffer.find(path) != musicBuffer.end()) {
-			//delete the contain
+			//delete the content
 			delete musicBuffer[path];
 			//delete the pointer
 			musicBuffer.erase(path);
@@ -248,7 +248,7 @@ bool AssetManager::deleteAsset(string path, AssetType type) {
 	case AssetType::TEXTURE:
 		//texture
 		if (texture.find(path) != texture.end()) {
-			//delete the contain
+			//delete the content
 			delete texture[path];
 			//delete the pointer
 			texture.erase(path);
@@ -261,7 +261,7 @@ bool AssetManager::deleteAsset(string path, AssetType type) {
 	case AssetType::FONT:
 		//font
 		if (fontBuffer.find(path) == fontBuffer.end()) {
-			//delete the contain
+			//delete the content
 			delete fontBuffer[path];
 			//delete the pointer
 			fontBuffer.erase(path);
