@@ -35,9 +35,6 @@ public:
 	physicsInfo getPlayerPhysicsInfo();
 	void setPlayerRenderInfo(float x, float y);
 	renderInfo getPlayerRenderInfo();
-	float getTime();
-
-
 private:
 	EventSystem * es; //pointer for event system
 

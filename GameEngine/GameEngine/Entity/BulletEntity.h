@@ -22,14 +22,13 @@ public:
 
 	//parameter of bullet
 	float bulletSpeed = 1000;
-	float damage = 100;
 
 	//entity type
 	int entityType = Entity::entityType::ENTITY_BULLET;
 
 	//is the bullet active?
 	bool active = true;
-	
+	float damage = 10;
 private:
 	sf::Shape* shape;
 };

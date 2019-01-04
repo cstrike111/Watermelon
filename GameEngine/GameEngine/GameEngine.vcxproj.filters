@@ -108,12 +108,6 @@
     <ClCompile Include="Entity\StaticShapeEntity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Entity\WeaponEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\WeaponSpawn.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -259,12 +253,6 @@
     </ClInclude>
     <ClInclude Include="EventSystem\Event\Player2Win.h">
       <Filter>Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\WeaponEntity.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\WeaponSpawn.h">
-      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

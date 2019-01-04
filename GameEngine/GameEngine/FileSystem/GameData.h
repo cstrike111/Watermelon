@@ -17,7 +17,6 @@ public:
 	float player2SpawnY = 0;
 	std::vector<StaticSpriteEntity*>* platformList;
 	std::vector<boundingBox*>* border;
-	std::vector<WeaponSpawn*>* weaponSpawn;
 
 };
 

@@ -154,8 +154,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Graphic\Graphic.cpp" />
     <ClCompile Include="Physics\Physics.cpp" />
-    <ClCompile Include="Entity\WeaponEntity.cpp" />
-    <ClCompile Include="Entity\WeaponSpawn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
@@ -206,8 +204,6 @@
     <ClInclude Include="EventSystem\Event\Player1MoveLeft.h" />
     <ClInclude Include="EventSystem\Event\Player1MoveRight.h" />
     <ClInclude Include="EventSystem\Event\Player1MoveUp.h" />
-    <ClInclude Include="Entity\WeaponEntity.h" />
-    <ClInclude Include="Entity\WeaponSpawn.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -51,16 +51,13 @@ public:
 
 	//player information
 	int playerNumber;
-	int ammo = 3;
 
 	//jump ready
 	bool jump;
 	bool doubleJump;
 
-	
-
 private:
 	sf::Sprite* sprite;
-	
+	float coolDownTime;
 
 };

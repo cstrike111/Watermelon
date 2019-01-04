@@ -18,21 +18,9 @@ public:
 	void setEventSystem(EventSystem* es); //set event system
 	void setAssetManager(AssetManager* am); //set asset manager system
 
-	//game specific function
-	void playHadouken1();
-	void playHadouken2();
-	void playVictory();
-	void playHit1();
-	void playHit2();
-
-
 private:
 	EventSystem* es; //pointer for event system
 	AssetManager* am; //pointer for asset manager
 	//store the sounds
-	sf::Sound* hadouken1;
-	sf::Sound* hadouken2;
-	sf::Sound* victory;
-	sf::Sound* hit1;
-	sf::Sound* hit2;
+	sf::Sound* playerStep;
 };

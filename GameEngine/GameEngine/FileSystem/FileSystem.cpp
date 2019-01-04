@@ -109,7 +109,7 @@ bool FileSystem::loadLevel1(GameData* d)
 				StaticSpriteEntity* obj = new StaticSpriteEntity();
 				obj->setSprite(new sf::Sprite());
 				obj->setPosition(glm::vec2(posX * UNIT_PIXEL, -posY * UNIT_PIXEL));
-				obj->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/platform.png", AssetManager::TEXTURE)));
+				obj->setTexture(static_cast<sf::Texture*> (am->loadAsset("asset/texture/wood.jpg", AssetManager::TEXTURE)));
 				obj->getSprite()->setOrigin(width * UNIT_PIXEL / 2, height * UNIT_PIXEL / 2);
 				obj->setTextureRect(0, 0, width * UNIT_PIXEL, height * UNIT_PIXEL);
 				//obj->setWidth(width * UNIT_PIXEL);
@@ -157,26 +157,6 @@ bool FileSystem::loadLevel1(GameData* d)
 				obj->bodyDef.position.Set(posX, posY);
 				obj->polygonShape.SetAsBox(width / 2, height / 2);
 				d->border->push_back(obj);
-				cout << "load!" << endl;
-			}
-			if(type == WEAPON_SPAWN)
-			{
-				float posX;
-				float posY;
-				float width;
-				float height;
-				map >> posX;
-				map >> posY;
-				map >> width;
-				map >> height;
-				WeaponSpawn* obj = new WeaponSpawn(am);
-				obj->setPosition(glm::vec2(posX * UNIT_PIXEL, -posY * UNIT_PIXEL));
-				obj->getShape()->setOrigin(width * UNIT_PIXEL / 2, height * UNIT_PIXEL / 2);
-				obj->setWidth(width * UNIT_PIXEL);
-				obj->setHeight(height * UNIT_PIXEL);
-				obj->bodyDef.position.Set(posX, posY);
-				obj->polygonShape.SetAsBox(width / 2, height / 2);
-				d->weaponSpawn->push_back(obj);
 				cout << "load!" << endl;
 			}
 			

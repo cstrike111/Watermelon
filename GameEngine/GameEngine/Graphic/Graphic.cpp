@@ -5,12 +5,6 @@ Graphic::Graphic(sf::RenderWindow* window, AssetManager* am) {
 	this->am = am;
 	openglInit();
 	loadAsset();
-	ammoText1.setCharacterSize(48);
-	ammoText2.setCharacterSize(48);
-	ammoText1.setFillColor(sf::Color::Black);
-	ammoText2.setFillColor(sf::Color::Black);
-	ammoText1.setPosition(320, 30);
-	ammoText2.setPosition(1340, 30);
 }
 
 Graphic::~Graphic() {
@@ -23,11 +17,6 @@ void Graphic::loadAsset() {
 	playerRenderInfo.setFont(*Calibri);
 	playerPhysicsInfo.setFont(*Calibri);
 	fps.setFont(*Calibri);
-	win1.setFont(*Calibri);
-	win2.setFont(*Calibri);
-	ammoText1.setFont(*Calibri);
-	ammoText2.setFont(*Calibri);
-	ammoText1.setPosition(2,2);
 }
 
 bool Graphic::update() {
@@ -51,9 +40,6 @@ bool Graphic::update() {
 }
 
 void Graphic::draw() {
-	
-	//draw background
-	window->draw(background);
 	
 	//draw shape
 	for (int i = 0; i < shapeList.size(); i++) {
@@ -111,10 +97,6 @@ void Graphic::draw() {
 
 	showPlayerRenderInfo();
 	showFps();
-	player1Win();
-	player2Win();
-	drawBulletInfo();
-
 }
 
 void Graphic::setEventSystem(EventSystem* es){
@@ -184,40 +166,6 @@ void Graphic::addEntity(Entity* e, Entity::rType renderType) {
 
 void Graphic::setProfileSystem(Profile* p) {
 	this->p = p;
-}
-
-void Graphic::player1Win()
-{
-	if (win1flag) {
-		string win = "PLAYER 1 WIN!";
-		win1.setString(win);
-		win1.setCharacterSize(72);
-		win1.setFillColor(sf::Color::Blue);
-		win1.setPosition(780, 540);
-		window->draw(win1);
-	}
-}
-
-void Graphic::player2Win()
-{
-	if (win2flag) {
-		string win = "PLAYER 2 WIN!";
-		win2.setString(win);
-		win2.setCharacterSize(72);
-		win2.setFillColor(sf::Color::Blue);
-		win2.setPosition(780, 540);
-		window->draw(win2);
-	}
-}
-
-void Graphic::drawBulletInfo()
-{
-	string ammoInfo1 = "Player 1 ammo: " + ammo1;
-	ammoText1.setString(ammoInfo1);
-	string ammoInfo2 = "Player 2 ammo: " + ammo2;
-	ammoText2.setString(ammoInfo2);
-	window->draw(ammoText1);
-	window->draw(ammoText2);
 }
 
 void Graphic::showFps() {
