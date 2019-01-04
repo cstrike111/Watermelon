@@ -6,8 +6,6 @@ public:
 	Player2Fire() {
 		//don't need to inform graphic
 		eventType = event::PLAYER2_FIRE;
-		//active[AUDIO] = true;
-		//active[PHYSICS] = true;
 		active[GAME] = true;
 	}
 };

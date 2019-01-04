@@ -1,10 +1,20 @@
 #pragma once
-#include "Entity.h"
+#include "StaticSpriteEntity.h"
 
-class BulletEntity : public Entity {
+class WeaponEntity : public StaticSpriteEntity
+{
 public:
-	BulletEntity();
-	~BulletEntity();
+	enum WeaponType
+	{
+		AWP,
+		SMG,
+		RIFLE,
+		ROCKET,
+		HADOUKEN
+	};
+	WeaponEntity();
+	~WeaponEntity();
+
 	void updateRenderInfo();
 	void getRenderInfo();
 	//don't forget to update and set collision rectangle before put it into physics system
@@ -13,23 +23,25 @@ public:
 	void updatePhysics();
 	void setTexture(sf::Texture* texture);
 	void setTextureRect(int rectLeft, int rectTop, int rectWidth, int rectHeight);
-	void setShape(sf::Shape* shape);
-	sf::Shape* getShape();
+	void setSprite(sf::Sprite* shape);
+	sf::Sprite* getSprite();
 	void setPosition(glm::vec2 position);
 	void setOrigin(glm::vec2 origin);
 	void setScale(glm::vec2 scale);
 	void setRotation(float rotation);
 
-	//parameter of bullet
-	float bulletSpeed = 1000;
-	float damage = 100;
-
 	//entity type
-	int entityType = Entity::entityType::ENTITY_BULLET;
+	int entityType = Entity::entityType::ENTITY_WEAPON;
 
-	//is the bullet active?
-	bool active = true;
-	
+	//weapon info
+	float speed;
+	float ammo;
+	float damage;
+	float fireRate;
+	bool pickup;
+
 private:
-	sf::Shape* shape;
+	//be careful, texture is not managed by this class
+	sf::Sprite* sprite;
 };
+

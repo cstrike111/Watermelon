@@ -43,5 +43,5 @@ private:
 	map<string, sf::Music*> musicBuffer;
 	map<string, sf::Texture*> texture;
 	map<string, sf::Font*> fontBuffer;
-
+	//mesh map will be for the mesh in the future
 };

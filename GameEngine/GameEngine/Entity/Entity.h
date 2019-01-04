@@ -13,7 +13,8 @@ public:
 		CHARACTER,
 		BULLET,
 		STATIC_SHAPE,
-		BORDER
+		BORDER,
+		WEAPON_SPAWN
 	};
 
 	//entityCollisionCategory
@@ -41,7 +42,8 @@ public:
 		ENTITY_SHAPE,
 		ENTITY_CHARACTER,
 		ENTITY_BULLET,
-		ENTITY_BORDER
+		ENTITY_BORDER,
+		ENTITY_WEAPON
 	};
 	/* Entity should be created in main.cpp and deleted in main.cpp! Later will managed with game player sub-system. */
 	Entity();

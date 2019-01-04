@@ -7,29 +7,43 @@ Audio::Audio(AssetManager* am) {
 
 Audio::~Audio() {
 	//delete the sound
-	delete playerStep;
-	playerStep = nullptr;
+	delete hadouken1;
+	hadouken1 = nullptr;
+	delete hadouken2;
+	hadouken2 = nullptr;
+	delete victory;
+	victory = nullptr;
+	delete hit1;
+	hit1 = nullptr;
+	delete hit2;
+	hit2 = nullptr;
 }
 
 void Audio::loadSounds() {
-	am->loadAsset("asset/sounds/ss.wav", AssetManager::SOUND);
-	playerStep = new sf::Sound();
-	playerStep->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("asset/sounds/ss.wav", AssetManager::SOUND))));
+	am->loadAsset("asset/sounds/hadouken.wav", AssetManager::SOUND);
+	hadouken1 = new sf::Sound();
+	hadouken1->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("asset/sounds/hadouken.wav", AssetManager::SOUND))));
+	hadouken2 = new sf::Sound();
+	hadouken2->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("asset/sounds/hadouken.wav", AssetManager::SOUND))));
+	am->loadAsset("asset/sounds/victory.wav", AssetManager::SOUND);
+	victory = new sf::Sound();
+	victory->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("asset/sounds/victory.wav", AssetManager::SOUND))));
+	am->loadAsset("asset/sounds/hit.ogg", AssetManager::SOUND);
+	hit1 = new sf::Sound();
+	hit1->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("asset/sounds/hit.ogg", AssetManager::SOUND))));
+	hit2 = new sf::Sound();
+	hit2->setBuffer(*(static_cast<sf::SoundBuffer*>(am->getAsset("asset/sounds/hit.ogg", AssetManager::SOUND))));
 }
 
 void Audio::handleEvent(int eventType) {
 	switch (eventType) {
 	case Event::PLAYER1_MOVE_UP:
-		playerStep->play();
 		break;
 	case Event::PLAYER1_MOVE_DOWN:
-		playerStep->play();
 		break;
 	case Event::PLAYER1_MOVE_LEFT:
-		playerStep->play();
 		break;
 	case Event::PLAYER1_MOVE_RIGHT:
-		playerStep->play();
 		break;
 	default:
 		break;
@@ -54,4 +68,29 @@ void Audio::setEventSystem(EventSystem* es) {
 
 void Audio::setAssetManager(AssetManager* am) {
 	this->am = am;
+}
+
+void Audio::playHadouken1()
+{
+	hadouken1->play();
+}
+
+void Audio::playHadouken2()
+{
+	hadouken2->play();
+}
+
+void Audio::playVictory()
+{
+	victory->play();
+}
+
+void Audio::playHit1()
+{
+	hit1->play();
+}
+
+void Audio::playHit2()
+{
+	hit2->play();
 }

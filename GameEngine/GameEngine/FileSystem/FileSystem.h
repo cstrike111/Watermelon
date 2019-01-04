@@ -7,6 +7,7 @@
 #include "..\Entity\StaticSpriteEntity.h"
 #include "..\AssetManager\AssetManager.h"
 #include "..\Entity\boundingBox.h"
+#include "..\Entity\WeaponSpawn.h"
 #include "GameData.h"
 
 class FileSystem
@@ -17,7 +18,8 @@ public:
 		PLAYER1_SPAWN,
 		PLAYER2_SPAWN,
 		PLATFORM,
-		BORDER
+		BORDER,
+		WEAPON_SPAWN
 	};
 
 	FileSystem(AssetManager* am);

@@ -9,7 +9,7 @@ CharacterEntity::CharacterEntity() {
 	bodyDef.position.Set(0.0f, 0.0f);
 	fixtureDef.shape = &polygonShape;
 	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
+	fixtureDef.friction = 0;
 	cd = new collisionData();
 	cd->pointer = this;
 	cd->type = entityType;

@@ -68,4 +68,9 @@ Profile::renderInfo Profile::getPlayerRenderInfo() {
 	return rInfo;
 }
 
+float Profile::getTime()
+{	
+	return time.asSeconds() * 1000;
+}
+
 

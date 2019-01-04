@@ -34,9 +34,25 @@ public:
 	void showFps(); //show fps
 	void showPlayerRenderInfo(); //show information of player
 	void setProfileSystem(Profile* p);
+	void player1Win();
+	void player2Win();
+	void drawBulletInfo();
 
 	//bullet list
 	vector<BulletEntity*> bulletList;
+
+	//background
+	sf::Sprite background;
+	sf::Text win1;
+	sf::Text win2;
+	sf::Text ammoText1;
+	sf::Text ammoText2;
+	string ammo1;
+	string ammo2;
+
+	//win flag
+	bool win1flag = false; //player 1
+	bool win2flag = false; //player 2
 
 private:
 	bool load; // whether the image is loaded
@@ -54,6 +70,7 @@ private:
 	//profile information enable flag
 	bool fpsEnable = false;
 	bool playerinfo = false;
+	
 
 	//asset pointer
 	sf::Font* Calibri;
@@ -62,5 +79,6 @@ private:
 	sf::Text fps;
 	sf::Text playerRenderInfo;
 	sf::Text playerPhysicsInfo;
+
 
 };

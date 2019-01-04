@@ -1,10 +1,14 @@
 #pragma once
-#include "Entity.h"
+#include "StaticShapeEntity.h"
+#include "WeaponEntity.h"
+#include "../AssetManager/AssetManager.h"
 
-class BulletEntity : public Entity {
+class WeaponSpawn : public StaticShapeEntity
+{
 public:
-	BulletEntity();
-	~BulletEntity();
+	WeaponSpawn(AssetManager* am);
+	~WeaponSpawn();
+
 	void updateRenderInfo();
 	void getRenderInfo();
 	//don't forget to update and set collision rectangle before put it into physics system
@@ -19,17 +23,26 @@ public:
 	void setOrigin(glm::vec2 origin);
 	void setScale(glm::vec2 scale);
 	void setRotation(float rotation);
-
-	//parameter of bullet
-	float bulletSpeed = 1000;
-	float damage = 100;
+	void spawnAweapon();
+	void createWeapon(int type);
+	void cleanTheWeapon();
+	void updateTime(float time);
 
 	//entity type
-	int entityType = Entity::entityType::ENTITY_BULLET;
-
-	//is the bullet active?
-	bool active = true;
+	int entityType = Entity::entityType::ENTITY_STATICSPRITE;
 	
+	//Assetmanager pointer
+	AssetManager* am;
+
 private:
+	//be careful, texture is not managed by this class
 	sf::Shape* shape;
+	//timer
+	float spawnTime = MIN_SPAWN_TIME;
+	float currentTime;
+	int MAX_SPAWN_TIME = 30;
+	int MIN_SPAWN_TIME = 5;
+	bool spawn = false;
+	WeaponEntity* weapon;
 };
+

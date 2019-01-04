@@ -8,11 +8,14 @@
 #include "..\EventSystem\EventSystem.h"
 #include "..\Entity\BulletEntity.h"
 #include "..\Entity\StaticShapeEntity.h"
+#include "..\Entity\WeaponSpawn.h"
+#include "Profile/Profile.h"
+#include "Audio/Audio.h"
 
 class Game
 {
 public:
-	Game(Physics* p, Graphic* g, EventSystem* e, AssetManager* am, FileSystem* f);
+	Game(Physics* p, Graphic* g, EventSystem* e, AssetManager* am, FileSystem* f, Profile* pro, Audio* audio);
 	//entities deletion handled by game object
 	~Game();
 
@@ -26,6 +29,11 @@ public:
 	CharacterEntity* player2;
 	vector<BulletEntity*> bullet1;
 	vector<BulletEntity*> bullet2;
+	//Timer for adding bullets (miliseconds)
+	float player1BulletTime = 0;
+	float player2BulletTime = 0;
+	const int MAX_AMMO = 4;
+	const float addBulletTime = 2000;
 	
 	//default spawn point
 	float player1spawnX;
@@ -36,18 +44,14 @@ public:
 	//level information
 	//the position is the center of the entity
 	bool levelLoad = false;
-	//level 1 (doodle world)
 	bool level1Load = false;
 	vector<StaticSpriteEntity*>* platformList; //don't forget to clean your memory!
 	vector<boundingBox*>* borderList;
-	//pointer of entity
-	StaticSpriteEntity* platform;
-	StaticShapeEntity* platform2;
-	ShapeEntity* circle;
-	CharacterEntity* animationTest;
+	vector<WeaponSpawn*>* weaponSpawn;
 
 	//win flag
 	bool win = false;
+	bool won = true; //prevent update twice
 
 private:
 	Physics * p;
@@ -55,6 +59,8 @@ private:
 	EventSystem* e;
 	FileSystem* f;
 	AssetManager* am;
+	Profile* pro;
+	Audio* audio;
 	
 	int currentLevel = 0;
 	//level 1

@@ -66,7 +66,7 @@ bool init() {
 		file->setEventSystem(es);
 
 		//initialize the game
-		game = new Game(p, g, es, asset, file);
+		game = new Game(p, g, es, asset, file, pro, a);
 		game->loadLevel1();
 	
 	}
